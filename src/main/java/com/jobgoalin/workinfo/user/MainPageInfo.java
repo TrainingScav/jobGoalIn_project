@@ -1,4 +1,4 @@
-package com.jobgoalin.workinfo.user;
+package com.jobgoalin.workinfo.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
