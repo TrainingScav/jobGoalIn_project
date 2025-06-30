@@ -1,0 +1,208 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    all: unset;
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.head--inner{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    /* padding: 0 2rem; */
+    border-bottom: 1px solid lightgray;
+}
+
+header{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 1000;
+}
+
+.head--container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    margin-left: 20px;
+    margin-right: 20px;
+    /* border-bottom: 1px solid lightgray; */
+    color: black;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.head--container2{
+    display: flex;
+    font-size: 13px;
+    font-weight: 500;
+    width: 100px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user--skill{
+    cursor: pointer;
+}
+
+.main{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 30px;
+    padding-top: 100px;
+    text-align: center;
+}
+
+.signin--container{
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;  
+    justify-content: center;  
+}
+
+.signin--form{
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    text-align: left;
+}
+
+input {
+    border: none;
+    padding: 20px;
+    outline: none;
+    gap: 10px;
+}
+
+.signin--id{
+    border-bottom: 1px solid lightgray;
+    gap: 10px;
+}
+
+.signin--password{
+    border-bottom: 1px solid lightgray;
+    gap: 10px;
+}
+
+.button{
+    color: rgb(86, 66, 196);
+    background-color: white;
+    border-radius: 20px;
+    padding: 8px 15px;
+    border-color: rgb(126, 110, 218);
+    border-width: 0.3px;
+    font-weight: 500;
+}
+
+.button1{
+    background-color: rgb(86, 66, 196);
+    color: white;
+    border-radius: 20px;
+    margin: 30px;
+    font-weight: 500;
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.class--footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+  background-color: rgb(230, 230, 230);
+  font-size: 13px;
+  margin-top: 3rem;
+}
+.class--footter--container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.class--footer--list {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 25px 0;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 80px;
+  font-size: 15px;
+  color: #888;
+  font-weight: bold;
+}
+.class--footer--copyright {
+  font-size: 14px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #888;
+  font-weight: bold;
+}
+
+@media(max-width: 768px){
+    .head--container{
+        font-size: 120%;
+    }
+
+    .signin--form{
+        max-width: 300px;
+    }
+
+    .button1{
+        max-width: 200px;
+    }
+
+  .head--container {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .head--brand--info {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .head--name {
+        font-size: 24px;
+    }
+
+        .class--footer {
+        font-size: 9px;
+        padding: 2rem;
+    }
+    
+
+    .class--footer--copyright {
+        font-size: 9px;
+    }
+
+    .class--footer--list {
+        font-size: 12px;
+        gap : 20px;
+    }
+
+}
