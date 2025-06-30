@@ -14,6 +14,6 @@ public class MainPageInfo {
 
     @GetMapping("/")
     public String index() {
-        return "login";
+        return "resume_register";
     }
 }
