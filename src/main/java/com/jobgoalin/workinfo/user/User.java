@@ -31,13 +31,13 @@ public class User {
 	private String userGender;
 	private String userNickName;
 	private String userCivilSerial;
+
 	@CreationTimestamp
     private Timestamp userCreatedAt;
 	private int accessLevel;
 	private boolean userLockYn;
 	private int loginAttemptCont;
 
-     // 객체 생성 시 가독성과 안정성 향상
     @Builder
     public User(int id, String username, String password, String email, Timestamp createdAt) {
         this.user_id = id;

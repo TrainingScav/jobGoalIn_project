@@ -29,12 +29,13 @@ public class CompUser {
     private String compTypeCode;
     private int compRegNumber;
     private String compName;
-    private String
+    private String compCEOName;
+    private String compAddress;
 
-    // 엔티티가 영속화 될 때 자동으로 pc 현재 시간을 설정
     @CreationTimestamp
-    private Timestamp createdAt;
-
+    private Timestamp compUserCreatedAt;
+    private int accessLevel;
+    private
     // 객체 생성 시 가독성과 안정성 향상
     @Builder
     public CompUser(Long id, String username, String password, String email, Timestamp createdAt) {
