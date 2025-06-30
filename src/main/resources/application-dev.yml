@@ -34,7 +34,7 @@ spring:
   # 데이터 베이스 연결 설정 (H2 인메모리 데이터베이스)
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/jobgoalin?useSSl=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://192.168.0.76/jobgoalin?useSSl=false&serverTimezone=Asia/Seoul
     username: jobgoalinUser
     password: ghkdlxld123
 
