@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -25,6 +26,8 @@ public class JobPostingBoard {
 
     private String title;
 
+    private String companyName;
+
     private String content;
 
     private String requireCareerYears;
@@ -36,17 +39,19 @@ public class JobPostingBoard {
     private String instId;
 
     @CreationTimestamp
-    private LocalDateTime postedAt;
-    private LocalDateTime deadline;
     private Timestamp instDate;
 
+    private LocalDate postedAt;
+    private LocalDate deadline;
+
     @Builder
-    public JobPostingBoard(Long recruitId, Long companyId, String title, String content, String requireCareerYears,
+    public JobPostingBoard(Long recruitId, Long companyId, String title, String companyName, String content, String requireCareerYears,
                            String employmentType, String location, String instId,
-                           LocalDateTime postedAt, LocalDateTime deadline, Timestamp instDate) {
+                           LocalDate postedAt, LocalDate deadline, Timestamp instDate) {
         this.recruitId = recruitId;
         this.companyId = companyId;
         this.title = title;
+        this.companyName = companyName;
         this.content = content;
         this.requireCareerYears = requireCareerYears;
         this.employmentType = employmentType;

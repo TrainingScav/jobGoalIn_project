@@ -1,0 +1,22 @@
+{{#jobPostingBoard}}
+    <h2>{{title}}</h2>
+
+
+    <p><strong>기업명:</strong> {{companyName}}</p>
+    <p><strong>공고 내용:</strong></p>
+    <p>{{content}}</p>
+    <p><strong>근무지:</strong> {{location}}</p>
+    <p><strong>고용 형태:</strong> {{employmentType}}</p>
+    <p><strong>요구 경력:</strong> {{requireCareerYears}}</p>
+
+    {{#postedAt}}
+        <p><strong>등록일:</strong> {{postedAt}}</p>
+    {{/postedAt}}
+
+
+    <p><strong>마감일:</strong> {{deadline}}</p>
+
+    <form action="/board/{{recruitId}}/delete" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+        <button type="submit">삭제</button>
+    </form>
+{{/jobPostingBoard}}

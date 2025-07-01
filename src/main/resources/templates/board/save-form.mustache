@@ -1,0 +1,27 @@
+<!-- templates/board/write.mustache -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>채용공고 등록</title>
+</head>
+<body>
+
+<h1>채용공고 등록</h1>
+
+<form action="/posting/write" method="post">
+    <label>제목: <input type="text" name="title"></label><br>
+    <label>회사명: <input type="text" name="companyName"></label><br>
+    <label>공고 내용:<br>
+        <textarea name="content" rows="5" cols="40"></textarea>
+    </label><br>
+    <label>고용형태: <input type="text" name="employmentType"></label><br>
+    <label>근무지: <input type="text" name="location"></label><br>
+    <label>요구 경력: <input type="text" name="requireCareerYears"></label><br>
+    <label>마감일: <input type="date" name="deadline"></label><br>
+
+    <button type="submit">등록하기</button>
+</form>
+
+</body>
+</html>
