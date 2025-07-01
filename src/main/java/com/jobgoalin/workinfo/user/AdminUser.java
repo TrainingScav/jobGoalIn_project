@@ -17,7 +17,7 @@ public class AdminUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int adminId;
+    private Long adminId;
 
     // 사용자 이름 중복 방지를 위한 유니크 제약 조건 설정
     @Column(unique = true,nullable = false)
@@ -33,14 +33,14 @@ public class AdminUser {
     private Timestamp createdAt;
 
     @ColumnDefault("3")
-    private int accessLevel;
+    private Long accessLevel;
 
     @ColumnDefault("'N'")
     @Column(columnDefinition = "CHAR(1)")
     private char userLockYn;
 
     @ColumnDefault("0")
-    private int loginAttemptCount;
+    private Long loginAttemptCount;
 
 //    // 객체 생성 시 가독성과 안정성 향상
 //    @Builder

@@ -16,7 +16,7 @@ public class UserSkillList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userSkillListNo;
+    private Long userSkillListNo;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") // 외래키 컬럼명 명시

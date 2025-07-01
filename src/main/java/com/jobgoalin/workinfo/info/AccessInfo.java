@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class AccessInfo {
 
     @Id
-    private int accessLevel;
+    private Long accessLevel;
 
     private String accessDesc;
     private String instId;

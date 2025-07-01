@@ -20,7 +20,7 @@ public class CompUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int compUserId;
+    private Long compUserId;
 
     // 사용자 이름 중복 방지를 위한 유니크 제약 조건 설정
     @Column(unique = true,nullable = false)
@@ -38,7 +38,7 @@ public class CompUser {
     @Column(nullable = false)
     private String compTypeCode;
     @Column(nullable = false)
-    private int compRegNumber;
+    private Long compRegNumber;
     @Column(nullable = false)
     private String compName;
     @Column(nullable = false)
@@ -51,13 +51,13 @@ public class CompUser {
     private Timestamp ComUserCreatedAt;
 
     @ColumnDefault("2")
-    private int accessLevel;
+    private Long accessLevel;
 
     @ColumnDefault("'N'")
     @Column(columnDefinition = "CHAR(1)")
     private char userLockYn;
 
     @ColumnDefault("0")
-    private int loginAttemptCount;
+    private Long loginAttemptCount;
 
 }
