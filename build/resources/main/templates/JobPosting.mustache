@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>채용공고 목록</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- CSS는 필요 시 추가 -->
+</head>
+<body>
+<h1>채용공고 목록</h1>
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+    <tr>
+        <th>공고 ID</th>
+        <th>회사 ID</th>
+        <th>제목</th>
+        <th>근무 형태</th>
+        <th>지역</th>
+        <th>작성일</th>
+        <th>마감일</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#jobPostings}}
+        <tr>
+            <td>{{recruitId}}</td>
+            <td>{{companyId}}</td>
+            <td><a href="/job-postings/{{recruitId}}">{{title}}</a></td>
+            <td>{{employmentType}}</td>
+            <td>{{location}}</td>
+            <td>{{postedAt}}</td>
+            <td>{{deadline}}</td>
+        </tr>
+    {{/jobPostings}}
+
+    {{^jobPostings}}
+        <tr>
+            <td colspan="7">등록된 채용공고가 없습니다.</td>
+        </tr>
+    {{/jobPostings}}
+    </tbody>
+</table>
+</body>
+</html>
