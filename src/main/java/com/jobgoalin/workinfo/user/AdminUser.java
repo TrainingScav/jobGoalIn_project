@@ -31,8 +31,7 @@ public class AdminUser {
     @Column(nullable = false)
     private Timestamp createdAt;
 
-    @JoinColumn(nullable = false)
-    private int accessLevel;
+
     private boolean userLockYn = false;
     private int loginAttemptCount = 0;
 
