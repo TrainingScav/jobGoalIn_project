@@ -1,12 +1,10 @@
 package com.jobgoalin.workinfo.user;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data
@@ -33,20 +31,24 @@ public class User {
 	private String userPhone;
 	@Column(nullable = false)
 	private String userBirth;
-	@Column(nullable = false)
+	@Column(nullable = false,columnDefinition = "CHAR(1)")
 	private String userGender;
 	@Column(nullable = false)
 	private String userNickName;
 	@Column(unique = true ,nullable = false)
 	private String userCivilSerial;
 
-	@CreationTimestamp
-	@Column(nullable = false)
-    private Timestamp userCreatedAt;
-	@JoinColumn(nullable = false)
-	private int accessLevel;
+	@Column(nullable = false, updatable = false)
+	private LocalDateTime userCreatedAt;
 	private boolean userLockYn = false;
 	private int loginAttemptCount = 0;
+
+
+
+
+
+
+
 
 //    @Builder
 //    public User(int id, String username, String password, String email, Timestamp createdAt) {

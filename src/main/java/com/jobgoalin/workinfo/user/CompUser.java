@@ -10,7 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
 
 @Data
-@Table(name = "comp_user_tb")
+@Table(name = "comp_user_info")
 @Entity
 
 @Builder
@@ -29,8 +29,10 @@ public class CompUser {
     @Column(nullable = false)
     private String compUserPassword;
     @Column(nullable = false)
-    private String compUserPhone;
+    private String compUserName;
     @Column(nullable = false)
+    private String compUserPhone;
+    @Column(unique = true, nullable = false)
     private String compUserEmail;
     @Column(nullable = false)
     private String compUserNickname;
@@ -47,8 +49,7 @@ public class CompUser {
 
     @CreationTimestamp
     private Timestamp ComUserCreatedAt;
-    @JoinColumn(nullable = false)
-    private int accessLevel;
+
     private boolean userLockYn = false;
     private int loginAttemptCount = 0;
 
