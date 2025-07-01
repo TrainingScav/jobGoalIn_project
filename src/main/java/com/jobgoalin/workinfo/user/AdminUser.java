@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -31,9 +32,15 @@ public class AdminUser {
     @Column(nullable = false)
     private Timestamp createdAt;
 
+    @ColumnDefault("3")
+    private int accessLevel;
 
-    private boolean userLockYn = false;
-    private int loginAttemptCount = 0;
+    @ColumnDefault("'N'")
+    @Column(columnDefinition = "CHAR(1)")
+    private char userLockYn;
+
+    @ColumnDefault("0")
+    private int loginAttemptCount;
 
 //    // 객체 생성 시 가독성과 안정성 향상
 //    @Builder
