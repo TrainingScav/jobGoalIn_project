@@ -1,28 +1,22 @@
-
 {{> layout/header}}
+<div class="company-list-page">
+    <div class="company-list-container">
+        <!-- 헤더 + 추가 버튼 -->
+        <div class="company-list-header">
+            <h1>기업 목록</h1>
+            <button class="add-button">추가</button>
+        </div>
 
-<h1>기업 목록</h1>
-
-<div class="company-list">
-    <div class="company-item">
-        <div class="company-name">잡코리아</div>
-        <div class="company-info">기업 형태: 대기업 | 위치: 서울</div>
-    </div>
-    <div class="company-item">
-        <div class="company-name">사람인</div>
-        <div class="company-info">기업 형태: 중견기업 | 위치: 경기</div>
-    </div>
-    <div class="company-item">
-        <div class="company-name">쿠팡</div>
-        <div class="company-info">기업 형태: 대기업 | 위치: 서울</div>
-    </div>
-    <div class="company-item">
-        <div class="company-name">배달의민족</div>
-        <div class="company-info">기업 형태: 스타트업 | 위치: 서울</div>
-    </div>
-    <div class="company-item">
-        <div class="company-name">카카오</div>
-        <div class="company-info">기업 형태: 대기업 | 위치: 성남</div>
+        <!-- 기업 목록 -->
+        {{#companyInfoList}}
+        <div class="company-item">
+            <img src="https://picsum.photos/id/10/300/300" alt="기업 이미지">
+            <div>
+                <a href="/company/{{companyId}}">{{companyName}}</a>
+                <p>{{companyDesc}}</p>
+            </div>
+        </div>
+        {{/companyInfoList}}
     </div>
 </div>
 {{> layout/footer}}

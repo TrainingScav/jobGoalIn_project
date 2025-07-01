@@ -1,0 +1,142 @@
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* 기업 정보 리스트*/
+.company-list-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.company-list-container {
+    width: 800px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.company-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.company-list-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.add-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.company-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.company-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.company-item a {
+    font-weight: bold;
+    color: #1E90FF;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.company-item p {
+    margin: 0;
+    color: #555;
+}
+
+ /* 기업 정보 상세 */
+.company-detail .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f5f5f5;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.company-detail .container {
+    width: 800px;
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.company-detail h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.company-detail .tab-menu {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.company-detail .tab-menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #555;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+.company-detail .tab-menu a.active {
+    border-bottom: 2px solid #333;
+    font-weight: bold;
+    color: #333;
+}
+
+.company-detail .company-info-box {
+    padding: 10px 0;
+}
+
+.company-detail .info-row {
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.company-detail .info-label {
+    width: 120px;
+    font-weight: bold;
+    color: #333;
+}
+
+.company-detail .info-value {
+    color: #555;
+}
+
+.company-detail hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
