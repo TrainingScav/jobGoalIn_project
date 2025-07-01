@@ -18,13 +18,13 @@ public class SkillList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int skillListNo;
+    private Long skillListNo;
 
     @Column(nullable = false)
-    private int skillGrpId;
+    private Long skillGrpId;
 
     @Column(unique = true, nullable = false)
-    private int skillId;
+    private Long skillId;
 
     @Column(nullable = false)
     private String skillName;

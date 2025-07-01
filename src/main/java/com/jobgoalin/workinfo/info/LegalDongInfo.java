@@ -20,7 +20,7 @@ public class LegalDongInfo {
     private String cityCountryDistrict;
     private String eupMyeonDong;
     private String villageName;
-    private int orderNo;
+    private Long orderNo;
 
     @CreationTimestamp
     private Timestamp creationDate;

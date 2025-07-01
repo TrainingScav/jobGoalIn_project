@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Long userId;
 
 	@Column(nullable = false)
 	private String username;
@@ -43,14 +43,14 @@ public class User {
 	private LocalDateTime userCreatedAt;
 
 	@ColumnDefault("1")
-	private int accessLevel;
+	private Long accessLevel;
 
 	@ColumnDefault("'N'")
 	@Column(columnDefinition = "CHAR(1)")
 	private char userLockYn;
 
 	@ColumnDefault("0")
-	private int loginAttemptCount;
+	private Long loginAttemptCount;
 
 
 

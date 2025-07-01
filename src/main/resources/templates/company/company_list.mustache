@@ -1,0 +1,22 @@
+{{> layout/header}}
+<div class="company-list-page">
+    <div class="company-list-container">
+        <!-- 헤더 + 추가 버튼 -->
+        <div class="company-list-header">
+            <h1>기업 목록</h1>
+            <button class="add-button">추가</button>
+        </div>
+
+        <!-- 기업 목록 -->
+        {{#companyInfoList}}
+        <div class="company-item">
+            <img src="https://picsum.photos/id/10/300/300" alt="기업 이미지">
+            <div>
+                <a href="/company/{{companyId}}">{{companyName}}</a>
+                <p>{{companyDesc}}</p>
+            </div>
+        </div>
+        {{/companyInfoList}}
+    </div>
+</div>
+{{> layout/footer}}
