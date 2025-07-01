@@ -3,13 +3,14 @@ package com.jobgoalin.workinfo.user;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data
-@Table(name = "user_info")
 @Entity
+@Table(name = "user_info")
 public class User {
 
     @Id
@@ -31,17 +32,25 @@ public class User {
 	private String userPhone;
 	@Column(nullable = false)
 	private String userBirth;
-	@Column(nullable = false,columnDefinition = "CHAR(1)")
+	@Column(nullable = false, columnDefinition = "CHAR(1)")
 	private String userGender;
 	@Column(nullable = false)
 	private String userNickName;
 	@Column(unique = true ,nullable = false)
 	private String userCivilSerial;
 
-	@Column(nullable = false, updatable = false)
+	@Column(nullable = false)
 	private LocalDateTime userCreatedAt;
-	private boolean userLockYn = false;
-	private int loginAttemptCount = 0;
+
+	@ColumnDefault("1")
+	private int accessLevel;
+
+	@ColumnDefault("'N'")
+	@Column(columnDefinition = "CHAR(1)")
+	private char userLockYn;
+
+	@ColumnDefault("0")
+	private int loginAttemptCount;
 
 
 

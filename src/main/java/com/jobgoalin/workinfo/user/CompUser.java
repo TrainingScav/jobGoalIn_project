@@ -5,18 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
 @Data
-@Table(name = "comp_user_info")
 @Entity
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name = "comp_user_info")
 public class CompUser {
 
     @Id
@@ -48,9 +47,17 @@ public class CompUser {
     private String compAddress;
 
     @CreationTimestamp
+    @Column(nullable = false)
     private Timestamp ComUserCreatedAt;
 
-    private boolean userLockYn = false;
-    private int loginAttemptCount = 0;
+    @ColumnDefault("2")
+    private int accessLevel;
+
+    @ColumnDefault("'N'")
+    @Column(columnDefinition = "CHAR(1)")
+    private char userLockYn;
+
+    @ColumnDefault("0")
+    private int loginAttemptCount;
 
 }
