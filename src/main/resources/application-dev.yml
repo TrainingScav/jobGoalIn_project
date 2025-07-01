@@ -44,12 +44,12 @@ spring:
     console:
       enabled: true
 
-  sql:
-    init:
+#  sql:
+#    init:
       # 2.5 이상 버전부터 명시를 해야 insert 처리 됨
-      mode: always
-      data-locations:
-        - classpath:db/data.sql
+#      mode: always
+#      data-locations:
+#        - classpath:db/data.sql
 
 
   # JPA 설정
