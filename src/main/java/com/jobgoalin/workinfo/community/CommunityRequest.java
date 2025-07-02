@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.community;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 public class CommunityRequest {

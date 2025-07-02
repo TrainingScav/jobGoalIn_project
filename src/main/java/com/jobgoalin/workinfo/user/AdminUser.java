@@ -42,13 +42,5 @@ public class AdminUser {
     @ColumnDefault("0")
     private Long loginAttemptCount;
 
-//    // 객체 생성 시 가독성과 안정성 향상
-//    @Builder
-//    public User(Long id, String username, String password, String email, Timestamp createdAt) {
-//        this.id = id;
-//        this.username = username;
-//        this.password = password;
-//        this.email = email;
-//        this.createdAt = createdAt;
-//    }
+
 }
