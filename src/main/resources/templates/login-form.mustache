@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 - 잡골인</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav button {
+            margin-left: 10px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        nav button:hover {
+            background-color: #2980b9;
+        }
+
+        .login-container {
+            max-width: 500px;
+            margin: 60px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        button.login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button.login-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>잡골인 JobGoalIn</h1>
+        <nav>
+            {{^sessionUser}}
+                <button onclick="location.href='/login'">로그인</button>
+                <button onclick="location.href='/join'">회원가입</button>
+            {{/sessionUser}}
+            {{#sessionUser}}
+                <button onclick="location.href='/mypage'">마이페이지</button>
+                <button onclick="location.href='/logout'">로그아웃</button>
+            {{/sessionUser}}
+        </nav>
+    </div>
+</header>
+
+<div class="login-container">
+    <h2>로그인</h2>
+
+    <form action="/login" method="post">
+        <label for="userLoginId">아이디</label>
+        <input type="text" id="userLoginId" name="userLoginId" required>
+
+        <label for="userPassWord">비밀번호</label>
+        <input type="password" id="userPassWord" name="userPassWord" required>
+
+        <button class="login-btn" type="submit">로그인</button>
+    </form>
+
+    {{#error}}
+        <div class="error-message">{{error}}</div>
+    {{/error}}
+</div>
+
+</body>
+</html>

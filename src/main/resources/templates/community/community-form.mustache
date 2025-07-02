@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>잡골인 메인</title>
+    <meta charset="UTF-8" />
+    <title>커뮤니티 목록 - 잡골인</title>
     <style>
         body {
             margin: 0;
@@ -31,30 +31,41 @@
         nav button:hover {
             background-color: #2980b9;
         }
-        .main-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 60px;
-        }
-        .main-buttons a {
-            width: 200px;
-            height: 80px;
-            margin: 20px;
+        main {
+            max-width: 900px;
+            margin: 40px auto;
             background-color: white;
-            border: 1px solid #ccc;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            color: #2c3e50;
-            transition: box-shadow 0.3s ease;
-        }
-        .main-buttons a:hover {
+            padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .community-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        .community-list li {
+            padding: 12px 20px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .community-list li:hover {
+            background-color: #f0f4f8;
+        }
+        .community-title {
+            font-weight: bold;
+            color: #3498db;
+            font-size: 18px;
+        }
+        .community-author {
+            color: #777;
+            font-size: 14px;
+            margin-top: 4px;
         }
         footer {
             margin-top: 100px;
@@ -66,16 +77,15 @@
     </style>
 </head>
 <body>
-
 <header>
     <div class="header-content">
         <h1>잡골인 JobGoalIn</h1>
         <nav>
-            {{^sessionUser}} <!-- 로그인 안된 경우 -->
+            {{^sessionUser}}
                 <button onclick="location.href='/login'">로그인</button>
                 <button onclick="location.href='/join'">회원가입</button>
             {{/sessionUser}}
-            {{#sessionUser}} <!-- 로그인 된 경우 -->
+            {{#sessionUser}}
                 <button onclick="location.href='/mypage'">마이페이지</button>
                 <button onclick="location.href='/logout'">로그아웃</button>
             {{/sessionUser}}
@@ -83,21 +93,23 @@
     </div>
 </header>
 
-<section class="main-buttons">
-    <a href="/job">채용정보</a>
-    <a href="/company">기업정보</a>
-    <a href="/community">커뮤니티</a>
-    <a href="/login">로그인</a>
-    <a href="/join">회원가입</a>
-    <a href="/about">회사소개</a>
-    <a href="/my-info">마이페이지</a>
-    <a href="/news">직장인 뉴스정보</a>
-    <a href="/contact">회사 연락처</a>
-</section>
+<main>
+    <h2>커뮤니티 게시판</h2>
+    <ul class="community-list">
+        {{#communityList}}
+            <li onclick="location.href='/community/{{id}}'">
+                <div class="community-title">{{title}}</div>
+                <div class="community-author">작성자: {{community.instId}} | 날짜: {{createdAt}}</div>
+            </li>
+        {{/communityList}}
+        {{^communityList}}
+            <li>등록된 게시글이 없습니다.</li>
+        {{/communityList}}
+    </ul>
+</main>
 
 <footer>
     © 2025 잡골인 JobGoalIn. All rights reserved.
 </footer>
-
 </body>
 </html>
