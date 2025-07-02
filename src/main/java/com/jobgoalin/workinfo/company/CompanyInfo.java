@@ -1,10 +1,10 @@
-package com.jobgoalin.workinfo.info;
+package com.jobgoalin.workinfo.company;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.w3c.dom.Text;
 
 import java.sql.Timestamp;
 
@@ -33,4 +33,18 @@ public class CompanyInfo {
     private String instId;
     @CreationTimestamp
     private Timestamp instDate;
+
+    @Builder
+    public CompanyInfo(Long companyId, String companyName, String companyDesc, String companyCeoName, String homepageUrl, String phoneNumber, String companyEmail, String companyAddress, String instId, Timestamp instDate) {
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.companyDesc = companyDesc;
+        this.companyCeoName = companyCeoName;
+        this.homepageUrl = homepageUrl;
+        this.phoneNumber = phoneNumber;
+        this.companyEmail = companyEmail;
+        this.companyAddress = companyAddress;
+        this.instId = instId;
+        this.instDate = instDate;
+    }
 }
