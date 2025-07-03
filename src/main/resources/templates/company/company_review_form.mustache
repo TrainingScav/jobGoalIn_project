@@ -1,0 +1,57 @@
+{{> layout/header}}
+
+<div class="company-detail">
+    <div class="wrapper">
+        <div class="container">
+
+            <div class="top-bar">
+                <a href="/company/list" class="list-button">목록</a>
+            </div>
+
+            <h1>기업 리뷰</h1>
+
+            <!-- 탭 메뉴 -->
+            <div class="tab-menu">
+                <a href="/company/2">기업 정보</a>
+                <a href="#" class="active">기업 리뷰</a>
+            </div>
+
+            <!-- 리뷰 등록 버튼 -->
+            <div class="review-top-bar">
+                <a href="/company/1/reviews/form" class="add-review-button">리뷰 등록</a>
+            </div>
+
+            <!-- 리뷰 리스트 -->
+            <div class="review-section">
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-id">user123</span>
+                        <span class="review-date">2024-07-02</span>
+                    </div>
+                    <div class="review-body">
+                        <div class="review-rating">평가: 4 / 5</div>
+                        <div class="review-position">현직원</div>
+                        <div class="review-recommend">👍 추천</div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-id">testuser</span>
+                        <span class="review-date">2024-06-30</span>
+                    </div>
+                    <div class="review-body">
+                        <div class="review-rating">평가: 2 / 5</div>
+                        <div class="review-position">전직원</div>
+                        <div class="review-recommend">👎 비추천</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{> layout/footer}}
