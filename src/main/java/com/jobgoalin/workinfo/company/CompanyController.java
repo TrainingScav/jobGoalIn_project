@@ -98,4 +98,16 @@ public class CompanyController {
         return "redirect:/company/list";
     }
 
+    @GetMapping("/company/{id}/review")
+    public String companyReview() {
+
+        return "company/company_review";
+    }
+
+    @GetMapping("/company/1/reviews/form")
+    public String companyReviewForm() {
+
+        return "company/company_review_form";
+    }
+
 }

@@ -321,3 +321,89 @@ h1 {
 .submit-button:hover {
     background-color: #45a049;
 }
+
+/* 리뷰 등록 버튼 */
+.review-top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.add-review-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-review-button:hover {
+    background-color: #45a049;
+}
+
+/* 리뷰 카드 */
+.review-card {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.review-body {
+    color: #555;
+}
+
+.review-rating, .review-position, .review-recommend {
+    margin-bottom: 5px;
+}
+
+/* 리뷰 작성 화면 */
+.review-form .form-group {
+    margin-bottom: 20px;
+}
+
+.review-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.review-form .form-group input,
+.review-form .form-group select,
+.review-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.review-form .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.review-form .submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.review-form .submit-button:hover {
+    background-color: #45a049;
+}

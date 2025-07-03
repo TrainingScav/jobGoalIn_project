@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -52,6 +53,9 @@ public class User {
 
 	@ColumnDefault("0")
 	private Long loginAttemptCount;
+
+	@OneToMany(mappedBy = "user")
+	private List<UserSkillList> userSkills;
 
 	@Builder
 	public User(Long userId, String username, String userLoginId, String userPassWord, String userEmail, String userAddress, String userPhone, String userBirth, String userGender, String userNickName, String userCivilSerial, LocalDateTime userCreatedAt, Long accessLevel, char userLockYn, Long loginAttemptCount) {
