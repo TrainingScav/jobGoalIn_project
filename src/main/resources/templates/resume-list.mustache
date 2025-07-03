@@ -1,27 +1,18 @@
+{{> layout/header}}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8"/>
     <title>이력서</title>
-    <link rel="stylesheet" href="/css/resume_list.css"> <!-- 수정된 부분 -->
+    <link rel="stylesheet" href="/css/resume-list.css"> <!-- 수정된 부분 -->
 </head>
 <body>
 
-<div class="header">
-    <div class="logo">이력서플랫폼</div>
-    <div class="nav">
-        <div>기업랭킹</div>
-        <div>채용</div>
-        <div>이력서</div>
-        <div>마이페이지</div>
-    </div>
-</div>
-
 <div class="main">
     <div class="tabs">
-        <a class="tab" href="mypage.html">MY</a>
-        <a class="tab" href="edit-profile.html">계정</a>
-        <a class="tab active" href="resume.html">이력서</a>
+        <a class="tab" href="my-page">MY</a>
+        <a class="tab" href="update-form">계정</a>
+        <a class="tab active" href="resume-lit">이력서</a>
     </div>
 
     <div class="resume-list">
@@ -62,9 +53,6 @@
     <a href="resume-new.html" class="btn-create">+ 새 이력서 작성</a>
 </div>
 
-<div class="footer">
-    Copyright ⓒ 2024 이력서플랫폼. All rights reserved.
-</div>
-
 </body>
 </html>
+{{> layout/footer}}
