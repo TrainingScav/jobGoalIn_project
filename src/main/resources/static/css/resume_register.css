@@ -1,0 +1,265 @@
+/* register_style.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  background-color: #1f2937;
+  padding: 16px 0;
+  color: white;
+}
+
+.inner {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.head--container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head--title a {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+.head--menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+section .main {
+  padding: 40px 0;
+}
+
+.subtitle--container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.subtitle--container .arrow {
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.resume--container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.resume--title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.profile--container {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.pic--container {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #777;
+  transition: all 0.3s;
+}
+
+.pic--container:hover {
+  background-color: #f0f0f0;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.info--container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info--container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.icon--container {
+  margin-right: 10px;
+  color: #6b7280;
+}
+
+.email--container,
+.year--container,
+.phone--container,
+.address--container {
+  display: flex;
+  align-items: center;
+}
+
+.year_phone--container {
+  display: flex;
+  gap: 16px;
+}
+
+.dev_position--container,
+.tech_stack--container,
+.career--container {
+  margin-top: 30px;
+}
+
+.dp_subtitle--container,
+.ts_subtitle--container,
+.c_subtitle--container {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.buttons,
+.buttons2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buttons .row1,
+.buttons .row2,
+.buttons2 .row3,
+.buttons2 .row4 {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dp1, .dp2, .dp3, .dp4, .dp5, .dp6,
+.ts1, .ts2, .ts3, .ts4, .ts5 {
+  background-color: #f3f4f6;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dp1 input, .dp2 input, .dp3 input,
+.dp4 input, .dp5 input, .dp6 input,
+.ts1 input, .ts2 input, .ts3 input,
+.ts4 input, .ts5 input {
+  margin-right: 6px;
+}
+
+.career--container .buttons {
+  display: flex;
+  gap: 30px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.career--container .buttons label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.save--container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.save_button {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.save_button:hover {
+  background-color: #1d4ed8;
+}
+
+footer.class--footer {
+  background-color: #f1f5f9;
+  padding: 30px 0;
+  margin-top: 60px;
+}
+
+.class--footer--container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.class--footer--list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+.class--footer--name a {
+  color: #6b7280;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.class--footer--name a:hover {
+  color: #111827;
+}
+
+.class--footer--copyright {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+}
