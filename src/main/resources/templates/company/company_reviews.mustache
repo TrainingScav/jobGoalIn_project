@@ -1,0 +1,73 @@
+{{> layout/header}}
+
+<div class="company-detail">
+    <div class="wrapper">
+        <div class="container">
+
+            <div class="top-bar">
+                <a href="/company/list" class="list-button">목록</a>
+            </div>
+
+            <h1>기업 리뷰</h1>
+
+            <!-- 탭 메뉴 -->
+            <div class="tab-menu">
+                <a href="/company/{{companyId}}">정보</a>
+                <a href="#" class="active">리뷰</a>
+            </div>
+
+            <!-- 리뷰 등록 버튼 -->
+            <div class="review-top-bar">
+                <a href="/company/{{companyId}}/reviews/form" class="add-review-button">리뷰 등록</a>
+            </div>
+
+            <!-- 리뷰 리스트 -->
+            <div class="review-section">
+                {{#reviews}}
+                    <div class="review-card">
+                        <div class="review-header">
+                            <span class="review-id">{{user.userNickName}}</span>
+
+                            <!-- 자기 댓글일 때만 보이는 삭제 버튼 -->
+                            <div class="review-right">
+                                <span class="review-date">{{time}}</span>
+                                {{#isMyReview}}
+                                    <form action="/company/{{companyId}}/reviews/{{reviewId}}/delete" method="post" class="delete-form">
+                                        <button type="submit" class="delete-button" onclick="return confirm('리뷰를 삭제 하시겠읍니까?')">삭제</button>
+                                    </form>
+                                {{/isMyReview}}
+                            </div>
+                        </div>
+                        <div class="review-body">
+                            <p>{{content}}</p>
+                            <div class="review-meta">
+                                {{#currentEmployee}}
+                                    <span class="badge employee current">현직원</span>
+                                {{/currentEmployee}}
+                                {{^currentEmployee}}
+                                    <span class="badge employee former">전직원</span>
+                                {{/currentEmployee}}
+
+                                {{#recommended}}
+                                    <span class="badge recommend good">👍 추천</span>
+                                {{/recommended}}
+                                {{^recommended}}
+                                    <span class="badge recommend bad">👎 비추천</span>
+                                {{/recommended}}
+                            </div>
+                        </div>
+                    </div>
+                {{/reviews}}
+
+                {{^reviews}}
+                    <div class="no-reviews">
+                        현재 등록된 리뷰가 없습니다.
+                    </div>
+                {{/reviews}}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> layout/footer}}

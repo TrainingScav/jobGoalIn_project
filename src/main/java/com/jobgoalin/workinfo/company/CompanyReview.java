@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.company;
 
 import com.jobgoalin.workinfo.user.User;
+import com.jobgoalin.workinfo.utils.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -31,10 +32,10 @@ public class CompanyReview {
     private String content;
 
     @Column(nullable = false)
-    private Boolean isCurrentEmployee;
+    private boolean isCurrentEmployee;
 
     @Column(nullable = false)
-    private Boolean isRecommended;
+    private boolean isRecommended;
 
     private String instId;
     @CreationTimestamp
@@ -50,5 +51,21 @@ public class CompanyReview {
         this.isRecommended = isRecommended;
         this.instId = instId;
         this.instDate = instDate;
+    }
+
+    /**
+     * 데이터 베이스에 생성이 안되는 필드 (즉 변수)
+     * why use it? - 뷰에 현재 로그인한 사용자가 여러개의 댓글 중 내가 작성한
+     * 댓글은 삭제 기능을 추가하기 위해 편의성 변수를 할당한다.
+     */
+    @Transient
+    private Boolean isMyReview;
+
+    public boolean isOwner(Long sessionId) {
+        return this.user.getUserId().equals(sessionId);
+    }
+
+    public String getTime() {
+        return MyDateUtil.timestampFormat(instDate);
     }
 }

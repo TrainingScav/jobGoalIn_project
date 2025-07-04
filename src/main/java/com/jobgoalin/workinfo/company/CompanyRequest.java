@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.company;
 
 
+import com.jobgoalin.workinfo.user.User;
 import lombok.Data;
 
 public class CompanyRequest {
@@ -42,6 +43,30 @@ public class CompanyRequest {
                     .phoneNumber(phoneNumber)
                     .companyEmail(companyEmail)
                     .companyAddress(companyAddress)
+                    .build();
+        }
+    }
+
+    @Data
+    public static class SaveReviewDTO {
+
+        private Long reviewId;
+        private String content;
+        private boolean isCurrentEmployee;
+        private boolean isRecommended;
+        
+        // selectBox 값 String -> boolean 변환을 위한 변수
+        private String isCurrentEmployeeYn;
+        private String isRecommendedYn;
+
+        public CompanyReview toEntity(User user, CompanyInfo companyInfo) {
+
+            return CompanyReview.builder()
+                    .content(content)
+                    .user(user)
+                    .companyInfo(companyInfo)
+                    .isCurrentEmployee(isCurrentEmployee)
+                    .isRecommended(isRecommended)
                     .build();
         }
     }

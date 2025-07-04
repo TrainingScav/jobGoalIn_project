@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.company;
 
+import com.jobgoalin.workinfo.utils.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -30,6 +33,9 @@ public class CompanyInfo {
     private String companyEmail;
     private String companyAddress;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "companyInfo", cascade = CascadeType.REMOVE)
+    List<CompanyReview> reviews = new ArrayList<>(); // List 선언과 동시에 초기화
+
     private String instId;
     @CreationTimestamp
     private Timestamp instDate;
@@ -46,5 +52,9 @@ public class CompanyInfo {
         this.companyAddress = companyAddress;
         this.instId = instId;
         this.instDate = instDate;
+    }
+
+    public String getTime() {
+        return MyDateUtil.timestampFormat(instDate);
     }
 }

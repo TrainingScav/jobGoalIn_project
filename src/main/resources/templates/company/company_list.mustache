@@ -17,6 +17,12 @@
             </div>
         </div>
         {{/companyInfoList}}
+
+        {{^companyInfoList}}
+        <div class="company-item">
+            <p>등록된 기업이 없습니다.</p>
+        </div>
+        {{/companyInfoList}}
     </div>
 </div>
 {{> layout/footer}}

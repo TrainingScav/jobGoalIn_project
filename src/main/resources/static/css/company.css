@@ -344,26 +344,91 @@ h1 {
 
 /* 리뷰 카드 */
 .review-card {
-    border: 1px solid #eee;
     padding: 15px;
+    border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 15px;
-    background-color: #fafafa;
+}
+
+.review-id {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.review-date {
+    font-weight: bold;
+    font-size: 13px;
+    color: #555; /* 연한 회색 적용도 좋음 */
 }
 
 .review-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
-    font-weight: bold;
+
 }
 
-.review-body {
-    color: #555;
+.review-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 날짜와 삭제 버튼 간격 */
 }
 
-.review-rating, .review-position, .review-recommend {
-    margin-bottom: 5px;
+.delete-form {
+    margin: 0;
+}
+
+.delete-button {
+    padding: 4px 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.review-meta {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+}
+
+.employee {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+    display: inline-block;
+}
+
+.employee.current { background-color: #3498db; } /* 현직원: 파랑 */
+.employee.former { background-color: #95a5a6; }   /* 전직원: 회색 */
+
+.recommend.good { background-color: #2ecc71; }   /* 추천: 초록 */
+.recommend.bad { background-color: #e74c3c; }    /* 비추천: 빨강 */
+
+.recommend {
+    background-color: #e74c3c;
+}
+
+.no-reviews {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 16px;
 }
 
 /* 리뷰 작성 화면 */
@@ -406,4 +471,68 @@ h1 {
 
 .review-form .submit-button:hover {
     background-color: #45a049;
+}
+
+
+/* 태블릿 대응 */
+@media (max-width: 768px) {
+    .company-list-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .company-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .company-item img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+    }
+
+    .company-item div {
+        flex: 1;
+    }
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+    .company-list-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .company-list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .company-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .company-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .company-item div {
+        width: 100%;
+    }
+
+    .add-button {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
 }
