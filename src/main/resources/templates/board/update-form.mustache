@@ -1,0 +1,49 @@
+{{> layout/header}}
+
+<div class="edit-form-container">
+<h2>채용공고 수정하기</h2>
+
+<form action="/jobpostingboard/{{jobPostingBoard.recruitId}}/update" method="post">
+    <p>
+        <label for="title">제목</label><br>
+        <input type="text" id="title" name="title" value="{{jobPostingBoard.title}}" required>
+    </p>
+
+    <p>
+        <label for="companyName">기업명</label><br>
+        <input type="text" id="companyName" name="companyName" value="{{jobPostingBoard.companyName}}" required>
+    </p>
+
+    <p>
+        <label for="content">공고 내용</label><br>
+        <textarea id="content" name="content" rows="5" required>{{jobPostingBoard.content}}</textarea>
+    </p>
+
+    <p>
+        <label for="location">근무지</label><br>
+        <input type="text" id="location" name="location" value="{{jobPostingBoard.location}}" required>
+    </p>
+
+    <p>
+        <label for="employmentType">고용 형태</label><br>
+        <input type="text" id="employmentType" name="employmentType" value="{{jobPostingBoard.employmentType}}" required>
+    </p>
+
+    <p>
+        <label for="requireCareerYears">요구 경력 (년)</label><br>
+        <input type="text" id="requireCareerYears" name="requireCareerYears" value="{{jobPostingBoard.requireCareerYears}}" min="0">
+    </p>
+
+    <p>
+        <label for="deadline">마감일</label><br>
+        <input type="date" id="deadline" name="deadline" value="{{jobPostingBoard.deadline}}">
+    </p>
+
+    <p>
+        <button type="submit">수정 완료</button>
+        <a href="/jobpostingboard/detail/{{jobPostingBoard.recruitId}}">취소</a>
+    </p>
+</form>
+</div>
+
+{{> layout/footer}}

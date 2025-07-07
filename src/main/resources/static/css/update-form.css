@@ -1,0 +1,75 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* 수정 폼 전체 박스 */
+.edit-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+/* 제목 */
+.edit-form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* 라벨과 입력 */
+.edit-form-container label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+.edit-form-container input[type="text"],
+.edit-form-container input[type="date"],
+.edit-form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* 버튼 영역 */
+.edit-form-container .form-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.edit-form-container button,
+.edit-form-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* 수정 완료 버튼 */
+.edit-form-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+/* 취소 링크 */
+.edit-form-container a {
+    background-color: #6c757d;
+    color: #fff;
+}
