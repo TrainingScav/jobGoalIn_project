@@ -57,6 +57,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<UserSkillList> userSkills;
 
+	@Transient
+	private Boolean isCompanyUserYn = false;
+
 	@Builder
 	public User(Long userId, String username, String userLoginId, String userPassWord, String userEmail, String userAddress, String userPhone, String userBirth, String userGender, String userNickName, String userCivilSerial, LocalDateTime userCreatedAt, Long accessLevel, char userLockYn, Long loginAttemptCount) {
 		this.userId = userId;
@@ -74,6 +77,8 @@ public class User {
 		this.accessLevel = accessLevel;
 		this.userLockYn = userLockYn;
 		this.loginAttemptCount = loginAttemptCount;
+
+
 	}
 
 

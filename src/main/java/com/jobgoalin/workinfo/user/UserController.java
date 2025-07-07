@@ -19,7 +19,9 @@ public class UserController {
 
     // 메인 페이지 진입
     @GetMapping("/")
-    public String index() {
+    public String index(HttpSession session) {
+
+
         return "index";
     }
 
@@ -73,8 +75,16 @@ public class UserController {
         if (dto.getLoginType().equals("normal")) {
             User user = userService.login(dto);
 
+            // 로그인 유저 세션정보 저장 (일반)
+            LoginUser loginUser = new LoginUser();
+            loginUser.setId(user.getUserId());
+            loginUser.setName(user.getUsername());
+            loginUser.setLoginId(user.getUserLoginId());
+            loginUser.setUserNickname(user.getUserNickName());
+            loginUser.setCompany(user.getIsCompanyUserYn());
+
             if (user != null) {
-                session.setAttribute("sessionUser", user);
+                session.setAttribute("sessionUser", loginUser);
                 return "redirect:/";
             } else {
                 model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -84,8 +94,16 @@ public class UserController {
         } else {
             CompUser compUser = userService.compLogin(dto);
 
+
+            LoginUser loginUser = new LoginUser();
+            loginUser.setId(compUser.getCompUserId());
+            loginUser.setName(compUser.getCompUserName());
+            loginUser.setLoginId(compUser.getCompUserLoginId());
+            loginUser.setUserNickname(compUser.getCompUserNickname());
+            loginUser.setCompany(compUser.getIsCompanyUserYn());
+
             if (compUser != null) {
-                session.setAttribute("sessionUser", compUser);
+                session.setAttribute("sessionUser", loginUser);
                 return "redirect:/";
             } else {
                 model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
