@@ -2,55 +2,59 @@
 <div class="company-detail">
     <div class="wrapper">
         <div class="container">
+
+            <div class="top-bar">
+                <a href="/company/list" class="list-button">목록</a>
+            </div>
+
             <h1>기업 정보</h1>
 
             <!-- 탭 메뉴 -->
             <div class="tab-menu">
                 <a href="#" class="active">정보</a>
-                <a href="#">리뷰</a>
+                <a href="/company/{{companyInfo.companyId}}/reviews">리뷰</a>
             </div>
 
             <!-- 기업 정보 -->
             <div class="company-info-box">
                 <div class="info-row">
-                    <span class="info-label">산업</span>
-                    <span class="info-value">판매유통</span>
+                    <span class="info-label">기업명</span>
+                    <span class="info-value">{{companyInfo.companyName}}</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">기업형태</span>
-                    <span class="info-value">-</span>
+                    <span class="info-label">기업 소개</span>
+                    <span class="info-value">{{companyInfo.companyDesc}}</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">사원수</span>
-                    <span class="info-value">-</span>
+                    <span class="info-label">CEO 이름</span>
+                    <span class="info-value">{{companyInfo.companyCeoName}}</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">설립일</span>
-                    <span class="info-value">2013.01.31</span>
+                    <span class="info-label">홈페이지 주소</span>
+                    <span class="info-value">{{companyInfo.homepageUrl}}</span>
                 </div>
 
                 <hr>
 
                 <div class="info-row">
-                    <span class="info-label">대표</span>
-                    <span class="info-value">노우형</span>
+                    <span class="info-label">회사 전화번호</span>
+                    <span class="info-value">{{companyInfo.phoneNumber}}</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">매출</span>
-                    <span class="info-value">-</span>
+                    <span class="info-label">회사 이메일</span>
+                    <span class="info-value">{{companyInfo.companyEmail}}</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">주소</span>
-                    <span class="info-value">경기 수원시 영통구 대학3로4번길 15, 1층 102호</span>
+                    <span class="info-label">회사 주소</span>
+                    <span class="info-value">{{companyInfo.companyAddress}}</span>
                 </div>
-                <div class="info-row">
-                    <span class="info-label">웹사이트</span>
-                    <span class="info-value">-</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">연혁</span>
-                    <span class="info-value">-</span>
-                </div>
+            </div>
+            <div class="button-group">
+                <a class="edit-button" href="/company/{{companyInfo.companyId}}/update">수정</a>
+
+                <form action="/company/{{companyInfo.companyId}}/delete" method="post">
+                    <button type="submit" class="delete-button">삭제</button>
+                </form>
             </div>
         </div>
     </div>

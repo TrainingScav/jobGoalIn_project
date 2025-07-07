@@ -1,11 +1,13 @@
 package com.jobgoalin.workinfo.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -52,19 +54,27 @@ public class User {
 	@ColumnDefault("0")
 	private Long loginAttemptCount;
 
+	@OneToMany(mappedBy = "user")
+	private List<UserSkillList> userSkills;
+
+	@Builder
+	public User(Long userId, String username, String userLoginId, String userPassWord, String userEmail, String userAddress, String userPhone, String userBirth, String userGender, String userNickName, String userCivilSerial, LocalDateTime userCreatedAt, Long accessLevel, char userLockYn, Long loginAttemptCount) {
+		this.userId = userId;
+		this.username = username;
+		this.userLoginId = userLoginId;
+		this.userPassWord = userPassWord;
+		this.userEmail = userEmail;
+		this.userAddress = userAddress;
+		this.userPhone = userPhone;
+		this.userBirth = userBirth;
+		this.userGender = userGender;
+		this.userNickName = userNickName;
+		this.userCivilSerial = userCivilSerial;
+		this.userCreatedAt = userCreatedAt;
+		this.accessLevel = accessLevel;
+		this.userLockYn = userLockYn;
+		this.loginAttemptCount = loginAttemptCount;
+	}
 
 
-
-
-
-
-
-//    @Builder
-//    public User(int id, String username, String password, String email, Timestamp createdAt) {
-//        this.userId = id;
-//        this.username = username;
-//        this.userPassWord = password;
-//        this.userEmail = email;
-//        this.userCreatedAt = createdAt;
-//    }
 }

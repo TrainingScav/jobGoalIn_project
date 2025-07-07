@@ -1,4 +1,4 @@
 package com.jobgoalin.workinfo.mypage;
 
-public class MyPageJpaRepository {
+public class MyPageService {
 }

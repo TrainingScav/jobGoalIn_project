@@ -1,0 +1,52 @@
+{{> layout/header}}
+<div class="company-register-page">
+    <form class="register-form" action="/company/form" method="post">
+        <h1>기업 정보 등록</h1>
+
+        <!-- 기업명 -->
+        <div class="form-group">
+            <label for="companyName">기업명<span class="required">*</span></label>
+            <input type="text" id="companyName" name="companyName" required>
+        </div>
+
+        <!-- 기업 소개 -->
+        <div class="form-group">
+            <label for="companyDesc">기업 소개<span class="required">*</span></label>
+            <textarea id="companyDesc" name="companyDesc" required></textarea>
+        </div>
+
+        <!-- CEO 이름 -->
+        <div class="form-group">
+            <label for="companyCeoName">CEO 이름<span class="required">*</span></label>
+            <input type="text" id="companyCeoName" name="companyCeoName" required>
+        </div>
+
+        <!-- 홈페이지 주소 -->
+        <div class="form-group">
+            <label for="homepageUrl">홈페이지 주소</label>
+            <input type="text" id="homepageUrl" name="homepageUrl">
+        </div>
+
+        <!-- 회사 전화 번호 -->
+        <div class="form-group">
+            <label for="phoneNumber">회사 전화 번호</label>
+            <input type="text" id="phoneNumber" name="phoneNumber">
+        </div>
+
+        <!-- 회사 이메일 -->
+        <div class="form-group">
+            <label for="companyEmail">회사 이메일</label>
+            <input type="email" id="companyEmail" name="companyEmail">
+        </div>
+
+        <!-- 회사 주소 -->
+        <div class="form-group">
+            <label for="companyAddress">회사 주소</label>
+            <input type="text" id="companyAddress" name="companyAddress">
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button type="submit" class="submit-button">등록하기</button>
+    </form>
+</div>
+{{> layout/footer}}

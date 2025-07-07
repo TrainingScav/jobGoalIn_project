@@ -1,3 +1,44 @@
+/* 공통 디자인 시작 */
+* {
+    box-sizing: border-box;
+}
+
+input {
+    all: unset;
+}
+
+/* a 태그에 모든 요소를 초기화 한다. */
+a {
+    all: unset;
+}
+
+a:link {
+    text-decoration: none;
+    /* color: #3f464d; */
+}
+
+a:visited {
+    text-decoration: none;
+    /* color: #3f464d; */
+}
+
+a:active {
+    text-decoration: none;
+    /* color: #3f464d; */
+}
+
+a:hover {
+    text-decoration: none;
+    /* color: #3f464d; */
+    cursor: pointer;
+}
+
+input:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+/* 공통 디자인 끝 */
+
 h1 {
     text-align: center;
     color: #333;
@@ -89,6 +130,26 @@ h1 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+.company-detail .container .top-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.company-detail .container .list-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.company-detail .container .list-button:hover {
+    background-color: #2980b9;
+}
+
 .company-detail h1 {
     color: #333;
     text-align: center;
@@ -139,4 +200,339 @@ h1 {
     margin: 20px 0;
     border: none;
     border-top: 1px solid #eee;
+}
+
+/* 상세화면 버튼 그룹 */
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.button-group a,
+.button-group form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.edit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.button-group form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.button-group form button:hover {
+    background-color: #d32f2f;
+}
+
+
+
+/* 기업 정보 작성화면 */
+.company-register-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 50px 0;
+}
+
+.register-form {
+    width: 600px;
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.register-form h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.required {
+    color: red;
+    margin-left: 5px;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+/* 리뷰 등록 버튼 */
+.review-top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.add-review-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-review-button:hover {
+    background-color: #45a049;
+}
+
+/* 리뷰 카드 */
+.review-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.review-id {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.review-date {
+    font-weight: bold;
+    font-size: 13px;
+    color: #555; /* 연한 회색 적용도 좋음 */
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+
+.review-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 날짜와 삭제 버튼 간격 */
+}
+
+.delete-form {
+    margin: 0;
+}
+
+.delete-button {
+    padding: 4px 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.review-meta {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+}
+
+.employee {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+    display: inline-block;
+}
+
+.employee.current { background-color: #3498db; } /* 현직원: 파랑 */
+.employee.former { background-color: #95a5a6; }   /* 전직원: 회색 */
+
+.recommend.good { background-color: #2ecc71; }   /* 추천: 초록 */
+.recommend.bad { background-color: #e74c3c; }    /* 비추천: 빨강 */
+
+.recommend {
+    background-color: #e74c3c;
+}
+
+.no-reviews {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* 리뷰 작성 화면 */
+.review-form .form-group {
+    margin-bottom: 20px;
+}
+
+.review-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.review-form .form-group input,
+.review-form .form-group select,
+.review-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.review-form .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.review-form .submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.review-form .submit-button:hover {
+    background-color: #45a049;
+}
+
+
+/* 태블릿 대응 */
+@media (max-width: 768px) {
+    .company-list-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .company-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .company-item img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+    }
+
+    .company-item div {
+        flex: 1;
+    }
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+    .company-list-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .company-list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .company-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .company-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .company-item div {
+        width: 100%;
+    }
+
+    .add-button {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
 }
