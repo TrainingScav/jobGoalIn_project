@@ -19,7 +19,7 @@ public class MyPageController {
     }
 
 
-    @GetMapping("/resume-list")
+    @GetMapping("/my-resume-list")
     public String resume() {
         return "resume-list";
     }

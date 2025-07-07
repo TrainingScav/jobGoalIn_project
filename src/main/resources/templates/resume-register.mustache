@@ -1,0 +1,151 @@
+{{> layout/header}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resume Resister</title>
+    <link rel="stylesheet" href="/css/resume-register.css"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+
+<section>
+    <div class="inner">
+        <div class="main">
+            <div class="main--container">
+                <div class="subtitle--container">
+                    <a href="/resumelist.html">
+                        <div class="arrow">
+                            <i class="fa-solid fa-arrow-left-long"></i>
+                        </div>
+                    </a>
+                    <div class="subtitle">이력서 등록</div>
+                </div>
+
+                <form action="/register/{{resumeInfo.user.userId}}" method="post">
+                <div class="resume--container">
+                    <div class="title--container">
+                        <div class="resume--title">황지백 이력서_250609</div>
+                        <input type="text" id="title" value="{{resumeInfo.title}}">
+                    </div>
+
+                    <div class="profile--container">
+                        <label class="pic--container" for="file">
+                            <div class="pic_icon--container">
+                                <i class="fa-solid fa-user"></i>
+                                <div class="pic_text--container">
+                                    <i class="fa-solid fa-circle-plus"></i><br/>파일선택
+                                </div>
+                            </div>
+                        </label>
+                        <input type="file" name="file" id="file"/>
+                        <div class="info--container">
+                            <div class="name--container">홍길동</div>
+                            <div class="email--container">
+                                <div class="icon--container">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <div class="email_text--container">
+                                    <input type="text" name="email" placeholder="dev.xxx@gmail.com"/>
+                                </div>
+                            </div>
+                            <div class="year_phone--container">
+                                <div class="yp1">
+                                    <div class="year--container">
+                                        <div class="icon--container">
+                                            <i class="fa-regular fa-calendar"></i>
+                                        </div>
+                                        <div class="year_text--container">
+                                            <input type="text" name="year" placeholder="2000.01.01."/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="yp2">
+                                    <div class="phone--container">
+                                        <div class="icon--container">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </div>
+                                        <div class="phone_text--container">
+                                            <input type="text" name="phone" placeholder="010-1234-5678"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="address--container">
+                                <div class="icon--container">
+                                    <i class="fa-regular fa-address-book"></i>
+                                </div>
+                                <div class="address_text--container">
+                                    <input type="text" name="address" placeholder="부산광역시 OOO구 OOO동"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ✅ 개발 직무 콤보박스 -->
+                    <div class="dev_position--container">
+                        <div class="dp_subtitle--container">개발 직무</div>
+                        <select name="dev_position" id="dev_position">
+                            <option value="">선택하세요</option>
+                            <option value="backend">Server Backend 개발자</option>
+                            <option value="frontend">Frontend 개발자</option>
+                            <option value="fullstack">Web Full Stack 개발자</option>
+                            <option value="ios">IOS 개발자</option>
+                            <option value="android">Android 개발자</option>
+                            <option value="cross">크로스 플랫폼 앱 개발자</option>
+                        </select>
+                    </div>
+
+                    <!-- ✅ 기술스택 콤보박스 (다중 선택 가능) -->
+                    <div class="tech_stack--container">
+                        <div class="ts_subtitle--container">기술스택(업무 툴/스킬)</div>
+                        <select name="tech_stack" id="tech_stack" multiple size="6">
+                            <option value="java">Java</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="spring">Spring</option>
+                            <option value="html">HTML</option>
+                            <option value="jquery">jQuery</option>
+                            <option value="mysql">MySQL</option>
+                            <option value="react">React</option>
+                            <option value="jsp">JSP</option>
+                            <option value="vue">Vue.js</option>
+                            <option value="oracle">Oracle</option>
+                        </select>
+                        <p style="font-size: 0.8em;">※ Ctrl (또는 Command) 키를 누른 채로 여러 항목 선택 가능</p>
+                    </div>
+
+                    <!-- ✅ 경력 콤보박스 -->
+                    <div class="career--container">
+                        <div class="c_subtitle--container">경력</div>
+                        <select name="career" id="career">
+                            <option value="">선택하세요</option>
+                            <option value="신입">신입</option>
+                            <option value="경력">경력</option>
+                        </select>
+                    </div>
+
+                    <div class="save--container">
+                        <button
+                                type="button"
+                                class="save_button"
+                                onclick="location.href = '/resumelist.html';"
+                        >
+                            저장하기
+                        </button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+{{> layout/footer}}
