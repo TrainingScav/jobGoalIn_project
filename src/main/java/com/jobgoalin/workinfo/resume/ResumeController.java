@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/resume")
+@RequestMapping("/resumelist")
 public class ResumeController {
 
 
@@ -27,7 +27,7 @@ public class ResumeController {
      * 이력서 등록 화면 요청
      */
 
-    @GetMapping("/resume")
+    @GetMapping("/resume-register")
     public String ResumeForm(Model model,HttpSession session) {
 
         User checkSessionUser = (User)session.getAttribute("sessionUser");
@@ -38,19 +38,18 @@ public class ResumeController {
         User user = resumeService.findById(1L);
 
         model.addAttribute("userInfo",user);
-
-        return"resume-register";
+        model.addAttribute("resumeInfo",new  ResumeRequest.ResumeRegisterDTO());
+        return "resumelist/resume-register";
     }
 
     /**
      * 이력서 등록 기능 요청
+    **/
 
-
-    @PostMapping("/resume/register")
+    @PostMapping("/resume-register")
     public String registerResume(@SessionAttribute("userId") Long userId, @ModelAttribute ResumeRequest.ResumeRegisterDTO resumeRegisterDTO) {
         resumeRegisterDTO.setUserId(userId);
         resumeService.registerResume(resumeRegisterDTO);
-        return"resume-list";
+        return "redirect:/resumelist/resume-register";
     }
-     */
 }
