@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.company;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import com.jobgoalin.workinfo._core.errors.exception.Exception404;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -91,5 +93,14 @@ public class CompanyService {
 
         companyReviewJpaRepository.deleteById(reviewId);
     }
+
+    // 기업 정보 등록여부 조회
+    // 기업 등록 시 한 사람 당 하나의 기업 정보를 등록 할 수 있음
+    /**/
+    public CompanyInfo findCompanyInfoByUserId(Long compUserId) {
+
+        return companyInfoJpaRepository.findCompanyInfoByCompUserId(compUserId);
+    }
+
 
 }

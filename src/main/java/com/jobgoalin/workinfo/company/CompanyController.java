@@ -1,11 +1,15 @@
 package com.jobgoalin.workinfo.company;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception401;
+import com.jobgoalin.workinfo._core.errors.exception.Exception403;
 import com.jobgoalin.workinfo._core.errors.exception.Exception500;
+import com.jobgoalin.workinfo.user.LoginUser;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +53,21 @@ public class CompanyController {
     }
 
     @GetMapping("/company/form")
-    public String companyInfoForm() {
+    public String companyInfoForm(HttpSession session) {
+
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
+
+        if (!user.isCompany()) {
+            new Exception403("기업 회원만 등록 할 수 있습니다.");
+            return "company/company_list";
+        }
+        /**/
+        CompanyInfo searchCompanyInfoByCompUserId = companyService.findCompanyInfoByUserId(user.getId());
+
+        if (searchCompanyInfoByCompUserId != null) {
+            new Exception401("기업정보 등록한 기업 회원 당 하나만 작성 가능합니다.");
+            return "redirect:/company/list";
+        }
 
         log.info(">> 기업정보 작성화면 이동 << ");
 
@@ -107,20 +125,15 @@ public class CompanyController {
     public String companyReview(@PathVariable(name = "id") Long companyId, Model model, HttpSession session)  {
 
         // 임시 테스트를 위한 세션유저 세팅
-        User user = (User)session.getAttribute("sessionUser");
-
-        if (user == null) {
-            user = userService.findById(1L);
-            session.setAttribute("sessionUser", user);
-        }
+        LoginUser user = (LoginUser)session.getAttribute("sessionUser");
 
         List<CompanyReview> companyReviews = companyService.findCompanyReviewByCompanyId(companyId);
 
         // 리뷰 소유권 설정 (삭제 버튼 표시용)
         if (user != null) {
-            User searchUserId = user;
+            LoginUser searchUserId = user;
             companyReviews.forEach(companyReview -> {
-                boolean isReviewOwner = companyReview.isOwner(searchUserId.getUserId());
+                boolean isReviewOwner = companyReview.isOwner(searchUserId.getId());
                 companyReview.setIsMyReview(isReviewOwner);
                 log.info("isMyReview 확인 : {}", companyReview.getIsMyReview());
             });

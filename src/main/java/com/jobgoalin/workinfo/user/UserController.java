@@ -21,6 +21,11 @@ public class UserController {
     @GetMapping("/")
     public String index(HttpSession session) {
 
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
+
+        if (user != null) {
+            log.info("sessionUser 값 확인 : {}", user );
+        }
 
         return "index";
     }
@@ -149,6 +154,12 @@ public class UserController {
         User updateUser = userService.updateById(id,reqDTO);
         session.setAttribute("sessionUser",updateUser);
         return "redirect:/update-form";
+    }
+
+    // 오시는길 화면 이동
+    @GetMapping("/contactus")
+    public String contactUs() {
+        return "contactUs";
     }
 
 }

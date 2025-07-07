@@ -7,6 +7,6 @@ public class Exception403 extends RuntimeException {
         super(message);
     }
 
-    // 권한 없음.(본이이 작성한 게시글만 수정 가능)
+    // 권한 없음.(본인이 작성한 게시글만 수정 가능)
     // 관리자만 접근 가능한 페이지
 }

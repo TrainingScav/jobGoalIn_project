@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo._core.interceptor;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception401;
+import com.jobgoalin.workinfo.user.LoginUser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -20,13 +21,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 
        HttpSession session = request.getSession();
        System.out.println("인터셉터 동작 확인 : " + request.getRequestURL());
-       /*
-       User sessionUser = (User)session.getAttribute("sessionUser");
+       /**/
+       LoginUser sessionUser = (LoginUser) session.getAttribute("sessionUser");
        if(sessionUser == null) {
            throw new Exception401("로그인 먼저 해주세요");
            //return false;
        }
-        */
+
        return true;
     }
 

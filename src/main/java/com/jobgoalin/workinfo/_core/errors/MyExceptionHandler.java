@@ -46,7 +46,7 @@ public class MyExceptionHandler {
     public ResponseEntity<String> ex401ByData(Exception401 e, HttpServletRequest request) {
         // location.href = '/loin-form'
         // String script = "<script> alert('"+ e.getMessage()  +"'); history.back(); </script>" ;
-        String script = "<script> alert('"+ e.getMessage()  +"'); location.href ='/login-form'; </script>" ;
+        String script = "<script> alert('"+ e.getMessage()  +"'); location.href ='/login'; </script>" ;
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
                 .contentType(MediaType.TEXT_HTML)

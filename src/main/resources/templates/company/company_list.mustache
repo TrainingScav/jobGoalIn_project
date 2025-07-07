@@ -4,7 +4,11 @@
         <!-- 헤더 + 추가 버튼 -->
         <div class="company-list-header">
             <h1>기업 목록</h1>
-            <a href="/company/form" class="add-button">추가</a>
+            {{#sessionUser}}
+                {{#isCompany}}
+                    <a href="/company/form" class="add-button">추가</a>
+                {{/isCompany}}
+            {{/sessionUser}}
         </div>
 
         <!-- 기업 목록 -->

@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.company;
 
+import com.jobgoalin.workinfo.user.CompUser;
 import com.jobgoalin.workinfo.utils.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -21,6 +22,10 @@ public class CompanyInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long companyId;
+
+    @OneToOne
+    @JoinColumn(name = "comp_user_id")
+    private CompUser compUser;
 
     @Column(nullable = false)
     private String companyName;
