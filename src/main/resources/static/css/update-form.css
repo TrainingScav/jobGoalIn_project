@@ -1,109 +1,75 @@
 body {
-  margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: #f8f9fa;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
-.header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* 수정 폼 전체 박스 */
+.edit-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: #2d2d2d;
+/* 제목 */
+.edit-form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #333;
 }
 
-.nav {
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: #666;
+/* 라벨과 입력 */
+.edit-form-container label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #222;
 }
 
-.nav div {
-  cursor: pointer;
+.edit-form-container input[type="text"],
+.edit-form-container input[type="date"],
+.edit-form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
-.main {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 0 20px;
+/* 버튼 영역 */
+.edit-form-container .form-buttons {
+    text-align: center;
+    margin-top: 30px;
 }
 
-.tabs {
-  display: flex;
-  border-bottom: 2px solid #e0e0e0;
-  margin-bottom: 30px;
+.edit-form-container button,
+.edit-form-container a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 0 10px;
+    cursor: pointer;
 }
 
-.tab {
-  padding: 10px 20px;
-  font-weight: 500;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  color: #555;
-  text-decoration: none;
+/* 수정 완료 버튼 */
+.edit-form-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
 }
 
-.tab.active {
-  color: #4a6cf7;
-  border-bottom: 2px solid #4a6cf7;
-}
-
-.form-box {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 24px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: #444;
-}
-
-.form-group input {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.form-actions {
-  text-align: right;
-  margin-top: 20px;
-}
-
-.form-actions button {
-  padding: 10px 20px;
-  background-color: #4a6cf7;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.form-actions button:hover {
-  background-color: #3b58d1;
-}
-
-.footer {
-  text-align: center;
-  padding: 30px;
-  font-size: 13px;
-  color: #999;
+/* 취소 링크 */
+.edit-form-container a {
+    background-color: #6c757d;
+    color: #fff;
 }

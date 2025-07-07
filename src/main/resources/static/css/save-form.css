@@ -1,0 +1,69 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* 전체 폼 박스 */
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+/* 제목 */
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #333;
+}
+
+/* 라벨과 입력 */
+.form-container label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"],
+.form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 6px;
+    box-sizing: border-box;
+}
+
+/* 텍스트에어리어 */
+.form-container textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* 버튼 */
+.form-container button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
