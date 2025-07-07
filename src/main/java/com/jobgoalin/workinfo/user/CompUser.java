@@ -35,10 +35,6 @@ public class CompUser {
     private String compUserEmail;
     @Column(nullable = false)
     private String compUserNickname;
-    /*
-    @Column(nullable = false)
-    private String compTypeCode;
-    */
     @Column(nullable = false)
     private Long compRegNumber;
     @Column(nullable = false)
@@ -62,8 +58,10 @@ public class CompUser {
     @ColumnDefault("0")
     private Long loginAttemptCount;
 
-    @Builder
+    @Transient
+    private Boolean isCompanyUserYn = true;
 
+    @Builder
     public CompUser(String compUserName, String compUserLoginId, String compUserPassword, String compUserPhone, String compUserEmail, String compUserNickname, Long compRegNumber, String compName, String compCEOName, String compAddress) {
         this.compUserName = compUserName;
         this.compUserLoginId = compUserLoginId;
