@@ -13,13 +13,13 @@ public class MyPageController {
     // 개인 정보 수정
 
 
-    @GetMapping("/my-page")
+    @GetMapping("/user/my-page")
     public String myPage() {
-        return "my-page";
+        return "user/my-page";
     }
 
 
-    @GetMapping("/my-resume-list")
+    @GetMapping("/resume-list")
     public String resume() {
         return "resume-list";
     }

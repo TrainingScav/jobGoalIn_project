@@ -29,11 +29,11 @@
                     <div class="subtitle">이력서 등록</div>
                 </div>
 
-                <form action="/register/{{resumeInfo.user.userId}}" method="post">
+                <form action="/register/{{userInfo.userId}}" method="post">
                 <div class="resume--container">
                     <div class="title--container">
                         <div class="resume--title">황지백 이력서_250609</div>
-                        <input type="text" id="title" value="{{resumeInfo.title}}">
+                        <input type="text" name="title" value="{{resumeInfo.title}}">
                     </div>
 
                     <div class="profile--container">
@@ -41,7 +41,7 @@
                             <div class="pic_icon--container">
                                 <i class="fa-solid fa-user"></i>
                                 <div class="pic_text--container">
-                                    <i class="fa-solid fa-circle-plus"></i><br/>파일선택
+                                    <i class="fa-solid fa-circ le-plus"></i><br/>파일선택
                                 </div>
                             </div>
                         </label>

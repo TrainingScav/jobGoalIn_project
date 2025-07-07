@@ -12,7 +12,5 @@ public class ResumeRequest {
         private String content;
         private char isExperienced;
         private char isShow;
-
-
     }
 }
