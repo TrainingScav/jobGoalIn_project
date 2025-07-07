@@ -16,12 +16,35 @@ public class UserRequest {
         private String userGender;
         private String userNickname;
         private String userCivilSerial;
+
+        public void validate() {
+
+        }
+    }
+
+    @Data
+    public static class CompJoinDTO {
+        private String compUserName;
+        private String compUserLoginId;
+        private String compUserPassword;
+        private String compUserPhone;
+        private String compUserEmail;
+        private String compUserNickname;
+        private Long compRegNumber;
+        private String compName;
+        private String compCEOName;
+        private String compAddress;
+
+        public void validate() {
+
+        }
     }
 
     @Data
     public static class LoginDTO {
         private String userLoginId;
         private String userPassWord;
+        private String loginType;
     }
 
     // 회원 정보 수정용 DTO

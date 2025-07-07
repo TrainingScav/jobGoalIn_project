@@ -17,38 +17,80 @@ public class UserController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 
-    // 회원가입 화면 요청
-    @GetMapping("/join")
-    public String joinForm() {
-        return "user/join-form"; // templates/user/join-form.html
+    // 메인 페이지 진입
+    @GetMapping("/")
+    public String index() {
+        return "index";
     }
 
-    @PostMapping("/join")
-    public String join(UserRequest.JoinDTO dto, Model model) {
+    // 일반 이용자 회원가입 화면 요청
+    @GetMapping("/signup/normal")
+    public String normalUserSignupForm() {
+        return "user/userJoin"; // templates/user/join-form.html
+    }
+
+    // 일반 이용자 회원가입 요청
+    @PostMapping("/signup/normal")
+    public String normalUserSignup(UserRequest.JoinDTO dto, Model model) {
         try {
             userService.join(dto);
             return "redirect:/login";
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
-            return "user/join-form";
+            return "user/userJoin";
+        }
+    }
+
+    // 기업 이용자 회원가입 화면 요청
+    @GetMapping("/signup/company")
+    public String companyUserSignupForm() {
+        return "user/compUserJoin"; // templates/user/join-form.html
+    }
+
+    // 기업 이용자 회원가입 요청
+    @PostMapping("/signup/company")
+    public String join(UserRequest.CompJoinDTO dto, Model model) {
+        try {
+            userService.compJoin(dto);
+            return "redirect:/login";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "user/compUserJoin";
         }
     }
 
     // 로그인 화면
     @GetMapping("/login")
     public String loginForm() {
-        return "user/login-form";
+        return "user/login";
     }
 
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO dto, HttpSession session, Model model) {
-        User user = userService.login(dto);
-        if (user != null) {
-            session.setAttribute("loginUser", user);
-            return "redirect:/";
+
+        log.info("dto 값 확인 : {}", dto.toString());
+
+        if (dto.getLoginType().equals("normal")) {
+            User user = userService.login(dto);
+
+            if (user != null) {
+                session.setAttribute("sessionUser", user);
+                return "redirect:/";
+            } else {
+                model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
+                return "user/login";
+            }
+
         } else {
-            model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            return "user/login-form";
+            CompUser compUser = userService.compLogin(dto);
+
+            if (compUser != null) {
+                session.setAttribute("sessionUser", compUser);
+                return "redirect:/";
+            } else {
+                model.addAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
+                return "user/login";
+            }
         }
     }
 

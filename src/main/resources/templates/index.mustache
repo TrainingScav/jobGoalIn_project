@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이력서 플랫폼</title>
-</head>
-<body>
-    안녕하세요1
-</body>
-</html>
+{{> layout/header}}
+<div class="card mb-3">
+    <div class="card-body">
+        <!-- {{! title }} 은 현재 Board 객체의 title 멤버 변수에 값을 출력한다
+                 머스태치는 자동으로 getTitle() 메서드를 호출 한 것이다.
+            -->
+        <h4 class="card-title mb-3">타이틀</h4>
+        <p> 메인페이지 화면 작업중</p>
+        <a href="/board/1" class="btn btn-primary">상세보기</a>
+    </div>
+</div>
+{{> layout/footer}}

@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.user;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +17,9 @@ import java.util.Optional;
 public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final CompUserRepository compUserRepository;
 
-    // 회원가입 - 유니크 컬럼만 검증함
+    // 일반유저 회원가입 - 유니크 컬럼만 검증함
     public void join(UserRequest.JoinDTO dto) {
         if (userRepository.existsByUserLoginId(dto.getUserLoginId())) {
             throw new IllegalArgumentException("아이디가 이미 존재합니다.");
@@ -49,17 +51,51 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // 로그인
-    public User login(UserRequest.LoginDTO dto) {
-        Optional<User> optionalUser = userRepository.findByUserLoginId(dto.getUserLoginId());
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            if (user.getUserPassWord().equals(dto.getUserPassWord())) {
-                return user;
-            }
+    // 기업유저 회원가입 - 유니크 컬럼만 검증함
+    public void compJoin(UserRequest.CompJoinDTO dto) {
+        if (userRepository.existsByUserLoginId(dto.getCompUserLoginId())) {
+            throw new IllegalArgumentException("아이디가 이미 존재합니다.");
         }
-        return null; // 아이디나 비밀번호 없으면 null 반환
+        if (userRepository.existsByUserEmail(dto.getCompUserEmail())) {
+            throw new IllegalArgumentException("이메일이 이미 사용 중입니다.");
+        }
+
+        CompUser compUser = CompUser.builder()
+                .compUserName(dto.getCompUserName())
+                .compUserLoginId(dto.getCompUserLoginId())
+                .compUserPassword(dto.getCompUserPassword())
+                .compUserPhone(dto.getCompUserPhone())
+                .compUserEmail(dto.getCompUserEmail())
+                .compUserNickname(dto.getCompUserNickname())
+                .compRegNumber(dto.getCompRegNumber())
+                .compName(dto.getCompName())
+                .compCEOName(dto.getCompCEOName())
+                .compAddress(dto.getCompAddress())
+                .accessLevel(2L)
+                .userLockYn('N')
+                .loginAttemptCount(0L)
+                .build();
+
+        compUserRepository.save(compUser);
+    }
+
+    // 일반 회원 로그인
+    public User login(UserRequest.LoginDTO dto) {
+        //User user = userRepository.findByUserIdAndPassword(dto.getUserLoginId(),dto.getUserPassWord());
+
+        //return user;
+
+        return userRepository
+                .findByUserIdAndPassword(dto.getUserLoginId(), dto.getUserPassWord())
+                .orElseThrow(() -> new Exception400("사용자명 또는 비밀번호가 틀렸어요"));
+    }
+
+    // 기업 회원 로그인
+    public CompUser compLogin(UserRequest.LoginDTO dto) {
+
+        return compUserRepository
+                .findByUserIdAndPassword(dto.getUserLoginId(), dto.getUserPassWord())
+                .orElseThrow(() -> new Exception400("사용자명 또는 비밀번호가 틀렸어요"));
     }
 
 
@@ -87,4 +123,6 @@ public class UserService {
         user.setUserAddress(updateDTO.getUserAddress());
         return user;
     }
+
+
 }
