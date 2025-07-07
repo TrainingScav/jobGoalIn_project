@@ -1,0 +1,129 @@
+body {
+
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
+}
+
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  background-image: url('/img/background.jpg'); /* 이미지 경로 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+
+/* 3단 레이아웃 전체 영역 */
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* 세로 중앙 정렬 */
+  padding: 60px 20px;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 공통 컬럼 스타일 */
+.main-column {
+  min-width: 250px;
+}
+
+/* 왼쪽 정보 영역 */
+.left-info {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+  font-weight:bold;
+}
+.left-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.left-info li {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 8px;
+}
+
+/* 오른쪽 정보 영역 */
+.right-info {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.8;
+  font-weight:bold;
+}
+.right-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.right-info li {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+.right-info li strong {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* 중앙 콘텐츠 영역 */
+.center-content {
+  flex: 2.3;
+  max-width: 1000px;
+  text-align: center;
+}
+.main-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #2d2d2d;
+}
+.main-subtext {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+}
+.main-image img {
+  max-width: 550px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.main-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.btn-main {
+  width: 180px;
+  background-color: #4a6cf7;
+  color: white;
+  padding: 12px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+.btn-main:hover {
+  background-color: #375ee0;
+}

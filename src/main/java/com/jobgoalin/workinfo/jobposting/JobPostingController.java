@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller // Mustache 템플릿을 반환하려면 @RestController 대신 @Controller 사용
+@Controller
 @RequiredArgsConstructor
 
 public class JobPostingController {
