@@ -10,6 +10,5 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class CommunityController {
     private static final Logger log = LoggerFactory.getLogger(CommunityController.class);
-    private final CommunityService communityService;
 
 }

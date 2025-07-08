@@ -1,19 +1,24 @@
 package com.jobgoalin.workinfo.community;
 
+import com.jobgoalin.workinfo.WorkinfoApplication;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name="community_post_info")
 @NoArgsConstructor
 public class Community {
-    private String postId;//pk
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
+    private Long postId;
 
     @Column(length = 100, nullable = false)
     private String title;
@@ -22,20 +27,20 @@ public class Community {
     @Column(nullable = false)
     private String content;
 
-    @Column(length = 50, nullable = false)
+    @Column(name = "inst_id", length = 50, nullable = false)
     private String instId;
 
+    @Column(name = "inst_date", nullable = false)
     @CreationTimestamp
-    @Column(nullable = false)
-    private Timestamp instDate;// 등록일시
+    private Timestamp instDate;
 
     @Builder
-    public Community(String postId, String title, String content, String instId, Timestamp instDate) {
-        this.postId = postId;
+    public Community(String title, String content, String instId) {
         this.title = title;
         this.content = content;
         this.instId = instId;
-        this.instDate = instDate;
     }
+
+
 }
 

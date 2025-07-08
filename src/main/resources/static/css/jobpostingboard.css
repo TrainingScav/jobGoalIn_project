@@ -1,0 +1,80 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f5f6f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* 헤더 + 버튼 정렬 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 960px;
+    margin: 40px auto 20px;
+    padding: 0 20px;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* 등록 버튼 */
+.post-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.post-button:hover {
+    background-color: #0056b3;
+}
+
+/* 채용공고 리스트 컨테이너 */
+.job-list {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 채용공고 카드 스타일 */
+.job-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+}
+
+.job-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.job-type,
+.company-name,
+.job-location {
+    margin: 4px 0;
+    color: #555;
+}
+
+.detail-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.detail-link:hover {
+    text-decoration: underline;
+}

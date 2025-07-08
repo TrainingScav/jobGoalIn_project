@@ -1,0 +1,24 @@
+{{> layout/header}}
+
+<div class="page-header">
+    <h1>채용공고 목록</h1>
+    <a href="/jobpostingboard/write" class="post-button">채용공고 등록</a>
+</div>
+
+<div class="job-list">
+    {{#jobPostingBoardList}}
+        <div class="job-card">
+            <h2 class="job-title">{{title}}</h2>
+            <p class="job-type">{{employmentType}}</p>
+            <p class="company-name">기업명: {{companyName}}</p>
+            <p class="job-location">{{location}}</p>
+            <a href="/jobpostingboard/detail/{{recruitId}}" class="detail-link">상세보기</a>
+        </div>
+    {{/jobPostingBoardList}}
+
+    {{^jobPostingBoardList}}
+        <p>등록된 채용공고가 없습니다.</p>
+    {{/jobPostingBoardList}}
+</div>
+
+{{> layout/footer}}

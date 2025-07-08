@@ -1,0 +1,48 @@
+{{> layout/header}}
+<div class="location-page">
+    <h1 class="location-title">오시는 길</h1>
+    <div class="location-container">
+        <!-- 지도 영역 -->
+        <div class="map-section" id="map" style="width:500px; height:400px;">
+            <!-- 여기에 카카오 지도 API가 표시될 거야 -->
+        </div>
+
+        <script type="text/javascript">
+            var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+            var options = { //지도를 생성할 때 필요한 기본 옵션
+                center: new kakao.maps.LatLng(35.159645454, 129.060203681), //지도의 중심좌표.
+                level: 1 //지도의 레벨(확대, 축소 정도)
+            };
+
+            var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+            // 마커가 표시될 위치입니다
+            var markerPosition  = new kakao.maps.LatLng(35.159645454, 129.060203681);
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                position: markerPosition
+            });
+
+            // 마커가 지도 위에 표시되도록 설정합니다
+            marker.setMap(map);
+        </script>
+
+        <!-- 주소 및 정보 -->
+        <div class="info-section">
+            <h2>회사 정보</h2>
+            <p><strong>주소:</strong> 그린컴퓨터아카데미 별관 4층 </p>
+            <p><strong>전화번호:</strong> 02-1234-5678</p>
+            <p><strong>이메일:</strong> jobGoalin@company.com</p>
+            <p><strong>영업시간:</strong> 평일 09:00 ~ 18:00</p>
+
+            <div class="info-buttons">
+                <a href="tel:0212345678" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-phone"></i> 전화걸기</a>
+                <a href="mailto:jobGoalin@company.com" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-envelope"></i> 이메일 보내기</a>
+                <a href="https://kko.kakao.com/3B-1kydy5h" target="_blank" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-map-location-dot"></i> 카카오맵 열기</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> layout/footer}}

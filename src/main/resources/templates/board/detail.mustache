@@ -1,0 +1,36 @@
+{{> layout/header}}
+
+{{#jobPostingBoard}}
+    <div class="job-detail">
+
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="job-title">{{title}}</h2>
+            <a href="/jobpostingboard" class="btn btn-secondary btn-sm">목록으로 돌아가기</a>
+        </div>
+
+
+        <div class="job-meta">
+            <p><strong>기업명:</strong> {{companyName}}</p>
+            <p><strong>공고 내용:</strong></p>
+            <p class="job-content">{{content}}</p>
+            <p><strong>근무지:</strong> {{location}}</p>
+            <p><strong>고용 형태:</strong> {{employmentType}}</p>
+            <p><strong>요구 경력:</strong> {{requireCareerYears}}</p>
+            {{#deadline}}
+                <p><strong>마감일:</strong> {{deadline}}</p>
+            {{/deadline}}
+        </div>
+
+
+        <div class="button-group" style="margin-top: 30px; text-align: center;">
+            <form class="delete-form" action="/jobpostingboard/{{recruitId}}/delete" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="display: inline-block;">
+                <button type="submit" class="btn btn-danger">삭제</button>
+            </form>
+
+            <a href="/jobpostingboard/{{recruitId}}/update-form" class="btn btn-outline-primary" style="margin-left: 10px;">수정</a>
+        </div>
+    </div>
+{{/jobPostingBoard}}
+
+{{> layout/footer}}

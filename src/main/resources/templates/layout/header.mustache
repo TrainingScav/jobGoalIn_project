@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Blog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9aa58a38a1a225f1447be20bdf0bf67"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/company.css">
+    <link rel="stylesheet" href="/css/jobpostingboard.css">
+    <link rel="stylesheet" href="/css/jobpostingdetail.css">
+    <link rel="stylesheet" href="/css/save-form.css">
+    <link rel="stylesheet" href="/css/update-form.css">
+    <link rel="stylesheet" href="/css/resumelist.css">
+    <link rel="stylesheet" href="/css/resume_detail.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <link rel="stylesheet" href="/css/user.css">
+</head>
+
+
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="/img/logo2.png" alt="로고이미지"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/company/list">기업정보</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/jobpostingboard">채용공고</a>
+                </li>
+                {{#sessionUser}}
+                    {{#isCompany}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/resumes">이력서 목록</a>
+                        </li>
+                    {{/isCompany}}
+                {{/sessionUser}}
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                {{^sessionUser}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup/normal">회원가입</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">로그인</a>
+                    </li>
+                {{/sessionUser}}
+
+                {{#sessionUser}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/update-form">회원정보보기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                {{/sessionUser}}
+            </ul>
+        </div>
+    </div>
+</nav>
