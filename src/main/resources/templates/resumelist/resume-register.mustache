@@ -1,152 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
 {{> layout/header}}
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Resume Resister</title>
-    <link rel="stylesheet" href="/css/resume-register.css"/>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-    />
-</head>
 <body>
-
-<section>
-    <div class="inner">
-        <div class="main">
-            <div class="main--container">
-                <div class="subtitle--container">
-                    <a >
-                        <div class="arrow">
-                            <i class="fa-solid fa-arrow-left-long"></i>
-                        </div>
+<section class="resume-wrapper">
+    <div class="resume-inner">
+        <div class="resume-main">
+            <div class="resume-container">
+                <!-- 상단 제목 -->
+                <div class="resume-header">
+                    <a href="javascript:history.back();" class="resume-back-btn">
+                        <i class="fa-solid fa-arrow-left-long"></i>
                     </a>
-                    <div class="subtitle">이력서 등록</div>
+                    <div class="resume-subtitle">이력서 등록</div>
                 </div>
 
-
-                <div class="resume--container">
-                    <div class="title--container">
-                        <p>title test: {{resumeInfo.title}}</p>
-                        <label for="title">제목</label>
-                        <div class="resume--title">황지백 이력서_250609</div>
+                <!-- 입력폼 전체 -->
+                <form class="resume-form" action="/resume-register" method="post">
+                    <!-- 제목 입력 -->
+                    <div class="resume-field">
+                        <label for="title" class="resume-label">제목</label>
+                        <input type="text" id="title" name="title" class="resume-input" placeholder="이력서 제목을 입력하세요." />
                     </div>
 
-                    <div class="profile--container">
-                        <label class="pic--container" for="file">
-                            <div class="pic_icon--container">
-                                <i class="fa-solid fa-user"></i>
-                                <div class="pic_text--container">
-                                    <i class="fa-solid fa-circ le-plus"></i><br/>파일선택
-                                </div>
-                            </div>
-                        </label>
-                        <input type="file" name="file" id="file"/>
-                        <div class="info--container">
-                            <div class="name--container">홍길동</div>
-                            <div class="email--container">
-                                <div class="icon--container">
-                                    <i class="fa-regular fa-envelope"></i>
-                                </div>
-                                <div class="email_text--container">
-                                    <input type="text" name="email" placeholder="dev.xxx@gmail.com"/>
-                                </div>
-                            </div>
-                            <div class="year_phone--container">
-                                <div class="yp1">
-                                    <div class="year--container">
-                                        <div class="icon--container">
-                                            <i class="fa-regular fa-calendar"></i>
-                                        </div>
-                                        <div class="year_text--container">
-                                            <input type="text" name="year" placeholder="2000.01.01."/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="yp2">
-                                    <div class="phone--container">
-                                        <div class="icon--container">
-                                            <i class="fa-solid fa-phone"></i>
-                                        </div>
-                                        <div class="phone_text--container">
-                                            <input type="text" name="phone" placeholder="010-1234-5678"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="address--container">
-                                <div class="icon--container">
-                                    <i class="fa-regular fa-address-book"></i>
-                                </div>
-                                <div class="address_text--container">
-                                    <input type="text" name="address" placeholder="부산광역시 OOO구 OOO동"/>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- 자기소개서 -->
+                    <div class="resume-field">
+                        <label for="content" class="resume-label">자기소개서</label>
+                        <textarea id="content" name="content" class="resume-textarea" placeholder="자기소개서를 입력하세요."></textarea>
                     </div>
 
-                    <!-- ✅ 개발 직무 콤보박스 -->
-                    <div class="dev_position--container">
-                        <div class="dp_subtitle--container">개발 직무</div>
-                        <select name="dev_position" id="dev_position">
+                    <!-- 개발 직무 -->
+                    <div class="resume-field">
+                        <label for="positionId" class="resume-label">개발 직무</label>
+                        <select name="positionId" id="positionId" class="resume-select">
                             <option value="">선택하세요</option>
-                            <option value="backend">Server Backend 개발자</option>
-                            <option value="frontend">Frontend 개발자</option>
-                            <option value="fullstack">Web Full Stack 개발자</option>
-                            <option value="ios">IOS 개발자</option>
-                            <option value="android">Android 개발자</option>
-                            <option value="cross">크로스 플랫폼 앱 개발자</option>
+                            <option value="1">Server Backend 개발자</option>
+                            <option value="2">Frontend 개발자</option>
+                            <option value="3">Web Full Stack 개발자</option>
+                            <option value="4">IOS 개발자</option>
+                            <option value="5">Android 개발자</option>
+                            <option value="6">크로스 플랫폼 앱 개발자</option>
                         </select>
                     </div>
 
-                    <!-- ✅ 기술스택 콤보박스 (다중 선택 가능) -->
-                    <div class="tech_stack--container">
-                        <div class="ts_subtitle--container">기술스택(업무 툴/스킬)</div>
-                        <select name="tech_stack" id="tech_stack" multiple size="6">
-                            <option value="java">Java</option>
-                            <option value="javascript">JavaScript</option>
-                            <option value="spring">Spring</option>
-                            <option value="html">HTML</option>
-                            <option value="jquery">jQuery</option>
-                            <option value="mysql">MySQL</option>
-                            <option value="react">React</option>
-                            <option value="jsp">JSP</option>
-                            <option value="vue">Vue.js</option>
-                            <option value="oracle">Oracle</option>
+                    <!-- 기술 스택 -->
+                    <div class="resume-field">
+                        <label for="skillStackId" class="resume-label">기술 스택</label>
+                        <select name="skillStackId" id="skillStackId" class="resume-select">
+                            <option value="7">Java</option>
+                            <option value="8">JavaScript</option>
+                            <option value="9">Spring</option>
+                            <option value="10">HTML</option>
+                            <option value="11">jQuery</option>
+                            <option value="12">MySQL</option>
+                            <option value="13">React</option>
+                            <option value="14">JSP</option>
+                            <option value="15">Vue.js</option>
+                            <option value="16">Oracle</option>
                         </select>
-                        <p style="font-size: 0.8em;">※ Ctrl (또는 Command) 키를 누른 채로 여러 항목 선택 가능</p>
                     </div>
 
-                    <!-- ✅ 경력 콤보박스 -->
-                    <div class="career--container">
-                        <div class="c_subtitle--container">경력</div>
-                        <select name="career" id="career">
+                    <!-- 경력 -->
+                    <div class="resume-field">
+                        <label for="isExperienced" class="resume-label">경력</label>
+                        <select name="isExperienced" id="isExperienced" class="resume-select">
                             <option value="">선택하세요</option>
-                            <option value="신입">신입</option>
-                            <option value="경력">경력</option>
+                            <option value="N">신입</option>
+                            <option value="Y">경력</option>
                         </select>
                     </div>
 
-                    <div class="save--container">
-                        <button
-                                type="button"
-                                class="save_button"
-                                onclick="location.href = '/resumelist.html';"
-                        >
-                            저장하기
-                        </button>
+                    <!-- 공개 여부 -->
+                    <div class="resume-field">
+                        <label for="isShow" class="resume-label">공개 여부</label>
+                        <select name="isShow" id="isShow" class="resume-select">
+                            <option value="">선택하세요</option>
+                            <option value="Y">공개</option>
+                            <option value="N">비공개</option>
+                        </select>
                     </div>
-                </div>
+
+                    <!-- 저장 버튼 -->
+                    <div class="resume-submit">
+                        <button type="submit" class="resume-button" >저장하기</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
 </body>
-</html>
 {{> layout/footer}}

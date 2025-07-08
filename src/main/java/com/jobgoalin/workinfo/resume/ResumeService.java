@@ -1,7 +1,9 @@
 package com.jobgoalin.workinfo.resume;
 
+import com.jobgoalin.workinfo.info.SkillList;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserRepository;
+import com.jobgoalin.workinfo.user.UserSkillList;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +19,11 @@ public class ResumeService {
 
     private final ResumeRepository resumeRepository;
     private final UserRepository userRepository;
+    private final SkillListJpaRepository skillListJpaRepository;
+    private final UserSkillListJpaRepository userSkillListJpaRepository;
     private static final Logger log = LoggerFactory.getLogger(ResumeService.class);
 
-    public Resume registerResume(ResumeRequest.ResumeRegisterDTO request) {
+    public void registerResume(ResumeRequest.ResumeRegisterDTO request) {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
@@ -32,7 +36,26 @@ public class ResumeService {
                 .instId(String.valueOf(user.getUserId())) // 사용자 ID를 기록 (등록자)
                 .instDate(new Timestamp(System.currentTimeMillis())) // 현재 시각
                 .build();
-        return resumeRepository.save(resume);
+
+        resumeRepository.save(resume);
+
+        SkillList positionSkill = skillListJpaRepository.findBySkillId(request.getPositionId());
+        SkillList SkillStack = skillListJpaRepository.findBySkillId(request.getSkillStackId());
+
+        UserSkillList userPositionSetting = UserSkillList.builder()
+                .user(user)
+                .skillList(positionSkill)
+                .instId(request.getUserNickname())
+                .build();
+        UserSkillList userSkillSetting = UserSkillList.builder()
+                .user(user)
+                .skillList(SkillStack)
+                .instId(request.getUserNickname())
+                .build();
+
+        userSkillListJpaRepository.save(userPositionSetting);
+        userSkillListJpaRepository.save(userSkillSetting);
+
     }
 
     public Resume findById(Long id) {

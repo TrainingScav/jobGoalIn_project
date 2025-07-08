@@ -16,26 +16,18 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ResumeController {
 
-
-
-    private final ResumeService resumeService;
     private static final Logger log = LoggerFactory.getLogger(ResumeController.class);
-
+    private final ResumeService resumeService;
+    private final UserService userService;
 
     /**
      * 이력서 등록 화면 요청
      */
-
-
     @GetMapping("/resumelist/resume-register")
-    public String ResumeForm(Model model,HttpSession session) {
+    public String ResumeForm(Model model) {
 
-        LoginUser checkSessionUser = (LoginUser) session.getAttribute("sessionUser");
-        if (checkSessionUser != null) {
-            log.info("sessionUser 값 확인 : {}", checkSessionUser.toString());
-        }
-        Resume resume = resumeService.findById(1L);
-        model.addAttribute("resumeInfo", resume);
+        //LoginUser checkSessionUser = (LoginUser) session.getAttribute("sessionUser");
+
         return "resumelist/resume-register";
     }
 
@@ -59,9 +51,16 @@ public class ResumeController {
     **/
 
     @PostMapping("/resume-register")
-    public String registerResume(@SessionAttribute("userId") Long userId, @ModelAttribute ResumeRequest.ResumeRegisterDTO resumeRegisterDTO) {
-        resumeRegisterDTO.setUserId(userId);
+    public String registerResume(HttpSession session, ResumeRequest.ResumeRegisterDTO resumeRegisterDTO) {
+
+        log.info("dto 값 확인 : {}", resumeRegisterDTO.toString());
+
+        LoginUser sessionUser = (LoginUser) session.getAttribute("sessionUser");
+        resumeRegisterDTO.setUserId(sessionUser.getId());
+        resumeRegisterDTO.setUserNickname(sessionUser.getUserNickname());
+
         resumeService.registerResume(resumeRegisterDTO);
-        return "redirect:/resumelist/resume-register";
+
+        return "redirect:/";
     }
 }

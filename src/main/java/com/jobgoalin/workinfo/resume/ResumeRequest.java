@@ -9,8 +9,11 @@ public class ResumeRequest {
     @Data
     public static class ResumeRegisterDTO{
         private Long userId;
+        private String userNickname;
         private String title;
         private String content;
+        private Long positionId;
+        private Long skillStackId;
         private char isExperienced;
         private char isShow;
     }
