@@ -1,6 +1,5 @@
 package com.jobgoalin.workinfo.resume;
 
-
 import com.jobgoalin.workinfo.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;

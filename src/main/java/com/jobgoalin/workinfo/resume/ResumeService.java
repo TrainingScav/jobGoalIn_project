@@ -3,20 +3,21 @@ package com.jobgoalin.workinfo.resume;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ResumeService {
 
     private final ResumeRepository resumeRepository;
     private final UserRepository userRepository;
+    private static final Logger log = LoggerFactory.getLogger(ResumeService.class);
 
     public Resume registerResume(ResumeRequest.ResumeRegisterDTO request) {
         User user = userRepository.findById(request.getUserId())
@@ -34,11 +35,9 @@ public class ResumeService {
         return resumeRepository.save(resume);
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> {
-            log.warn("사용자 조회 실패 - ID: {}", id);
-            return new ResponseStatusException(HttpStatus.NOT_FOUND,"사용자를 찾을 수 없습니다.");
+    public Resume findById(Long id) {
+        return resumeRepository.findById(id).orElseThrow(() -> {
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "이력서를 찾을 수 없습니다.");
         });
     }
-
 }

@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.resume;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 public class ResumeRequest {

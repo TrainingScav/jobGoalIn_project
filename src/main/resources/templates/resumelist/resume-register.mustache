@@ -1,6 +1,6 @@
-{{> layout/header}}
 <!DOCTYPE html>
 <html lang="en">
+{{> layout/header}}
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -21,7 +21,7 @@
         <div class="main">
             <div class="main--container">
                 <div class="subtitle--container">
-                    <a href="/resumelist.html">
+                    <a >
                         <div class="arrow">
                             <i class="fa-solid fa-arrow-left-long"></i>
                         </div>
@@ -29,11 +29,12 @@
                     <div class="subtitle">이력서 등록</div>
                 </div>
 
-                <form action="/register/{{userInfo.userId}}" method="post">
+
                 <div class="resume--container">
                     <div class="title--container">
+                        <p>title test: {{resumeInfo.title}}</p>
+                        <label for="title">제목</label>
                         <div class="resume--title">황지백 이력서_250609</div>
-                        <input type="text" name="title" value="{{resumeInfo.title}}">
                     </div>
 
                     <div class="profile--container">
