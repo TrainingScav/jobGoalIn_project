@@ -31,7 +31,7 @@ public class User {
 	@Column(nullable = false)
 	private String userAddress;
 	@Column(nullable = false)
-	private String userPhone;
+	private String userPhoneNumber;
 	@Column(nullable = false)
 	private String userBirth;
 	@Column(nullable = false, columnDefinition = "CHAR(1)")
@@ -61,14 +61,14 @@ public class User {
 	private Boolean isCompanyUserYn = false;
 
 	@Builder
-	public User(Long userId, String username, String userLoginId, String userPassWord, String userEmail, String userAddress, String userPhone, String userBirth, String userGender, String userNickName, String userCivilSerial, LocalDateTime userCreatedAt, Long accessLevel, char userLockYn, Long loginAttemptCount) {
+	public User(Long userId, String username, String userLoginId, String userPassWord, String userEmail, String userAddress, String userPhoneNumber, String userBirth, String userGender, String userNickName, String userCivilSerial, LocalDateTime userCreatedAt, Long accessLevel, char userLockYn, Long loginAttemptCount) {
 		this.userId = userId;
 		this.username = username;
 		this.userLoginId = userLoginId;
 		this.userPassWord = userPassWord;
 		this.userEmail = userEmail;
 		this.userAddress = userAddress;
-		this.userPhone = userPhone;
+		this.userPhoneNumber = userPhoneNumber;
 		this.userBirth = userBirth;
 		this.userGender = userGender;
 		this.userNickName = userNickName;
