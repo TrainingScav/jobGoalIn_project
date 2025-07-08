@@ -30,7 +30,7 @@ public class CompanyService {
     public CompanyInfo findCompanyInfoById(Long id) {
 
         CompanyInfo companyInfo = companyInfoJpaRepository.findById(id).orElseThrow(() ->
-            new Exception404("해당 게시물이 존재하지 않습니다.")
+                new Exception404("해당 게시물이 존재하지 않습니다.")
         );
 
         return companyInfo;
@@ -66,7 +66,7 @@ public class CompanyService {
 
         log.info("게시글 삭제 서비스 시작 - ID {}", id);
         CompanyInfo companyInfo = companyInfoJpaRepository.findById(id).orElseThrow(() ->
-            new Exception404("삭제하려는 게시글이 없습니다")
+                new Exception404("삭제하려는 게시글이 없습니다")
         );
 
         companyInfoJpaRepository.deleteById(id);

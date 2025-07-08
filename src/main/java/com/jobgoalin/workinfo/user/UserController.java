@@ -39,7 +39,6 @@ public class UserController {
     // 일반 이용자 회원가입 요청
     @PostMapping("/signup/normal")
     public String normalUserSignup(UserRequest.JoinDTO dto, Model model) {
-        dto.validate();
         try {
             userService.join(dto);
             return "redirect:/login";
@@ -58,7 +57,6 @@ public class UserController {
     // 기업 이용자 회원가입 요청
     @PostMapping("/signup/company")
     public String join(UserRequest.CompJoinDTO dto, Model model) {
-        dto.validate();
         try {
             userService.compJoin(dto);
             return "redirect:/login";
@@ -119,6 +117,7 @@ public class UserController {
         }
     }
 
+
     // 로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -155,7 +154,7 @@ public class UserController {
         User user = (User)session.getAttribute("sessionUser");
         User updateUser = userService.updateById(id,reqDTO);
         session.setAttribute("sessionUser",updateUser);
-        return "redirect:/user/update-form";
+        return "redirect:/uesr/update-form";
     }
 
     // 오시는길 화면 이동

@@ -4,6 +4,7 @@ import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import com.jobgoalin.workinfo._core.errors.exception.Exception401;
 import com.jobgoalin.workinfo._core.errors.exception.Exception403;
 import com.jobgoalin.workinfo._core.errors.exception.Exception500;
+import com.jobgoalin.workinfo.user.CompUser;
 import com.jobgoalin.workinfo.user.LoginUser;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserService;
@@ -31,22 +32,46 @@ public class CompanyController {
     private final UserService userService;
 
     @GetMapping("/company/list")
-    public String companyInfoList(Model model) {
+    public String companyInfoList(Model model, HttpSession session) {
 
         log.info(">> 기업정보 목록 조회 시작 << ");
 
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
         List<CompanyInfo> companyInfoList = companyService.findAllCompanyInfo();
+
+        if (user != null) {
+            // 등록 버튼 표시여부 (기업정보가 이미 등록 되어 있을 시 버튼 표시 삭제)
+            companyInfoList.forEach(companyInfo -> {
+                if (companyInfo.getCompUser().getCompUserId().equals(user.getId())) {
+                    user.setCompanyInfoWriteYn(false);
+                } else {
+                    user.setCompanyInfoWriteYn(true);
+                }
+            });
+        }
+
         model.addAttribute("companyInfoList", companyInfoList);
 
         return "company/company_list";
     }
 
     @GetMapping("/company/{id}")
-    public String companyInfoDetail(@PathVariable(name = "id") Long id, Model model) {
+    public String companyInfoDetail(@PathVariable(name = "id") Long id, Model model, HttpSession session) {
 
         log.info(">> 기업 상세정보 화면이동 및 조회 시작 << ");
 
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
         CompanyInfo companyInfoDetail = companyService.findCompanyInfoById(id);
+
+        if (user != null) {
+            // 등록 버튼 표시여부 (기업정보가 이미 등록 되어 있을 시 버튼 표시 삭제)
+            if (companyInfoDetail.getCompUser().getCompUserId().equals(user.getId())) {
+                user.setCompanyInfoUpdateAndDeleteYn(true);
+            } else {
+                user.setCompanyInfoUpdateAndDeleteYn(false);
+            }
+        }
+
         model.addAttribute("companyInfo", companyInfoDetail);
 
         return "company/company_detail";
@@ -58,15 +83,13 @@ public class CompanyController {
         LoginUser user = (LoginUser) session.getAttribute("sessionUser");
 
         if (!user.isCompany()) {
-            new Exception403("기업 회원만 등록 할 수 있습니다.");
-            return "company/company_list";
+            throw new Exception403("기업 회원만 등록 할 수 있습니다.");
         }
-        /**/
+
         CompanyInfo searchCompanyInfoByCompUserId = companyService.findCompanyInfoByUserId(user.getId());
 
         if (searchCompanyInfoByCompUserId != null) {
-            new Exception401("기업정보 등록한 기업 회원 당 하나만 작성 가능합니다.");
-            return "redirect:/company/list";
+            throw new Exception400("기업정보 등록한 기업 회원 당 하나만 작성 가능합니다.");
         }
 
         log.info(">> 기업정보 작성화면 이동 << ");
@@ -75,11 +98,15 @@ public class CompanyController {
     }
 
     @PostMapping("/company/form")
-    public String companyInfoInsert(CompanyRequest.SaveDTO saveDTO) {
+    public String companyInfoInsert(CompanyRequest.SaveDTO saveDTO, HttpSession session) {
 
         log.info(">> 기업정보 등록 시작 << ");
 
-        CompanyInfo companyInfo = companyService.companyInfoInsert(saveDTO.toEntity());
+        // CompUser 객체에 세션유저 id 담아줌.
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
+        CompUser compUser = userService.findCompUserById(user.getId());
+
+        CompanyInfo companyInfo = companyService.companyInfoInsert(saveDTO.toEntity(compUser));
 
         if (companyInfo == null) {
             throw new Exception500("등록 처리 중 에러가 발생했습니다.");
@@ -89,22 +116,32 @@ public class CompanyController {
     }
 
     @GetMapping("/company/{id}/update")
-    public String companyInfoUpdateForm(@PathVariable(name = "id") Long id, Model model) {
+    public String companyInfoUpdateForm(@PathVariable(name = "id") Long id, Model model, HttpSession session) {
 
         log.info(">> 기업정보 수정 화면이동 및 조회 시작 << ");
 
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
         CompanyInfo companyInfoDetail = companyService.findCompanyInfoById(id);
+
+        if (!companyInfoDetail.getCompUser().getCompUserId().equals(user.getId())) {
+            throw new Exception403("해당 기업의 회원만 수정 할 수 있습니다.");
+        }
+
         model.addAttribute("companyInfo", companyInfoDetail);
 
         return "company/company_update";
     }
 
     @PostMapping("/company/{id}/update")
-    public String companyInfoUpdate(@PathVariable(name = "id") Long id, CompanyRequest.SaveDTO saveDTO) {
+    public String companyInfoUpdate(@PathVariable(name = "id") Long id, CompanyRequest.SaveDTO saveDTO, HttpSession session) {
 
         log.info(">> 기업정보 수정 시작 << ");
 
-        CompanyInfo companyInfo = companyService.companyInfoUpdate(id, saveDTO.toEntity());
+        // CompUser 객체에 세션유저 id 담아줌.
+        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
+        CompUser compUser = userService.findCompUserById(user.getId());
+
+        CompanyInfo companyInfo = companyService.companyInfoUpdate(id, saveDTO.toEntity(compUser));
         if (companyInfo == null) {
             throw new Exception500("수정 처리 중 에러가 발생했습니다.");
         }
@@ -194,7 +231,7 @@ public class CompanyController {
 
     @PostMapping("/company/{companyId}/reviews/{reviewId}/delete")
     public String companyReviewDelete(@PathVariable(name = "companyId")Long companyId,
-                                        @PathVariable(name = "reviewId")Long reviewId)
+                                      @PathVariable(name = "reviewId")Long reviewId)
     {
 
         companyService.companyReviewDelete(reviewId);

@@ -10,20 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MyPageController {
 
 
-    @GetMapping("/my_page")
+    // 개인 정보 수정
+
+
+    @GetMapping("/user/my-page")
     public String myPage() {
-        return "my_page";
+        return "user/my-page";
     }
 
-    // http://localhost:8080/filelist
 
-    @GetMapping("/edit_profile")
-    public String updateUserInfo() {
-        return "edit_profile";
-    }
-
-    @GetMapping("/resume_list")
+    @GetMapping("/resume-list")
     public String resume() {
-        return "resume_list";
+        return "resume-list";
     }
 }

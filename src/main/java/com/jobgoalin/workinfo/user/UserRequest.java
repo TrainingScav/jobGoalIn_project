@@ -17,7 +17,6 @@ public class UserRequest {
         private String userNickname;
         private String userCivilSerial;
 
-
         public void validate() {
 
             // 이름 : 필수입력, 숫자 및 특수문자 제한

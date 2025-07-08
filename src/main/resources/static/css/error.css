@@ -1,0 +1,51 @@
+/* error.css */
+.error-page {
+    background: repeating-linear-gradient(
+        45deg,
+        #f8d7da,
+        #f8d7da 10px,
+        #fff 10px,
+        #fff 20px
+    );
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-page .container {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+.error-page .error-icon {
+    font-size: 5rem;
+    color: #dc3545;
+    margin-bottom: 1rem;
+}
+
+.error-page .error-code {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #dc3545;
+}
+
+.error-page .error-message {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.error-page .background-x {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    right: -50px;
+    bottom: -50px;
+    z-index: -1;
+    background: url('data:image/svg+xml;utf8,<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="40" y2="40" stroke="red" stroke-width="2"/><line x1="40" y1="0" x2="0" y2="40" stroke="red" stroke-width="2"/></svg>') repeat;
+    opacity: 0.05;
+}

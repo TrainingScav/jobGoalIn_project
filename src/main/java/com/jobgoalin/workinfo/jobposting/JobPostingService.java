@@ -42,3 +42,4 @@ public class JobPostingService {
         jobPostingRepository.deleteById(recruitId);
     }
 }
+

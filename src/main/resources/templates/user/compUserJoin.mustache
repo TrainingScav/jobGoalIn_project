@@ -1,0 +1,27 @@
+{{> layout/header}}
+
+<div class="signup-container">
+    <!-- 회원 타입 선택 탭 -->
+    <div class="tab-buttons">
+        <a href="/signup/normal" class="{{#isNormal}}tab-button active{{/isNormal}}{{^isNormal}}tab-button{{/isNormal}}">일반 회원</a>
+        <a href="/signup/company" class="{{#isCompany}}tab-button active{{/isCompany}}{{^isCompany}}tab-button{{/isCompany}}">기업 회원</a>
+    </div>
+
+    <!-- 기업 회원 가입 폼 -->
+    <form id="company-form" action="/signup/company" method="post" class="signup-form">
+        <h2>기업 회원 가입</h2>
+        <input type="text" name="compUserName" placeholder="기업 회원 이름" required>
+        <input type="text" name="compUserLoginId" placeholder="기업 로그인 아이디" required>
+        <input type="password" name="compUserPassword" placeholder="비밀번호" required>
+        <input type="text" name="compUserPhone" placeholder="전화번호">
+        <input type="email" name="compUserEmail" placeholder="이메일" required>
+        <input type="text" name="compUserNickname" placeholder="닉네임">
+        <input type="text" name="compRegNumber" placeholder="사업자 등록 번호">
+        <input type="text" name="compName" placeholder="기업명">
+        <input type="text" name="compCEOName" placeholder="기업 CEO 이름">
+        <input type="text" name="compAddress" placeholder="기업 주소">
+        <button type="submit" class="submit-button">회원가입</button>
+    </form>
+</div>
+
+{{> layout/footer}}

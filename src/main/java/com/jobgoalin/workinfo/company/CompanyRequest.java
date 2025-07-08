@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.company;
 
 
+import com.jobgoalin.workinfo.user.CompUser;
 import com.jobgoalin.workinfo.user.User;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ public class CompanyRequest {
     @Data
     public static class SaveDTO {
         private Long companyId;
+        private CompUser compUser;
         private String companyName;
         private String companyDesc;
         private String companyCeoName;
@@ -32,10 +34,11 @@ public class CompanyRequest {
         }
          */
 
-        public CompanyInfo toEntity() {
+        public CompanyInfo toEntity(CompUser compUser) {
 
             return CompanyInfo.builder()
                     .companyId(companyId)
+                    .compUser(compUser)
                     .companyName(companyName)
                     .companyDesc(companyDesc)
                     .companyCeoName(companyCeoName)

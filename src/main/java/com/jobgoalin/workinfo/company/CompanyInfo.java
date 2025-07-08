@@ -46,8 +46,9 @@ public class CompanyInfo {
     private Timestamp instDate;
 
     @Builder
-    public CompanyInfo(Long companyId, String companyName, String companyDesc, String companyCeoName, String homepageUrl, String phoneNumber, String companyEmail, String companyAddress, String instId, Timestamp instDate) {
+    public CompanyInfo(Long companyId, CompUser compUser, String companyName, String companyDesc, String companyCeoName, String homepageUrl, String phoneNumber, String companyEmail, String companyAddress, String instId, Timestamp instDate) {
         this.companyId = companyId;
+        this.compUser = compUser;
         this.companyName = companyName;
         this.companyDesc = companyDesc;
         this.companyCeoName = companyCeoName;

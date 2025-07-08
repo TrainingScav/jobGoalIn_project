@@ -1,0 +1,56 @@
+/* 상세보기 전체 컨테이너 */
+.resume-detail-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+/* 제목 스타일 */
+.detail-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+  color: #2d2d2d;
+}
+
+/* 카드 스타일 */
+.resume-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 제목 강조 */
+.resume-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 본문 내용 */
+.resume-content {
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* 돌아가기 버튼 */
+.btn-back {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #4a6cf7;
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-back:hover {
+  background-color: #375ee0;
+}

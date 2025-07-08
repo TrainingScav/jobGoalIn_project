@@ -1,4 +1,4 @@
-ggdasfserver:
+ggdasfqserver:
   servlet:
     encoding:
       charset: UTF-8

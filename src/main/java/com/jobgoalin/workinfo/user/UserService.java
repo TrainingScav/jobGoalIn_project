@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception404;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +93,7 @@ public class UserService {
         // 입력한 비밀번호가 다르다면
         if (!dto.getUserPassWord().equals(user.getUserPassWord())) {
             user.setLoginAttemptCount(user.getLoginAttemptCount() + 1);
-        //로그인 횟수 1 추가
+            //로그인 횟수 1 추가
             if (user.getLoginAttemptCount() >= 5) {
                 user.setUserLockYn('Y');
             }
@@ -141,5 +142,10 @@ public class UserService {
         return user;
     }
 
+    public CompUser findCompUserById(Long id) {
 
+        return compUserRepository.findById(id).orElseThrow(() -> {
+            return new Exception404("해당 유저를 찾을 수 없습니다.");
+        });
+    }
 }
