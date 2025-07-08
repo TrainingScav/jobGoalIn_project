@@ -35,9 +35,9 @@ public class ResumeService {
         return resumeRepository.save(resume);
     }
 
-    public Resume findById(Long userId,ResumeRequest.ResumeRegisterDTO reqDTO) {
-        return resumeRepository.findById(userId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "이력서를 찾을 수 없습니다."));
+    public Resume findById(Long id) {
+        return resumeRepository.findById(id).orElseThrow(() -> {
+            return new ResponseStatusException(HttpStatus.NOT_FOUND, "이력서를 찾을 수 없습니다.");
+        });
     }
-
 }

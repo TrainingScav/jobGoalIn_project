@@ -131,8 +131,7 @@ public class UserController {
     @GetMapping("/user/update-form")
     public String updateForm(Model model,HttpSession session) {
 
-
-        User checkSesssionUser = (User)session.getAttribute("sessionUser");
+        LoginUser checkSesssionUser = (LoginUser)session.getAttribute("sessionUser");
         if (checkSesssionUser != null) {
             log.info("sessionUser 값 확인 : {}", checkSesssionUser.toString());
         }
