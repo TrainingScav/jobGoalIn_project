@@ -38,7 +38,7 @@ public class UserService {
                 .userPassWord(dto.getUserPassWord())
                 .userEmail(dto.getUserEmail())
                 .userAddress(dto.getUserAddress())
-                .userPhone(dto.getUserPhoneNumber())
+                .userPhoneNumber(dto.getUserPhoneNumber())
                 .userBirth(dto.getUserBirth())
                 .userGender(dto.getUserGender())
                 .userNickName(dto.getUserNickname())
@@ -136,7 +136,7 @@ public class UserService {
 
         // 더티 체킹
         user.setUserNickName(updateDTO.getUserNickname());
-        user.setUserPhone(updateDTO.getUserPhoneNumber());
+        user.setUserPhoneNumber(updateDTO.getUserPhoneNumber());
         user.setUserPassWord(updateDTO.getUserPassword());
         user.setUserAddress(updateDTO.getUserAddress());
         return user;
