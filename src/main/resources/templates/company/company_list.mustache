@@ -4,7 +4,11 @@
         <!-- 헤더 + 추가 버튼 -->
         <div class="company-list-header">
             <h1>기업 목록</h1>
-            <button class="add-button">추가</button>
+            {{#sessionUser}}
+                {{#isCompany}}
+                    <a href="/company/form" class="add-button">추가</a>
+                {{/isCompany}}
+            {{/sessionUser}}
         </div>
 
         <!-- 기업 목록 -->
@@ -15,6 +19,12 @@
                 <a href="/company/{{companyId}}">{{companyName}}</a>
                 <p>{{companyDesc}}</p>
             </div>
+        </div>
+        {{/companyInfoList}}
+
+        {{^companyInfoList}}
+        <div class="company-item">
+            <p>등록된 기업이 없습니다.</p>
         </div>
         {{/companyInfoList}}
     </div>

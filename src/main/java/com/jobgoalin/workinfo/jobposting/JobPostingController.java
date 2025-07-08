@@ -1,77 +1,64 @@
 package com.jobgoalin.workinfo.jobposting;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Optional;
-
-@Controller // Mustache 템플릿을 반환하려면 @RestController 대신 @Controller 사용
+@Controller
 @RequiredArgsConstructor
 
 public class JobPostingController {
 
-    private final JobPostingRepository jobPostingRepository;
-    private static final Logger log = LoggerFactory.getLogger(JobPostingController.class);
+    private final JobPostingService jobPostingService;
 
-    // 전체 채용공고 목록 조회
-    @GetMapping("/board")
+    @GetMapping("/jobpostingboard")
     public String boardList(Model model) {
-        List<JobPostingBoard> jobPostingBoardList = jobPostingRepository.findAll();
-
-        log.info("jobPostingBoardList 데이터 확인 : {}", jobPostingBoardList);
-        log.info("jobPostingBoardList 사이즈 확인 : {}", jobPostingBoardList.size());
-
-        model.addAttribute("jobPostingBoardList", jobPostingBoardList );
-        return "board/jobPosting"; // resources/templates/jobposting-list.mustache
+        model.addAttribute("jobPostingBoardList", jobPostingService .findAll());
+        return "board/jobPosting";
     }
 
-    // 상세 보기 화면
-    @GetMapping("/board/detail/{recruitId}")
-    public String detail(@PathVariable("recruitId") Long recruitId, Model model) {
-        JobPostingBoard jobPostingBoard = jobPostingRepository.findByRecruitId(recruitId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        model.addAttribute("jobPostingBoard", jobPostingBoard);
-        return "board/detail";  // templates/board/detail.mustache
+    @GetMapping("/jobpostingboard/detail/{recruitId}")
+    public String detail(@PathVariable Long recruitId, Model model) {
+        model.addAttribute("jobPostingBoard", jobPostingService.findById(recruitId));
+        return "board/detail";
     }
 
-    // 등록 폼 보여주기
-    @GetMapping("/board/write")
+    @GetMapping("/jobpostingboard/write")
     public String showWriteForm() {
-        return "board/save-form"; // templates/board/write.mustache
+        return "board/save-form";
     }
 
-    // 등록 처리
     @PostMapping("/posting/write")
     public String submitJobPosting(JobPostingBoard jobPostingBoard) {
-        jobPostingRepository.save(jobPostingBoard);
-        return "redirect:/board";  // 등록 후 목록 페이지로 이동
+        jobPostingService.save(jobPostingBoard);
+        return "redirect:/jobpostingboard";
     }
 
-    // 게시물 삭제처리
-    @PostMapping("/board/{recruitId}/delete")
-    public String delete(@PathVariable("recruitId")Long recruitId, HttpSession session){
-        Optional<JobPostingBoard> jobPostingBoard = jobPostingRepository.findByRecruitId(recruitId);
-        jobPostingRepository.deleteById(recruitId);
-        return "redirect:/board";
+    @GetMapping("/jobpostingboard/{recruitId}/update-form")
+    public String updateForm(@PathVariable Long recruitId, Model model) {
+        model.addAttribute("jobPostingBoard", jobPostingService.findById(recruitId));
+        return "board/update-form";
     }
 
-
-
-
-
+    @PostMapping("/jobpostingboard/{recruitId}/update")
+    public String update(@PathVariable Long recruitId, JobPostingBoard updated) {
+        jobPostingService.update(recruitId, updated);
+        return "redirect:/jobpostingboard/detail/" + recruitId;
     }
+
+    @PostMapping("/jobpostingboard/{recruitId}/delete")
+    public String delete(@PathVariable Long recruitId) {
+        jobPostingService.delete(recruitId);
+        return "redirect:/jobpostingboard";
+    }
+
+}
+
+
+
 
 
 

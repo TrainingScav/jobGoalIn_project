@@ -1,103 +1,46 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>잡골인 메인</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f7f9fc;
-        }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav button {
-            margin-left: 10px;
-            padding: 8px 16px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        nav button:hover {
-            background-color: #2980b9;
-        }
-        .main-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 60px;
-        }
-        .main-buttons a {
-            width: 200px;
-            height: 80px;
-            margin: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            color: #2c3e50;
-            transition: box-shadow 0.3s ease;
-        }
-        .main-buttons a:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        footer {
-            margin-top: 100px;
-            background-color: #ecf0f1;
-            padding: 20px;
-            text-align: center;
-            color: #555;
-        }
-    </style>
-</head>
+{{> layout/header}}
 <body>
+<div class="background-overlay"></div>
 
-<header>
-    <div class="header-content">
-        <h1>잡골인 JobGoalIn</h1>
-        <nav>
-            {{^sessionUser}} <!-- 로그인 안된 경우 -->
-                <button onclick="location.href='/login'">로그인</button>
-                <button onclick="location.href='/join'">회원가입</button>
-            {{/sessionUser}}
-            {{#sessionUser}} <!-- 로그인 된 경우 -->
-                <button onclick="location.href='/mypage'">마이페이지</button>
-                <button onclick="location.href='/logout'">로그아웃</button>
-            {{/sessionUser}}
-        </nav>
+<div class="main-wrapper">
+
+    <!-- 왼쪽 -->
+    <div class="main-column left-info">
+        <h3>🔐 신뢰할 수 있는 서비스</h3>
+        <ul>
+            <li>개인정보 보호 최우선</li>
+            <li>기업 입장 제한 설정 가능</li>
+            <li>모든 기능 무료 제공</li>
+            <li>스팸 없는 안전한 플랫폼</li>
+        </ul>
     </div>
-</header>
 
-<section class="main-buttons">
-    <a href="/job">채용정보</a>
-    <a href="/company">기업정보</a>
-    <a href="/community">커뮤니티</a>
-    <a href="/login">로그인</a>
-    <a href="/join">회원가입</a>
-    <a href="/about">회사소개</a>
-    <a href="/my-info">마이페이지</a>
-    <a href="/news">직장인 뉴스정보</a>
-    <a href="/contact">회사 연락처</a>
-</section>
+    <!-- 중앙 -->
+    <div class="main-column center-content">
+        <h1 class="main-title">👋 JobGoalIn에 오신 걸 환영합니다 👋</h1>
+        <p class="main-subtext">이력서를 등록하고 원하는 일자리를 찾아보세요!</p>
 
-<footer>
-    © 2025 잡골인 JobGoalIn. All rights reserved.
-</footer>
+        <div class="main-image">
+            <img src="/img/logo3.jpg" alt="메인 이미지">
+        </div>
 
+        <div class="main-actions">
+            <a href="/jobpostingboard" class="btn-main">채용 공고 보러가기</a>
+            <a href="/company/list" class="btn-main">기업 정보 보기</a>
+        </div>
+    </div>
+
+    <!-- 오른쪽 -->
+    <div class="main-column right-info">
+        <h3>🗪 자주 묻는 질문</h3>
+        <ul>
+            <li><strong>이력서는 몇 개까지 쓸 수 있나요?</strong><br>👉 최대 5개까지 등록 가능해요.</li>
+            <li><strong>기업이 내 이력서를 보면 알 수 있나요?</strong><br>👉 열람을 통해 확인할 수 있어요.</li>
+            <li><strong>이력서 비공개 설정이 가능한가요?</strong><br>👉 공개 여부는 자유롭게 설정 가능해요.</li>
+        </ul>
+    </div>
+
+
+</div>
 </body>
-</html>
+{{> layout/footer}}
