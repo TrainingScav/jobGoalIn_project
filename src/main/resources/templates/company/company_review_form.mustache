@@ -1,0 +1,44 @@
+{{> layout/header}}
+
+<div class="company-detail">
+    <div class="wrapper">
+        <div class="container">
+
+            <div class="top-bar">
+                <a href="/company/{{companyId}}/reviews" class="list-button">리뷰 목록</a>
+            </div>
+
+            <h1>리뷰 등록</h1>
+
+            <!-- 리뷰 작성 폼 -->
+            <form action="/company/{{companyId}}/reviews/form" method="post" class="review-form">
+                <div class="form-group">
+                    <label for="content">평가</label>
+                    <textarea id="content" name="content" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="isCurrentEmployeeYn">현직원 여부</label>
+                    <select id="isCurrentEmployeeYn" name="isCurrentEmployeeYn" required>
+                        <option value="true" selected>현직원</option>
+                        <option value="false">전직원</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="isRecommendedYn">추천 여부</label>
+                    <select id="isRecommendedYn" name="isRecommendedYn" required>
+                        <option value="true" selected>추천</option>
+                        <option value="false">비추천</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-button">리뷰 등록</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{{> layout/footer}}

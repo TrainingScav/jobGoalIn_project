@@ -1,0 +1,32 @@
+{{> layout/header}}
+<body>
+<h1>이력서 목록</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th>작성일</th>
+        <th>공개 여부</th>
+        <th>관리</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#resumeList}}
+        <tr>
+            <td>{{resumeNo}}</td>
+            <td>{{title}}</td>
+            <td>{{content}}</td>
+            <td>{{formattedDate}}</td>
+            <td>{{showStatus}}</td>
+            <td>
+                <a href="/resumes/{{resumeNo}}" class="btn-detail">상세보기</a>
+            </td>
+        </tr>
+    {{/resumeList}}
+    </tbody>
+</table>
+</body>
+{{> layout/footer}}

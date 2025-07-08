@@ -9,15 +9,8 @@ INSERT INTO recruit_info (
 (105, 'AI 엔지니어','Samsung','LLM 기반 AI 모델 학습 및 서비스 연동을 담당합니다.', '2년이상','정규직', '부산 해운대구', 1005, '2025-06-30', '2025-07-25', '2025-06-30');
 
 
-
-INSERT INTO community_post_info (title, content, inst_id, inst_date) VALUES
-('첫 번째 게시글', '커뮤니티 게시판 테스트용 첫 번째 글입니다.', 'user1', NOW()),
-('두 번째 게시글', '여기는 두 번째 글의 내용이 들어갑니다.', 'user2', NOW()),
-('세 번째 게시글', '테스트용 세 번째 게시글입니다. 내용이 다양합니다.', 'user3', NOW()),
-('네 번째 게시글', '네 번째 글도 잘 작성해봅니다.', 'user1', NOW()),
-('다섯 번째 게시글', '테스트 데이터 다섯 번째 글입니다.', 'user4', NOW()),
-('여섯 번째 게시글', '내용은 간단하게 작성합니다.', 'user5', NOW()),
-('일곱 번째 게시글', '일곱 번째 게시글로 커뮤니티가 풍성해집니다.', 'user2', NOW()),
-('여덟 번째 게시글', '여덟 번째 글 내용 확인용입니다.', 'user3', NOW()),
-('아홉 번째 게시글', '아홉 번째 글도 테스트 목적입니다.', 'user1', NOW()),
-('열 번째 게시글', '마지막 열 번째 글입니다. 감사합니다.', 'user4', NOW());
+INSERT INTO resume_list (user_id, title, content, is_experienced, is_show, inst_id)
+VALUES
+(1, '백엔드 개발자 이력서', 'Java, Spring Boot (경력 3년)', 'Y', 'Y', 'user01'),
+(2, '프론트엔드 신입 이력서', 'HTML, CSS, React 학습 완료 (경력 1년)', 'N', 'N', 'user02'),
+(3, '데이터 분석가 경력직', 'Python, SQL, Pandas 사용 경험 있음 (경력 5년)', 'Y', 'Y', 'user03');

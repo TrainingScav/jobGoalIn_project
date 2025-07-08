@@ -1,0 +1,88 @@
+/* ===== 기본 설정 ===== */
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #2d2d2d;
+}
+
+
+.header, .footer {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+
+table {
+  width: 90%;
+  margin: 0 auto 60px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #2d3e50;
+  color: white;
+}
+
+th, td {
+  padding: 14px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+
+
+/* ===== 버튼 ===== */
+.btn-detail {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #6c757d;
+  color: white;
+  border-radius: 5px;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-detail:hover {
+  background-color: #5a6268;
+}
+
+.btn-create {
+  display: inline-block;
+  margin: 20px auto 40px auto;
+  background-color: #4a6cf7;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ===== 기타 ===== */
+.text-center {
+  text-align: center;
+}

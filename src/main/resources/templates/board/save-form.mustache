@@ -1,12 +1,6 @@
-<!-- templates/board/write.mustache -->
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>채용공고 등록</title>
-</head>
+{{> layout/header}}
 <body>
-
+<div class="form-container">
 <h1>채용공고 등록</h1>
 
 <form action="/posting/write" method="post">
@@ -22,6 +16,7 @@
 
     <button type="submit">등록하기</button>
 </form>
-
+</div>
 </body>
-</html>
+
+{{> layout/footer}}

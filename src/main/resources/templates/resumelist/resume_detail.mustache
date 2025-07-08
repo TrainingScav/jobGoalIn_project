@@ -1,0 +1,21 @@
+{{> layout/header}}
+<body>
+<div class="resume-detail-container">
+    <h1 class="detail-title">이력서 상세보기</h1>
+
+    <div class="resume-card">
+        <h2 class="resume-title">{{resume.title}}</h2>
+
+        <p><strong>내용:</strong></p>
+        <p class="resume-content">{{resume.content}}</p>
+
+        <p><strong>경력여부:</strong> {{resume.experiencedStatus}}</p>
+        <p><strong>작성자:</strong> {{resume.instId}}</p>
+        <p><strong>작성일:</strong> {{resume.formattedDate}}</p>
+
+        <hr>
+        <a href="/resumes" class="btn-back">목록으로 돌아가기</a>
+    </div>
+</div>
+</body>
+{{> layout/footer}}

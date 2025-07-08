@@ -23,20 +23,18 @@ public class CompUser {
     private Long compUserId;
 
     // 사용자 이름 중복 방지를 위한 유니크 제약 조건 설정
+    @Column(nullable = false)
+    private String compUserName;
     @Column(unique = true,nullable = false)
     private String compUserLoginId;
     @Column(nullable = false)
     private String compUserPassword;
-    @Column(nullable = false)
-    private String compUserName;
     @Column(nullable = false)
     private String compUserPhone;
     @Column(unique = true, nullable = false)
     private String compUserEmail;
     @Column(nullable = false)
     private String compUserNickname;
-    @Column(nullable = false)
-    private String compTypeCode;
     @Column(nullable = false)
     private Long compRegNumber;
     @Column(nullable = false)
@@ -60,4 +58,20 @@ public class CompUser {
     @ColumnDefault("0")
     private Long loginAttemptCount;
 
+    @Transient
+    private Boolean isCompanyUserYn = true;
+
+    @Builder
+    public CompUser(String compUserName, String compUserLoginId, String compUserPassword, String compUserPhone, String compUserEmail, String compUserNickname, Long compRegNumber, String compName, String compCEOName, String compAddress) {
+        this.compUserName = compUserName;
+        this.compUserLoginId = compUserLoginId;
+        this.compUserPassword = compUserPassword;
+        this.compUserPhone = compUserPhone;
+        this.compUserEmail = compUserEmail;
+        this.compUserNickname = compUserNickname;
+        this.compRegNumber = compRegNumber;
+        this.compName = compName;
+        this.compCEOName = compCEOName;
+        this.compAddress = compAddress;
+    }
 }
