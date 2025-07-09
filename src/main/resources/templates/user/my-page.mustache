@@ -1,21 +1,24 @@
 {{> layout/header}}
 <body>
-<div class="mypage-wrapper">
-    <div class="user-info-card">
-        <div class="user-header">
-            <div class="user-nickname">홍길동님</div>
-            <div class="user-join-date">가입일: 2024-05-10</div>
-        </div>
+<div class="main">
+    <!-- ✅ 가운데 정렬된 탭 메뉴 -->
+    <div class="tabs justify-content-center">
+        <div class="tab active">MY</div>
+        <a class="tab" href="update-form">회원정보</a>
+        <a class="tab" href="resume-list">이력서</a>
+    </div>
 
-        <div class="user-detail">
-            <div class="user-label">포지션</div>
-            <div class="user-value">백엔드 개발자</div>
-        </div>
+    <div class="profile-box">
+        <!-- ✅ 프로필 이미지 제거 -->
+        <div class="profile-info">
+            <h3>{{userInfo.userNickName}}</h3>
+            <div class="meta">가입일:{{userInfo.userCreatedAt}}</div>
+            <div class="position">백엔드 개발자</div>
 
-        <div class="user-detail">
-            <div class="user-label">기술 스택</div>
             <div class="skill-tags">
+                {{#userSkillList}}
                 <span class="skill-tag">{{skillList.skillName}}</span>
+                {{/userSkillList}}
             </div>
         </div>
     </div>

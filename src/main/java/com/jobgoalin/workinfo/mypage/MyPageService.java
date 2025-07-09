@@ -5,6 +5,7 @@ import com.jobgoalin.workinfo.resume.UserSkillListJpaRepository;
 import com.jobgoalin.workinfo.user.UserSkillList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +16,8 @@ public class MyPageService {
 
     private final UserSkillListJpaRepository userSkillListJpaRepository;
 
-    public List<SkillList> getSkillsByUserId(Long userId) {
-        List<UserSkillList> userSkillLists = userSkillListJpaRepository.findByUser_UserId(userId);
-        return userSkillLists.stream()
-                .map(UserSkillList::getSkillList)
-                .filter(skill -> skill != null)
-                .collect(Collectors.toList());
+    @Transactional
+    public List<UserSkillList> getUserSkillsByUserId(Long userId) {
+        return userSkillListJpaRepository.findByUser_UserId(userId);
     }
 }
