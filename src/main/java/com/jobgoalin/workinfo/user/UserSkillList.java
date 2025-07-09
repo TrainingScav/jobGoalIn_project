@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo.info.SkillList;
+import com.jobgoalin.workinfo.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +19,10 @@ public class UserSkillList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSkillListNo;
+
+    @ManyToOne
+    @JoinColumn(name = "resume_no")
+    private Resume resume;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") // 외래키 컬럼명 명시
@@ -33,8 +38,9 @@ public class UserSkillList {
     private Timestamp instDate;
 
     @Builder
-    public UserSkillList(Long userSkillListNo, User user, SkillList skillList, String instId, Timestamp instDate) {
+    public UserSkillList(Long userSkillListNo, Resume resume, User user, SkillList skillList, String instId, Timestamp instDate) {
         this.userSkillListNo = userSkillListNo;
+        this.resume = resume;
         this.user = user;
         this.skillList = skillList;
         this.instId = instId;

@@ -16,8 +16,42 @@
                 <form class="resume-form" action="/resume-register" method="post">
                     <!-- 제목 입력 -->
                     <div class="resume-field">
-                        <label for="title" class="resume-label">제목</label>
+                        <label for="title" class="resume-label">이력서 제목</label>
                         <input type="text" id="title" name="title" class="resume-input" placeholder="이력서 제목을 입력하세요." />
+                    </div>
+
+                    <!-- 2개 필드 한 줄 -->
+                    <div class="resume-grid">
+                        <div class="resume-field">
+                            <label class="resume-label" for="name">이름</label>
+                            <input type="text" id="userName" name="userName" class="resume-input" placeholder="이름을 입력하세요.">
+                        </div>
+                        <div class="resume-field">
+                            <label class="resume-label" for="gender">성별</label>
+                            <select id="gender" name="gender" class="resume-select">
+                                <option value="">선택하세요</option>
+                                <option value="M">남성</option>
+                                <option value="F">여성</option>
+                            </select>
+                        </div>
+
+                        <div class="resume-field">
+                            <label class="resume-label" for="birthdate">생년월일</label>
+                            <input type="text" id="birthdate" name="birthdate" class="resume-input" placeholder="예: 1990-01-01">
+                        </div>
+                        <div class="resume-field">
+                            <label class="resume-label" for="phoneNumber">전화번호</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="resume-input" placeholder="예: 010-1234-5678">
+                        </div>
+
+                        <div class="resume-field">
+                            <label class="resume-label" for="email">이메일</label>
+                            <input type="email" id="email" name="email" class="resume-input" placeholder="예: example@email.com">
+                        </div>
+                        <div class="resume-field">
+                            <label class="resume-label" for="address">주소</label>
+                            <input type="text" id="address" name="address" class="resume-input" placeholder="주소를 입력하세요.">
+                        </div>
                     </div>
 
                     <!-- 자기소개서 -->

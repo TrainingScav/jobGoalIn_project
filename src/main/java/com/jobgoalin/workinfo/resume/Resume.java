@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -22,22 +23,43 @@ public class Resume {
     @JoinColumn(name = "user_id" , nullable = false)
     private User user;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String title;
     @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String phoneNumber;
+    @Column(nullable = false)
+    private String address;
+    @Column(nullable = false)
+    private String birthdate;
+    @Column(nullable = false)
+    private String email;
+    @Column(nullable = false, length = 1)
+    private char gender;
+    @Column(nullable = false, length = 1000)
     private String content;
-    @Column(columnDefinition = "CHAR(1)")
+    @Column(nullable = false, length = 1)
     private char isExperienced;
-    @Column(columnDefinition = "CHAR(1)")
+    @Column(nullable = false, length = 1)
     private char isShow;
     private String instId;
+
+    @CreationTimestamp
     private Timestamp instDate;
 
     @Builder
-    public Resume(Long resumeNo, User user, String title, String content, char isExperienced, char isShow, String instId, Timestamp instDate) {
+
+    public Resume(Long resumeNo, User user, String title, String name, String phoneNumber, String address, String birthdate, String email, char gender, String content, char isExperienced, char isShow, String instId, Timestamp instDate) {
         this.resumeNo = resumeNo;
         this.user = user;
         this.title = title;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.gender = gender;
         this.content = content;
         this.isExperienced = isExperienced;
         this.isShow = isShow;

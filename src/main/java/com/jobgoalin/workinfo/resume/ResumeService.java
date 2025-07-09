@@ -4,11 +4,13 @@ import com.jobgoalin.workinfo.info.SkillList;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserRepository;
 import com.jobgoalin.workinfo.user.UserSkillList;
+import jakarta.persistence.Transient;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
@@ -23,32 +25,30 @@ public class ResumeService {
     private final UserSkillListJpaRepository userSkillListJpaRepository;
     private static final Logger log = LoggerFactory.getLogger(ResumeService.class);
 
+    @Transactional
     public void registerResume(ResumeRequest.ResumeRegisterDTO request) {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
-        Resume resume = Resume.builder()
-                .user(user)
-                .title(request.getTitle())
-                .content(request.getContent())
-                .isExperienced(request.getIsExperienced())
-                .isShow(request.getIsShow())
-                .instId(String.valueOf(user.getUserId())) // 사용자 ID를 기록 (등록자)
-                .instDate(new Timestamp(System.currentTimeMillis())) // 현재 시각
-                .build();
+        Resume resume = resumeRepository.save(request.toEntity(user));
 
-        resumeRepository.save(resume);
+        log.info("request 확인 : {}", request);
 
         SkillList positionSkill = skillListJpaRepository.findBySkillId(request.getPositionId());
         SkillList SkillStack = skillListJpaRepository.findBySkillId(request.getSkillStackId());
 
+        log.info("positionSetting 확인 : {}", positionSkill.getSkillListNo());
+        log.info("skillSettiong 확인 : {}", SkillStack.getSkillListNo());
+
         UserSkillList userPositionSetting = UserSkillList.builder()
                 .user(user)
+                .resume(resume)
                 .skillList(positionSkill)
                 .instId(request.getUserNickname())
                 .build();
         UserSkillList userSkillSetting = UserSkillList.builder()
                 .user(user)
+                .resume(resume)
                 .skillList(SkillStack)
                 .instId(request.getUserNickname())
                 .build();

@@ -1,93 +1,95 @@
-.resume-wrapper {
-  padding: 20px;
-}
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9fafb;
+    margin: 0;
+    padding: 40px;
+  }
 
-.resume-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  .resume-wrapper {
+    margin: 0 auto;          /* 가운데 정렬 */
+    max-width: 900px;        /* 넉넉한 폭 설정 */
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
 
-.resume-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+  .resume-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
 
-.resume-label {
-  font-weight: bold;
-  font-size: 15px;
-}
+  .resume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2열 고정 */
+    gap: 10px 22px; /* 행 간격, 열 간격 */
+    margin-bottom: 30px;
+  }
 
-.resume-input,
-.resume-select,
-.resume-textarea {
-  padding: 10px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
+  .resume-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
 
-.resume-input {
-  height: 40px;
-}
+  .resume-label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+  }
 
-.resume-textarea {
-  resize: vertical;
-  min-height: 120px;
-}
+  .resume-input,
+  .resume-select,
+  .resume-textarea {
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-.resume-select {
-  /* 기본 스타일 */
-  padding: 10px 36px 10px 10px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
+  .resume-input,
+  .resume-select {
+    height: 55px; /* 동일 높이 유지 */
+  }
 
-  /* 기본 화살표 제거 */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  .resume-textarea {
+    width: 100%; /* 부모 grid의 폭을 꽉 채우게 */
+    resize: vertical;
+    min-height: 100px;
 
-  /* 사용자 정의 화살표 추가 (SVG 아이콘) */
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%204%205'%3E%3Cpath%20fill='black'%20d='M2%200L0%202h4L2%200z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 10px;
-}
+  }
 
-.resume-select:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-}
+  .resume-submit {
+    display: flex;
+    justify-content: center;
+  }
 
-.resume-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+  .resume-button {
+    padding: 12px 32px;
+    font-size: 16px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 
-.resume-submit {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
+  .resume-button:hover {
+    background-color: #1e4ed8;
+  }
 
-.resume-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.resume-button:hover {
-  background-color: #1e4ed8;
-}
+    @media (max-width: 600px) {
+      .resume-grid {
+        grid-template-columns: 1fr; /* 모바일에서는 1열로 쌓기 */
+      }
+    }
