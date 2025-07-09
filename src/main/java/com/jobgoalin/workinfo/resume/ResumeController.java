@@ -25,30 +25,13 @@ public class ResumeController {
      */
     @GetMapping("/resumelist/resume-register")
     public String ResumeForm(Model model) {
-
-        //LoginUser checkSessionUser = (LoginUser) session.getAttribute("sessionUser");
-
         return "resumelist/resume-register";
     }
 
-//    @GetMapping("/resume-register")
-//    public String ResumeForm() {
-//    public String ResumeForm(Model model,HttpSession session) {
-//        User checkSessionUser = (User)session.getAttribute("sessionUser");
-//        if (checkSessionUser != null) {
-//            log.info("sessionUser 값 확인 : {}",checkSessionUser.toString());
-//        }
-//
-//        User user = resumeService.findById(1L);
-//
-//        model.addAttribute("userInfo",user);
-//        model.addAttribute("resumeInfo",new  ResumeRequest.ResumeRegisterDTO());
-//        return "resumelist/resume-register";
-//    }
 
     /**
      * 이력서 등록 기능 요청
-    **/
+     */
 
     @PostMapping("/resume-register")
     public String registerResume(HttpSession session, ResumeRequest.ResumeRegisterDTO resumeRegisterDTO) {
@@ -63,4 +46,6 @@ public class ResumeController {
 
         return "redirect:/";
     }
+
+
 }
