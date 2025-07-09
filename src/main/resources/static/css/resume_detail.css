@@ -1,56 +1,99 @@
-/* 상세보기 전체 컨테이너 */
-.resume-detail-container {
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #111;
+  margin: 0;
+  padding: 2rem;
+}
+
+.resume-wrapper {
   max-width: 800px;
-  margin: 60px auto;
-  padding: 0 20px;
+  margin: 0 auto;
 }
 
-/* 제목 스타일 */
-.detail-title {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 40px;
-  color: #2d2d2d;
-}
-
-/* 카드 스타일 */
-.resume-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* 제목 강조 */
-.resume-title {
-  font-size: 22px;
+.section-title {
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  margin-top: 3rem;      /* ↑ 이전 섹션과 거리 */
+  margin-bottom: 1.5rem; /* ↓ 제목과 내용 거리 */
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
 }
 
-/* 본문 내용 */
-.resume-content {
-  margin-bottom: 20px;
-  font-size: 15px;
-  line-height: 1.6;
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 2rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 1rem;
+}
+
+.info-item .icon {
+  color: #1f6ed4;
+  margin-right: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.info-item strong {
+  font-size: 0.9rem;
   color: #444;
 }
 
-/* 돌아가기 버튼 */
-.btn-back {
-  display: inline-block;
-  margin-top: 20px;
-  background-color: #4a6cf7;
-  color: white;
-  padding: 10px 16px;
-  text-decoration: none;
+.intro-box {
+  background-color: #f9f9f9;
+  border-left: 4px solid #1f6ed4;
+  padding: 1rem;
   border-radius: 6px;
-  font-size: 14px;
-  transition: background-color 0.2s ease-in-out;
+  line-height: 1.6;
+  color: #333;
 }
 
-.btn-back:hover {
-  background-color: #375ee0;
+.summary-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem; /* 🔼 자기소개서와의 거리 넓힘 */
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.summary-item .icon {
+  color: #1f6ed4;
+  font-size: 1.1rem;
+}
+
+.resume-wrapper .resume-detail-header {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.resume-wrapper .back-button {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: #1a5dcc;
+  font-weight: 600;
+}
+
+.resume-wrapper .page-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111;
 }

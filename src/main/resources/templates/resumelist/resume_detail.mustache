@@ -1,21 +1,54 @@
 {{> layout/header}}
 <body>
-<div class="resume-detail-container">
-    <h1 class="detail-title">이력서 상세보기</h1>
+<div class="resume-wrapper">
 
-    <div class="resume-card">
-        <h2 class="resume-title">{{resume.title}}</h2>
-
-        <p><strong>내용:</strong></p>
-        <p class="resume-content">{{resume.content}}</p>
-
-        <p><strong>경력여부:</strong> {{resume.experiencedStatus}}</p>
-        <p><strong>작성자:</strong> {{resume.instId}}</p>
-        <p><strong>작성일:</strong> {{resume.formattedDate}}</p>
-
-        <hr>
-        <a href="/resumes" class="btn-back">목록으로 돌아가기</a>
+    <!-- 🔙 목록으로 이동 + 중앙 제목 -->
+    <div class="resume-detail-header">
+        <div class="back-button">
+            <a href="/resumes"> ← 목록으로 이동</a>
+        </div>
     </div>
+
+    {{#resume}}
+    <!-- 📌 작성자 정보 -->
+    <h2 class="section-title">이력서 작성자 정보</h2>
+    <div class="info-grid">
+        <div class="info-item">
+            <span class="icon">📝</span> <strong>이름</strong><p>{{name}}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">🚻</span> <strong>성별</strong><p>{{genderInfo}}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">📅</span> <strong>생년월일</strong><p>{{birthdate}}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">📞</span> <strong>전화번호</strong><p>{{phoneNumber}}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">📧</span> <strong>이메일</strong><p>{{email}}</p>
+        </div>
+        <div class="info-item">
+            <span class="icon">🏠</span> <strong>주소</strong><p>{{address}}</p>
+        </div>
+    </div>
+
+    <!-- 📌 요약 정보 -->
+    <h2 class="section-title">포지션/기술스택/경력 정보</h2>
+    <div class="summary-line">
+        <div class="summary-item"><span class="icon">💼</span> <strong>개발 직무</strong>: {{position}}</div>
+        <div class="summary-item"><span class="icon">🛠️</span> <strong>기술 스택</strong>: {{skill}}</div>
+        <div class="summary-item"><span class="icon">📆</span> <strong>경력 여부</strong>: {{experiencedStatus}}</div>
+    </div>
+
+    <!-- 📌 자기소개서 -->
+    <h2 class="section-title">자기소개서</h2>
+    <div class="intro-box">
+        <p>
+            {{content}}
+        </p>
+    </div>
+    {{/resume}}
 </div>
 </body>
 {{> layout/footer}}

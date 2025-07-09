@@ -1,6 +1,10 @@
 package com.jobgoalin.workinfo.resume;
 
+import com.jobgoalin.workinfo.company.CompanyReview;
+import com.jobgoalin.workinfo.info.SkillList;
 import com.jobgoalin.workinfo.user.User;
+import com.jobgoalin.workinfo.user.UserSkillList;
+import com.jobgoalin.workinfo.utils.MyDateUtil;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -48,8 +54,15 @@ public class Resume {
     @CreationTimestamp
     private Timestamp instDate;
 
-    @Builder
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resume", cascade = CascadeType.REMOVE)
+    List<UserSkillList> userSkillLists = new ArrayList<>(); // List 선언과 동시에 초기화
 
+    @Transient
+    private String position;
+    @Transient
+    private String skill; // DB에 저장되지 않음
+
+    @Builder
     public Resume(Long resumeNo, User user, String title, String name, String phoneNumber, String address, String birthdate, String email, char gender, String content, char isExperienced, char isShow, String instId, Timestamp instDate) {
         this.resumeNo = resumeNo;
         this.user = user;
@@ -65,5 +78,22 @@ public class Resume {
         this.isShow = isShow;
         this.instId = instId;
         this.instDate = instDate;
+    }
+
+    public String getFormattedDate() {
+        return MyDateUtil.timestampFormat(instDate);
+    }
+
+    public boolean getShowStatus() {
+        return this.isShow == 'Y';
+        //return "Y".equals(this.isShow) ? "공개" : "비공개";
+    }
+
+    public String getExperiencedStatus() {
+        return this.isExperienced == 'Y' ? "O" : "X";
+    }
+
+    public String getGenderInfo() {
+        return this.gender == 'M' ? "남성" : "여성";
     }
 }
