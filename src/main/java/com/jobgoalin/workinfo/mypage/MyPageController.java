@@ -1,7 +1,9 @@
 package com.jobgoalin.workinfo.mypage;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -14,7 +16,11 @@ public class MyPageController {
 
 
     @GetMapping("/user/my-page")
-    public String myPage() {
+    public String myPage(Model model, HttpSession session) {
+
+
+
+
         return "user/my-page";
     }
 
@@ -23,4 +29,6 @@ public class MyPageController {
     public String resume() {
         return "resume-list";
     }
+
+
 }
