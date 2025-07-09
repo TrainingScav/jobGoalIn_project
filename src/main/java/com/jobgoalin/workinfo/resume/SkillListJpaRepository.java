@@ -11,5 +11,4 @@ public interface SkillListJpaRepository extends JpaRepository<SkillList, Long> {
 
     @Query("SELECT sl FROM SkillList sl WHERE sl.skillId = :skillId")
     SkillList findBySkillId(@Param("skillId") Long skillId);
-    List<SkillList> findByUser_UserId(Long userId);
 }

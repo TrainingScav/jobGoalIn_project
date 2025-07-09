@@ -1,10 +1,4 @@
 {{> layout/header}}
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>마이페이지</title>
-    <link rel="stylesheet" href="/css/mypage.css" />
-</head>
 <body>
 <div class="mypage-wrapper">
     <div class="user-info-card">
@@ -21,10 +15,7 @@
         <div class="user-detail">
             <div class="user-label">기술 스택</div>
             <div class="skill-tags">
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">Spring</span>
-                <span class="skill-tag">JPA</span>
-                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">{{skillList.skillName}}</span>
             </div>
         </div>
     </div>
