@@ -1,0 +1,32 @@
+{{#post}}
+    <!DOCTYPE html>
+    <html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{title}} - 상세 보기</title>
+        <style>
+            body { font-family:'맑은 고딕',sans-serif; background:#f5f5f5; padding:2rem; }
+            .container { background:#fff; padding:2rem; max-width:800px; margin:auto;
+                         box-shadow:0 4px 10px rgba(0,0,0,0.05); border-radius:8px; }
+            h1 { margin-top:0; color:#2c3e50; }
+            .meta { font-size:0.9rem; color:#777; margin-bottom:1.5rem; }
+            .content { white-space:pre-wrap; line-height:1.6; }
+            .back { display:inline-block; margin-top:2rem; color:#3498db; text-decoration:none; }
+            .back:hover { text-decoration:underline; }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h1>{{title}}</h1>
+        <div class="meta">
+            작성자 ID: {{instId}}<br>
+            작성일시: {{instDate}}
+        </div>
+        <div class="content">
+            {{content}}
+        </div>
+        <a href="/community/list" class="back">← 목록으로 돌아가기</a>
+    </div>
+    </body>
+    </html>
+{{/post}}

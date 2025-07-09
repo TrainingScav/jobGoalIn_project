@@ -1,33 +1,53 @@
 package com.jobgoalin.workinfo.community;
 
-
-import com.jobgoalin.workinfo.user.User;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * 커뮤니티 관련 비즈니스 로직 처리 계층
- */
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class CommunityService {
 
-    private static final Logger log = LoggerFactory.getLogger(CommunityService.class);
     private final CommunityRepository communityRepository;
-    /**
-     * 게시글 저장하기
-     */
-    @Transactional
-    public void save(CommunityRequest.SaveDTO saveDTO, User sessionUser){
-        // 1. 게시글 조회
 
-        // 2.
-
-
+    // 전체 게시글 조회
+    public List<Community> findAllPosts() {
+        return communityRepository.findAll();
     }
 
+    // 단일 게시글 조회
+    public Community findById(Long postId) {
+        return communityRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. id=" + postId));
+    }
+
+    // 게시글 생성
+    @Transactional
+    public Community savePost(CommunityRequest.SaveDTO dto) {
+        Community post = Community.builder()
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .instId(dto.getInstId())
+                .postPassword(dto.getPostPassword())
+                .build();
+        return communityRepository.save(post);
+    }
+
+    // 게시글 수정
+    @Transactional
+    public void updatePost(Long postId, CommunityRequest.UpdateDTO dto) {
+        Community post = findById(postId);
+        post.setTitle(dto.getTitle());
+        post.setContent(dto.getContent());
+        // instId, instDate는 변경하지 않음
+    }
+
+    // 게시글 삭제
+    @Transactional
+    public void deletePost(Long postId) {
+        communityRepository.deleteById(postId);
+    }
 }
