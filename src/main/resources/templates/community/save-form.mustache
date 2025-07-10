@@ -1,0 +1,26 @@
+{{> layout/header}}
+<body>
+<div class="form-container">
+    <h1>커뮤니티 글 작성</h1>
+
+    <form action="/communityposting/write" method="post">
+        <label>
+            제목:
+            <input type="text" name="title" required>
+        </label><br>
+
+        <label>
+            내용:<br>
+            <textarea name="content" rows="5" cols="40" required></textarea>
+        </label><br>
+
+        <label>
+            작성자 ID:
+            <input type="text" name="instId" required>
+        </label><br>
+
+        <button type="submit">등록하기</button>
+    </form>
+</div>
+</body>
+{{> layout/footer}}

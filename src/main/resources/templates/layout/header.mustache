@@ -21,10 +21,8 @@
     <link rel="stylesheet" href="/css/resume-register.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/my-page.css">
-
     <link rel="stylesheet" href="/css/user.css">
     <link rel="stylesheet" href="/css/error.css">
-
 </head>
 
 <body>
@@ -35,6 +33,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <!-- 좌측 메뉴 -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/company/list">기업정보</a>
@@ -42,7 +41,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/jobpostingboard">채용공고</a>
                 </li>
+
                 {{#sessionUser}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/community/list">커뮤니티</a>
+                    </li>
+
                     {{#isCompany}}
                         <li class="nav-item">
                             <a class="nav-link" href="/resumes">이력서 목록</a>
@@ -51,6 +55,7 @@
                 {{/sessionUser}}
             </ul>
 
+            <!-- 우측 메뉴 -->
             <ul class="navbar-nav ms-auto">
                 {{^sessionUser}}
                     <li class="nav-item">
