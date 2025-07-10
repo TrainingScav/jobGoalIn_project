@@ -35,11 +35,12 @@
             </tr>
             </thead>
             <tbody>
+            {{#posts}}
             <tr>
                 <td class="center-text">
-                    <a href="/resume/detail/1" class="resume-link">{{resumeInfo.title}}</a>
+                    <a href="/resume/detail/{{resumeNo}}" class="resume-link">{{title}}</a>
                 </td>
-                <td class="center-text">{{resumeInfo.instDate}}</td>
+                <td class="center-text">{{instDate}}</td>
                 <td>
                     <div class="btn-group">
                         <a href="/resume/update/1" class="btn-small">수정</a>
@@ -47,19 +48,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td class="center-text">
-                    <a href="/resume/detail/2" class="resume-link">프로젝트 기반 이력서</a>
-                </td>
-                <td class="center-text">2024-06-28 10:15</td>
-                <td>
-                    <div class="btn-group">
-                        <a href="/resume/update/2" class="btn-small">수정</a>
-                        <a href="/resume/delete/2" class="btn-small btn-delete">삭제</a>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
+            {{/posts}}
         </table>
 
         <!-- 이력서 작성 버튼 -->
