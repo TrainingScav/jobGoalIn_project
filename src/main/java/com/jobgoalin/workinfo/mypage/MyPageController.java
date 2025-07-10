@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -21,17 +23,21 @@ public class MyPageController {
     private final MyPageService myPageService;
 
 
+
     @GetMapping("/user/my-page")
     public String myPage(Model model, HttpSession session) {
 
         LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
         Long userId = loginUser.getId();
 
+
         User user = userRepository.findById(userId).orElse(null);
         Resume resume = resumeRepository.findById(userId).orElse(null);
+        List<Resume> posts = myPageService.findAllPosts();
 
         model.addAttribute("userInfo", user);
         model.addAttribute("resumeInfo",resume);
+        model.addAttribute("posts", posts);
         return "user/my-page";
     }
 
