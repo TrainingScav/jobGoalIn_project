@@ -41,13 +41,14 @@ public class UserController {
     // 일반 이용자 회원가입 요청
     @PostMapping("/signup/normal")
     public String normalUserSignup(UserRequest.JoinDTO dto, Model model) {
-        try {
-            userService.join(dto);
-            return "redirect:/login";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "user/userJoin";
-        }
+
+        // request 값 유효성 확인
+        dto.validate();
+
+        // 회원가입 진행
+        userService.join(dto);
+
+        return "redirect:/login";
     }
 
     // 기업 이용자 회원가입 화면 요청

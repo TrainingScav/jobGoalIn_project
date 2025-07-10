@@ -32,24 +32,7 @@ public class UserService {
             throw new IllegalArgumentException("주민번호가 이미 등록되어 있습니다.");
         }
 
-        User user = User.builder()
-                .username(dto.getUsername())
-                .userLoginId(dto.getUserLoginId())
-                .userPassWord(dto.getUserPassWord())
-                .userEmail(dto.getUserEmail())
-                .userAddress(dto.getUserAddress())
-                .userPhoneNumber(dto.getUserPhoneNumber())
-                .userBirth(dto.getUserBirth())
-                .userGender(dto.getUserGender())
-                .userNickName(dto.getUserNickname())
-                .userCivilSerial(dto.getUserCivilSerial())
-                .userCreatedAt(LocalDateTime.now())
-                .accessLevel(1L)
-                .userLockYn('N')
-                .loginAttemptCount(0L)
-                .build();
-
-        userRepository.save(user);
+        userRepository.save(dto.toEntity());
     }
 
     // 기업유저 회원가입 - 유니크 컬럼만 검증함
@@ -129,7 +112,7 @@ public class UserService {
     public CompUser findCompUserById(Long id) {
 
         return compUserRepository.findById(id).orElseThrow(() -> {
-            return new Exception404("해당 유저를 찾을 수 없습니다.");
+            throw new Exception404("해당 유저를 찾을 수 없습니다.");
         });
     }
 }
