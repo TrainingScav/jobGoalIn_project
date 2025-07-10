@@ -17,11 +17,11 @@
             </div>
 
             <!-- 리뷰 등록 버튼 -->
-            {{#sessionUser}}{{^isCompany}}
+            {{#sessionUser}}{{^isCompany}}{{#isWritable}}
             <div class="review-top-bar">
                 <a href="/company/{{companyId}}/reviews/form" class="add-review-button">리뷰 등록</a>
             </div>
-            {{/isCompany}}{{/sessionUser}}
+            {{/isWritable}}{{/isCompany}}{{/sessionUser}}
             <!-- 리뷰 리스트 -->
             <div class="review-section">
                 {{#sessionUser}}{{#reviews}}

@@ -22,14 +22,16 @@
             {{/deadline}}
         </div>
 
-
+        {{#sessionUser}}{{#isCompany}}{{#isJobPostingInfoUpdateAndDeleteYn}}
         <div class="button-group" style="margin-top: 30px; text-align: center;">
             <form class="delete-form" action="/jobpostingboard/{{recruitId}}/delete" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');" style="display: inline-block;">
                 <button type="submit" class="btn btn-danger">삭제</button>
             </form>
-
-            <a href="/jobpostingboard/{{recruitId}}/update-form" class="btn btn-outline-primary" style="margin-left: 10px;">수정</a>
+            <div>
+                <a href="/jobpostingboard/{{recruitId}}/update-form" class="update-form" style="margin-left: 10px;">수정</a>
+            </div>
         </div>
+        {{/isJobPostingInfoUpdateAndDeleteYn}}{{/isCompany}}{{/sessionUser}}
     </div>
 {{/jobPostingBoard}}
 

@@ -79,6 +79,12 @@ public class CompanyService {
         return companyReviewJpaRepository.findReviewsJoinCompanyInfo(companyId);
     }
 
+    public Long countReviewsByUserId(Long id) {
+        log.info("기업 리뷰 작성 여부 확인 시작");
+
+        return companyReviewJpaRepository.countByUserId(id);
+    }
+
     @Transactional
     public void companyReviewInsert(CompanyReview saveReview) {
 
@@ -101,7 +107,5 @@ public class CompanyService {
 
         return companyInfoJpaRepository.findCompanyInfoByCompUserId(compUserId);
     }
-
-
 
 }

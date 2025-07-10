@@ -2,7 +2,9 @@
 
 <div class="page-header">
     <h1>채용공고 목록</h1>
-    <a href="/jobpostingboard/write" class="post-button">채용공고 등록</a>
+    {{#sessionUser}}{{#isCompany}}{{#isJobPostWritable}}
+        <a href="/jobpostingboard/write" class="post-button">채용공고 등록</a>
+    {{/isJobPostWritable}}{{/isCompany}}{{/sessionUser}}
 </div>
 
 <div class="job-list">

@@ -159,12 +159,19 @@ public class CompanyController {
 
         // 리뷰 소유권 설정 (삭제 버튼 표시용)
         if (user != null) {
-            LoginUser searchUserId = user;
-            companyReviews.forEach(companyReview -> {
-                boolean isReviewOwner = companyReview.isOwner(searchUserId.getId());
-                companyReview.setIsMyReview(isReviewOwner);
-                log.info("isMyReview 확인 : {}", companyReview.getIsMyReview());
-            });
+            if (!user.isCompany()) {
+                companyReviews.forEach(companyReview -> {
+                    boolean isReviewOwner = companyReview.isOwner(user.getId());
+                    companyReview.setIsMyReview(isReviewOwner);
+                    log.info("isMyReview 확인 : {}", companyReview.getIsMyReview());
+                });
+
+                // 이전에 리뷰 작성을 하였는지 확인하여 작성 했을 시 등록 버튼 숨김
+                Long findReviewById = companyService.countReviewsByUserId(user.getId());
+                boolean isWritable = (findReviewById == null || findReviewById <= 0);
+
+                model.addAttribute("isWritable", isWritable);
+            }
         }
 
         log.info("리뷰 개수 확인 : {}", companyReviews.size());

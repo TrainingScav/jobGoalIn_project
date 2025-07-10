@@ -1,8 +1,7 @@
 package com.jobgoalin.workinfo.resumelist;
 
-import com.jobgoalin.workinfo.company.CompanyController;
 import com.jobgoalin.workinfo.resume.Resume;
-import com.jobgoalin.workinfo.resume.ResumeService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +17,13 @@ public class ResumeListController {
     private static final Logger log = LoggerFactory.getLogger(ResumeListController.class);
     private final ResumeListService resumeListService;
 
-
     @GetMapping("/resumes")
     public String showResumeList(Model model) {
+
+
         model.addAttribute("resumeList", resumeListService.getAllResumes());
         return "resumelist/resume_list";
-        }
+    }
 
     @GetMapping("/resumes/{resumeNo}")
     public String getResumeDetail(@PathVariable Long resumeNo, Model model) {
