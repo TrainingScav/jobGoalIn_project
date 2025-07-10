@@ -166,6 +166,25 @@ public class UserRequest {
             if (compAddress == null || compAddress.trim().isEmpty()) {
                 throw new IllegalArgumentException("주소는 필수입니다.");
             }
+
+        }
+
+        public CompUser toEntity() {
+            return CompUser.builder()
+                    .compUserName(compUserName)
+                    .compUserLoginId(compUserLoginId)
+                    .compUserPassword(compUserPassword)
+                    .compUserPhone(compUserPhone)
+                    .compUserEmail(compUserEmail)
+                    .compUserNickname(compUserNickname)
+                    .compRegNumber(compRegNumber)
+                    .compName(compName)
+                    .compCEOName(compCEOName)
+                    .compAddress(compAddress)
+                    .accessLevel(2L)
+                    .userLockYn('N')
+                    .loginAttemptCount(0L)
+                    .build();
         }
     }
 

@@ -49,13 +49,16 @@
                     <span class="info-value">{{companyInfo.companyAddress}}</span>
                 </div>
             </div>
+            {{#sessionUser}}{{#isCompanyInfoUpdateAndDeleteYn}}
             <div class="button-group">
-                <a class="edit-button" href="/company/{{companyInfo.companyId}}/update">수정</a>
-
-                <form action="/company/{{companyInfo.companyId}}/delete" method="post">
-                    <button type="submit" class="delete-button">삭제</button>
-                </form>
+                {{#isCompany}}
+                    <a class="edit-button" href="/company/{{companyInfo.companyId}}/update">수정</a>
+                    <form action="/company/{{companyInfo.companyId}}/delete" method="post">
+                        <button type="submit" class="delete-button" onclick="confirm('정말 기업 정보를 삭제 하시겠습니까?')">삭제</button>
+                    </form>
+                {{/isCompany}}
             </div>
+            {{/isCompanyInfoUpdateAndDeleteYn}}{{/sessionUser}}
         </div>
     </div>
 </div>

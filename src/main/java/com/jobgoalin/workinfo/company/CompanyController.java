@@ -1,9 +1,6 @@
 package com.jobgoalin.workinfo.company;
 
-import com.jobgoalin.workinfo._core.errors.exception.Exception400;
-import com.jobgoalin.workinfo._core.errors.exception.Exception401;
-import com.jobgoalin.workinfo._core.errors.exception.Exception403;
-import com.jobgoalin.workinfo._core.errors.exception.Exception500;
+import com.jobgoalin.workinfo._core.errors.exception.*;
 import com.jobgoalin.workinfo.user.CompUser;
 import com.jobgoalin.workinfo.user.LoginUser;
 import com.jobgoalin.workinfo.user.User;
@@ -40,14 +37,12 @@ public class CompanyController {
         List<CompanyInfo> companyInfoList = companyService.findAllCompanyInfo();
 
         if (user != null) {
-            // 등록 버튼 표시여부 (기업정보가 이미 등록 되어 있을 시 버튼 표시 삭제)
-            companyInfoList.forEach(companyInfo -> {
-                if (companyInfo.getCompUser().getCompUserId().equals(user.getId())) {
-                    user.setCompanyInfoWriteYn(false);
-                } else {
-                    user.setCompanyInfoWriteYn(true);
-                }
-            });
+            // 테이블 조회하여 해당 유저로 등록된 기업정보가 있는지 확인
+            CompanyInfo canWrite = companyService.findCompanyInfoByUserId(user.getId());
+
+            if (canWrite == null) {
+                model.addAttribute("isCompanyInfoWritable", true);
+            }
         }
 
         model.addAttribute("companyInfoList", companyInfoList);
@@ -66,9 +61,7 @@ public class CompanyController {
         if (user != null) {
             // 등록 버튼 표시여부 (기업정보가 이미 등록 되어 있을 시 버튼 표시 삭제)
             if (companyInfoDetail.getCompUser().getCompUserId().equals(user.getId())) {
-                user.setCompanyInfoUpdateAndDeleteYn(true);
-            } else {
-                user.setCompanyInfoUpdateAndDeleteYn(false);
+                model.addAttribute("isCompanyInfoUpdateAndDeleteYn", true);
             }
         }
 
@@ -161,9 +154,7 @@ public class CompanyController {
     @GetMapping("/company/{id}/reviews")
     public String companyReview(@PathVariable(name = "id") Long companyId, Model model, HttpSession session)  {
 
-        // 임시 테스트를 위한 세션유저 세팅
         LoginUser user = (LoginUser)session.getAttribute("sessionUser");
-
         List<CompanyReview> companyReviews = companyService.findCompanyReviewByCompanyId(companyId);
 
         // 리뷰 소유권 설정 (삭제 버튼 표시용)
@@ -202,20 +193,19 @@ public class CompanyController {
         CompanyInfo companyInfo = companyService.findCompanyInfoById(companyId);
 
         // 임시 테스트를 위한 세션유저 세팅
-        User user = (User)session.getAttribute("sessionUser");
+        LoginUser sessionUser = (LoginUser)session.getAttribute("sessionUser");
+        User user = userService.findById(sessionUser.getId());
 
         if (user == null) {
-            user = userService.findById(1L);
-            session.setAttribute("sessionUser", user);
+            throw new Exception404("유저 정보를 찾을 수 없습니다.");
         }
 
         // 한 유저는 기업에 리뷰를 하나만 달 수 있다.
         // 이미 등록되어 있는 리뷰가 있을 시 등록불가
         List<CompanyReview> companyReviews = companyService.findCompanyReviewByCompanyId(companyId);
 
-        User searchUser = user;
         companyReviews.forEach(companyReview -> {
-            boolean isReviewOwner = companyReview.isOwner(searchUser.getUserId());
+            boolean isReviewOwner = companyReview.isOwner(user.getUserId());
             if (isReviewOwner) {
                 throw new Exception400("계정 하나 당 하나의 기업 리뷰를 등록 할 수 있습니다.");
             }

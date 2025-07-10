@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResumeListService {
 
-    private final ResumeListRepository resumeListRepository;
     private final ResumeRepository resumeRepository;
 
     public List<Resume> getAllResumes() {

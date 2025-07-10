@@ -54,7 +54,7 @@ public class UserService {
 
     // 기업유저 회원가입 - 유니크 컬럼만 검증함
     public void compJoin(UserRequest.CompJoinDTO dto) {
-        dto.validate();
+
         if (userRepository.existsByUserLoginId(dto.getCompUserLoginId())) {
             throw new IllegalArgumentException("아이디가 이미 존재합니다.");
         }
@@ -62,23 +62,7 @@ public class UserService {
             throw new IllegalArgumentException("이메일이 이미 사용 중입니다.");
         }
 
-        CompUser compUser = CompUser.builder()
-                .compUserName(dto.getCompUserName())
-                .compUserLoginId(dto.getCompUserLoginId())
-                .compUserPassword(dto.getCompUserPassword())
-                .compUserPhone(dto.getCompUserPhone())
-                .compUserEmail(dto.getCompUserEmail())
-                .compUserNickname(dto.getCompUserNickname())
-                .compRegNumber(dto.getCompRegNumber())
-                .compName(dto.getCompName())
-                .compCEOName(dto.getCompCEOName())
-                .compAddress(dto.getCompAddress())
-                .accessLevel(2L)
-                .userLockYn('N')
-                .loginAttemptCount(0L)
-                .build();
-
-        compUserRepository.save(compUser);
+        compUserRepository.save(dto.toEntity());
     }
 
     // 일반 회원 로그인

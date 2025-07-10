@@ -1,5 +1,7 @@
 package com.jobgoalin.workinfo.user;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception500;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -56,14 +58,15 @@ public class UserController {
 
     // 기업 이용자 회원가입 요청
     @PostMapping("/signup/company")
-    public String join(UserRequest.CompJoinDTO dto, Model model) {
-        try {
-            userService.compJoin(dto);
-            return "redirect:/login";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "user/compUserJoin";
-        }
+    public String join(UserRequest.CompJoinDTO dto) {
+
+        // request 값 유효성 확인
+        dto.validate();
+
+        // 회원가입 진행
+        userService.compJoin(dto);
+
+        return "redirect:/login";
     }
 
     // 로그인 화면
