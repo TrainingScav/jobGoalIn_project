@@ -13,10 +13,6 @@ public class MyPageService {
 
     private final ResumeRepository resumeRepository;
 
-    // 전체 이력서 조회
-    public List<Resume> findAllPosts() {
-        return resumeRepository.findAll();
-    }
 }
 
 

@@ -106,6 +106,7 @@ public class UserService {
         user.setUserPhoneNumber(updateDTO.getUserPhoneNumber());
         user.setUserPassWord(updateDTO.getUserPassword());
         user.setUserAddress(updateDTO.getUserAddress());
+        user.setUserId(updateDTO.getUser().getUserId());
         return user;
     }
 

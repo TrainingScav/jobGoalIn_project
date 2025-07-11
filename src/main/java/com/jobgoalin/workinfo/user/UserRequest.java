@@ -1,5 +1,8 @@
 package com.jobgoalin.workinfo.user;
 
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import lombok.Data;
 
@@ -220,6 +223,10 @@ public class UserRequest {
     // 회원 정보 수정용 DTO
     @Data
     public static class UpdateDTO {
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "user_id" , nullable = false)
+        private User user;
         private String userPassword;
         private String userNickname;
         private String userAddress;

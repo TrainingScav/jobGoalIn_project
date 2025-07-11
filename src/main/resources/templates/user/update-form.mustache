@@ -10,13 +10,13 @@
 
 <div class="main">
     <div class="tabs">
-        <a class="tab" href="my-page">MY</a>
-        <a class="tab active" href="update-form">계정</a>
-        <a class="tab" href="resume-list">이력서</a>
+        <a class="tab"></a>
+        <a class="tab"></a>
+        <a class="tab"></a>
     </div>
 
     <div class="form-box">
-        <form action="/update/{{userInfo.userId}}" method="post">
+        <form action="/user/update-form/{{userInfo.userId}}" method="post">
             <!-- 이름: 읽기 전용 -->
             <div class="form-group">
                 <label for="name">이름</label>
@@ -50,7 +50,7 @@
             <!-- 휴대폰 번호: 수정 가능 -->
             <div class="form-group">
                 <label for="phone">휴대폰 번호</label>
-                <input type="text" id="phoneNumber" name="UserPhoneNumber" value="{{userInfo.userPhone}}">
+                <input type="text" id="phoneNumber" name="UserPhoneNumber" value="{{userInfo.userPhoneNumber}}">
             </div>
 
             <div class="form-actions">
