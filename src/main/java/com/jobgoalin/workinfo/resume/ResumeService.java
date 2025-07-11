@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -62,5 +63,9 @@ public class ResumeService {
         return resumeRepository.findById(id).orElseThrow(() -> {
             return new ResponseStatusException(HttpStatus.NOT_FOUND, "이력서를 찾을 수 없습니다.");
         });
+    }
+
+    public List<Resume> findResumesByUserId(Long userId) {
+        return resumeRepository.findByUserUserId(userId);
     }
 }

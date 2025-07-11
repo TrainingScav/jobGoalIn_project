@@ -14,8 +14,8 @@ body {
 .section-title {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-top: 3rem;      /* ↑ 이전 섹션과 거리 */
-  margin-bottom: 1.5rem; /* ↓ 제목과 내용 거리 */
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid #ddd;
   padding-bottom: 0.5rem;
 }
@@ -58,7 +58,7 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
   margin-top: 1rem;
-  margin-bottom: 3rem; /* 🔼 자기소개서와의 거리 넓힘 */
+  margin-bottom: 3rem;
 }
 
 .summary-item {

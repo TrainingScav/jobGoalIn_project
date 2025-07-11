@@ -1,131 +1,135 @@
 .main {
-    padding: 40px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-}
-
-/* ✅ 가운데 정렬된 탭 메뉴 */
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    gap: 10px;
-}
-
-.tab {
-    padding: 10px 20px;
-    background-color: #eee;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
+    max-width: 900px;
+    margin: 30px auto;
+    font-family: 'Noto Sans KR', sans-serif;
     color: #333;
-}
-
-.tab.active {
-    background-color: #007bff;
-    color: white;
-}
-
-/* ✅ 프로필 박스 */
-.profile-box {
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background: #fdfdfd;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    max-width: 700px;
-    margin: 0 auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px 30px;
+}
+
+.profile-main .section-block {
+    padding: 20px 0;
+}
+
+.profile-main .section-block.profile-box:not(:first-child) {
+    border-top: 2px solid #bbb;
 }
 
 .profile-header h3 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 600;
 }
 
-.profile-info {
-    margin-top: 10px;
+.edit-btn-wrap {
+    text-align: right;
+    margin-bottom: 12px;
+}
+
+.btn-edit, .btn-write, .btn-small {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.btn-edit:hover, .btn-write:hover, .btn-small:hover {
+    background-color: #2980b9;
 }
 
 .profile-info .meta {
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    margin-bottom: 6px;
 }
 
-/* ✅ 이력서 섹션 */
-.resume-section {
-    margin-top: 40px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+.profile-info .meta strong {
+    color: #555;
 }
+
+
+.resume-section {
+    padding: 25px 25px 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 1px solid #ccc;
+}
+
 
 .resume-section h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    font-weight: bold;
+    margin-bottom: 14px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #34495e;
+    padding-bottom: 10px;
+    border-bottom: none;
 }
 
 .resume-table {
+    margin-top: 16px;
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #ccc;
 }
 
-.resume-table th,
-.resume-table td {
+.resume-table th, .resume-table td {
     padding: 12px 8px;
+    text-align: left;
     border-bottom: 1px solid #ddd;
-    text-align: center;
+}
+
+.resume-table th {
+    background-color: #e8eef5;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.resume-table tr:hover {
+    background-color: #f4faff;
 }
 
 .center-text {
-    text-align: center !important;
+    text-align: center;
 }
 
-/* ✅ 버튼 스타일 */
-.btn-edit,
-.btn-small,
-.btn-write {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 13px;
+.btn-group a {
+    margin-right: 8px;
 }
 
-.btn-edit {
-    font-size: 13px;
-}
-
-.btn-write {
-    margin-top: 20px;
-    font-size: 14px;
-    font-weight: bold;
+.btn-small {
+    padding: 4px 10px;
+    font-size: 0.85rem;
 }
 
 .btn-delete {
-    background-color: #dc3545;
+    background-color: #e74c3c;
 }
 
-/* ✅ 이력서 제목 링크 스타일 */
-.resume-link {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
+.btn-delete:hover {
+    background-color: #c0392b;
 }
 
-.resume-link:hover {
-    text-decoration: underline;
+.resume-write-btn {
+    text-align: right;
+    margin-top: 15px;
 }
-.btn-group {
-    display: flex;
-    gap: 6px; /* 버튼 너비의 약 절반 수준 간격 */
-    justify-content: center;
+
+.text-muted {
+    color: #999;
+}
+
+.card-body.text-center {
+    padding: 20px 0;
+    font-style: italic;
 }

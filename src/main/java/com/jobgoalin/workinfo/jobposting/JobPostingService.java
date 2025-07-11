@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.jobposting;
 
+import com.jobgoalin.workinfo.resume.Resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class JobPostingService {
 
     public void delete(Long recruitId) {
         jobPostingRepository.deleteById(recruitId);
+    }
+
+    public List<JobPostingBoard> findJobPostingsByUserId(Long companyId) {
+        return jobPostingRepository.findByCompanyId(companyId);
     }
 }
 

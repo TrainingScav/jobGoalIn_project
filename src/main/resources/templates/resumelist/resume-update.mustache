@@ -1,0 +1,124 @@
+{{> layout/header}}
+<body>
+<section class="resume-wrapper">
+    <div class="resume-inner">
+        <div class="resume-main">
+            <div class="resume-container">
+                <!-- 상단 제목 -->
+                <div class="resume-header">
+                    <a href="javascript:history.back();" class="resume-back-btn">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                    </a>
+                    <div class="resume-subtitle">이력서 수정</div>
+                </div>
+
+                <!-- 입력폼 전체 -->
+                <form class="resume-form" action="/resume-update" method="post">
+                    <!-- 제목 입력 -->
+                    <div class="resume-field">
+                        <label for="title" class="resume-label">이력서 제목</label>
+                        <input type="text" id="title" name="title" class="resume-input" placeholder="이력서 제목을 입력하세요.">
+                    </div>
+
+                    <!-- 2개 필드 한 줄 -->
+                    <div class="resume-grid">
+                        <div class="resume-field">
+                            <label class="resume-label" for="name">이름</label>
+                            <input type="text" id="userName" name="userName" class="resume-input" placeholder="이름을 입력하세요.">
+                        </div>
+                        <div class="resume-field">
+                            <label class="resume-label" for="gender">성별</label>
+                            <select id="gender" name="gender" class="resume-select">
+                                <option value="">선택하세요</option>
+                                <option value="M">남성</option>
+                                <option value="F">여성</option>
+                            </select>
+                        </div>
+
+                        <div class="resume-field">
+                            <label class="resume-label" for="birthdate">생년월일</label>
+                            <input type="text" id="birthdate" name="birthdate" class="resume-input" placeholder="예: 1990-01-01">
+                        </div>
+                        <div class="resume-field">
+                            <label class="resume-label" for="phoneNumber">전화번호</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" class="resume-input" placeholder="예: 010-1234-5678">
+                        </div>
+
+                        <div class="resume-field">
+                            <label class="resume-label" for="email">이메일</label>
+                            <input type="email" id="email" name="email" class="resume-input" placeholder="예: example@email.com">
+                        </div>
+                        <div class="resume-field">
+                            <label class="resume-label" for="address">주소</label>
+                            <input type="text" id="address" name="address" class="resume-input" placeholder="주소를 입력하세요.">
+                        </div>
+                    </div>
+
+                    <!-- 자기소개서 -->
+                    <div class="resume-field">
+                        <label for="content" class="resume-label">자기소개서</label>
+                        <textarea id="content" name="content" class="resume-textarea" placeholder="자기소개서를 입력하세요."></textarea>
+                    </div>
+
+                    <!-- 개발 직무 -->
+                    <div class="resume-field">
+                        <label for="positionId" class="resume-label">개발 직무</label>
+                        <select name="positionId" id="positionId" class="resume-select">
+                            <option value="">선택하세요</option>
+                            <option value="1">Server Backend 개발자</option>
+                            <option value="2">Frontend 개발자</option>
+                            <option value="3">Web Full Stack 개발자</option>
+                            <option value="4">IOS 개발자</option>
+                            <option value="5">Android 개발자</option>
+                            <option value="6">크로스 플랫폼 앱 개발자</option>
+                        </select>
+                    </div>
+
+                    <!-- 기술 스택 -->
+                    <div class="resume-field">
+                        <label for="skillStackId" class="resume-label">기술 스택</label>
+                        <select name="skillStackId" id="skillStackId" class="resume-select">
+                            <option value="7">Java</option>
+                            <option value="8">JavaScript</option>
+                            <option value="9">Spring</option>
+                            <option value="10">HTML</option>
+                            <option value="11">jQuery</option>
+                            <option value="12">MySQL</option>
+                            <option value="13">React</option>
+                            <option value="14">JSP</option>
+                            <option value="15">Vue.js</option>
+                            <option value="16">Oracle</option>
+                        </select>
+                    </div>
+
+                    <!-- 경력 -->
+                    <div class="resume-field">
+                        <label for="isExperienced" class="resume-label">경력</label>
+                        <select name="isExperienced" id="isExperienced" class="resume-select">
+                            <option value="">선택하세요</option>
+                            <option value="N">신입</option>
+                            <option value="Y">경력</option>
+                        </select>
+                    </div>
+
+                    <!-- 공개 여부 -->
+                    <div class="resume-field">
+                        <label for="isShow" class="resume-label">공개 여부</label>
+                        <select name="isShow" id="isShow" class="resume-select">
+                            <option value="">선택하세요</option>
+                            <option value="Y">공개</option>
+                            <option value="N">비공개</option>
+                        </select>
+                    </div>
+
+                    <!-- 저장 버튼 -->
+                    <div class="resume-submit">
+                        <button type="submit" class="resume-button" >저장하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+{{> layout/footer}}

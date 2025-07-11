@@ -2,6 +2,7 @@ package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import com.jobgoalin.workinfo._core.errors.exception.Exception500;
+import com.jobgoalin.workinfo.resume.Resume;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -131,16 +132,11 @@ public class UserController {
     /**
      * 회원 정보 수정 화면 요청
      */
-    @GetMapping("/user/update-form")
-    public String updateForm(Model model,HttpSession session) {
+    @GetMapping("/user/update-form/{id}")
+    public String updateForm(@PathVariable Long id, Model model, HttpSession session, UserRequest.UpdateDTO reqDTO) {
 
-        LoginUser checkSesssionUser = (LoginUser)session.getAttribute("sessionUser");
-        if (checkSesssionUser != null) {
-            log.info("sessionUser 값 확인 : {}", checkSesssionUser.toString());
-        }
-
-        User user = userService.findById(1L);
-
+        LoginUser userId = (LoginUser)session.getAttribute("sessionUser");
+        User user = userService.findById(userId.getId());
         model.addAttribute("userInfo", user);
 
         return "/user/update-form";
@@ -153,10 +149,9 @@ public class UserController {
     @PostMapping("/user/update-form/{id}")
     public String update(@PathVariable(name = "id") Long id, UserRequest.UpdateDTO reqDTO, HttpSession session) {
         reqDTO.validate();
-        User user = (User)session.getAttribute("sessionUser");
         User updateUser = userService.updateById(id,reqDTO);
         session.setAttribute("sessionUser",updateUser);
-        return "redirect:/uesr/update-form";
+        return "redirect:/user/update-form";
     }
 
     // 오시는길 화면 이동
