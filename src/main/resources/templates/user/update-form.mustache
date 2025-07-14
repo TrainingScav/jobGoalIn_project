@@ -16,7 +16,7 @@
     </div>
 
     <div class="form-box">
-        <form action="/user/update-form/{{userInfo.userId}}" method="post">
+        <form action="/user/update-form" method="post">
             <!-- 이름: 읽기 전용 -->
             <div class="form-group">
                 <label for="name">이름</label>
@@ -38,7 +38,7 @@
             <!-- 비밀번호: 수정 가능 -->
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" name="userPassword" placeholder="변경할 경우에만 입력해주세요">
+                <input type="password" id="password" name="userPassword" placeholder="변경할 경우에만 입력해주세요" value="{{userInfo.userPassWord}}">
             </div>
 
             <!-- 주소: 수정 가능 -->

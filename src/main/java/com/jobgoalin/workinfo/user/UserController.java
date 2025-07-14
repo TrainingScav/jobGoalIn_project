@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -133,8 +134,8 @@ public class UserController {
     /**
      * 회원 정보 수정 화면 요청
      */
-    @GetMapping("/user/update-form/{id}")
-    public String updateForm(@PathVariable Long id, Model model, HttpSession session, UserRequest.UpdateDTO reqDTO) {
+    @GetMapping("/user/update-form")
+    public String updateForm(Model model, HttpSession session, UserRequest.UpdateDTO reqDTO) {
 
         LoginUser userId = (LoginUser)session.getAttribute("sessionUser");
         User user = userService.findById(userId.getId());
@@ -147,11 +148,23 @@ public class UserController {
      * 회원 수정 기능 요청
      */
 
-    @PostMapping("/user/update-form/{id}")
-    public String update(@PathVariable(name = "id") Long id, UserRequest.UpdateDTO reqDTO, HttpSession session) {
+    @PostMapping("/user/update-form")
+    public String update(UserRequest.UpdateDTO reqDTO, HttpSession session) {
+
         reqDTO.validate();
-        User updateUser = userService.updateById(id,reqDTO);
-        session.setAttribute("sessionUser",updateUser);
+
+        LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
+        reqDTO.setUserId(loginUser.getId());
+
+        if (loginUser.isCompany()) { //기업 회원일 시
+            // 기업 회원 업데이트 서비스 로직 호출
+        } else {
+            User updateUser = userService.updateById(reqDTO);
+
+            loginUser.setUserNickname(updateUser.getUserNickName());
+        }
+
+        session.setAttribute("sessionUser",loginUser);
         return "redirect:/user/update-form";
     }
 

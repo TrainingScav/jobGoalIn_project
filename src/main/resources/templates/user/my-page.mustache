@@ -9,7 +9,7 @@
                     <h3>{{userInfo.username}} / {{userInfo.userNickName}}</h3>
                 </div>
                 <div class="edit-btn-wrap">
-                    <a href="/user/update-form/{{userInfo.userId}}" class="btn-edit">회원정보 수정</a>
+                    <a href="/user/update-form" class="btn-edit">회원정보 수정</a>
                 </div>
                 <div class="profile-info">
                     <div class="meta"><strong>가입일:</strong> {{userInfo.userCreatedAt}}</div>
@@ -98,8 +98,8 @@
                             <td class="center-text">{{instDate}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="/board/update-form" class="btn-small">수정</a>
-                                    <a href="/user/mypage" class="btn-small btn-delete">삭제</a>
+                                    <a href="/jobpostingboard/{{recruitId}}/update-form" class="btn-small">수정</a>
+                                    <a href="/jobpostingboard/{{recruitId}}/delete" class="btn-small btn-delete">삭제</a>
                                 </div>
                             </td>
                         </tr>
@@ -113,7 +113,7 @@
                 {{/jobPostings}}
 
                 <div class="resume-write-btn">
-                    <a href="/board/save-form" class="btn-write">채용공고 등록</a>
+                    <a href="/jobpostingboard/write" class="btn-write">채용공고 등록</a>
                 </div>
             </div>
         {{/loginUser.isCompany}}

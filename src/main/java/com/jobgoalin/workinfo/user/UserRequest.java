@@ -224,9 +224,7 @@ public class UserRequest {
     @Data
     public static class UpdateDTO {
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id" , nullable = false)
-        private User user;
+        private Long userId;
         private String userPassword;
         private String userNickname;
         private String userAddress;

@@ -2,6 +2,7 @@ package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import com.jobgoalin.workinfo._core.errors.exception.Exception404;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,16 +98,15 @@ public class UserService {
      */
 
     @Transactional
-    public User updateById(Long userId,UserRequest.UpdateDTO updateDTO) {
+    public User updateById(UserRequest.UpdateDTO updateDTO) {
 
-        User user = findById(userId);
+        User user = findById(updateDTO.getUserId());
 
         // 더티 체킹
         user.setUserNickName(updateDTO.getUserNickname());
         user.setUserPhoneNumber(updateDTO.getUserPhoneNumber());
         user.setUserPassWord(updateDTO.getUserPassword());
         user.setUserAddress(updateDTO.getUserAddress());
-        user.setUserId(updateDTO.getUser().getUserId());
         return user;
     }
 
