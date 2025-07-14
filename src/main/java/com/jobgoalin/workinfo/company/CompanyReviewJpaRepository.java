@@ -11,4 +11,7 @@ public interface CompanyReviewJpaRepository extends JpaRepository<CompanyReview,
     @Query("SELECT cr FROM CompanyReview cr JOIN FETCH cr.companyInfo ci WHERE ci.companyId = :id")
     List<CompanyReview> findReviewsJoinCompanyInfo(@Param("id") Long id);
 
+    @Query("SELECT COUNT(cr) FROM CompanyReview cr WHERE cr.user.id = :id")
+    Long countByUserId(@Param("id") Long id);
+
 }

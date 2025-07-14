@@ -46,6 +46,7 @@ public class CompanyRequest {
                     .phoneNumber(phoneNumber)
                     .companyEmail(companyEmail)
                     .companyAddress(companyAddress)
+                    .instId(compUser.getCompUserLoginId())
                     .build();
         }
     }

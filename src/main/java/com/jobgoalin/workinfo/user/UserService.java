@@ -32,29 +32,12 @@ public class UserService {
             throw new IllegalArgumentException("주민번호가 이미 등록되어 있습니다.");
         }
 
-        User user = User.builder()
-                .username(dto.getUsername())
-                .userLoginId(dto.getUserLoginId())
-                .userPassWord(dto.getUserPassWord())
-                .userEmail(dto.getUserEmail())
-                .userAddress(dto.getUserAddress())
-                .userPhoneNumber(dto.getUserPhoneNumber())
-                .userBirth(dto.getUserBirth())
-                .userGender(dto.getUserGender())
-                .userNickName(dto.getUserNickname())
-                .userCivilSerial(dto.getUserCivilSerial())
-                .userCreatedAt(LocalDateTime.now())
-                .accessLevel(1L)
-                .userLockYn('N')
-                .loginAttemptCount(0L)
-                .build();
-
-        userRepository.save(user);
+        userRepository.save(dto.toEntity());
     }
 
     // 기업유저 회원가입 - 유니크 컬럼만 검증함
     public void compJoin(UserRequest.CompJoinDTO dto) {
-        dto.validate();
+
         if (userRepository.existsByUserLoginId(dto.getCompUserLoginId())) {
             throw new IllegalArgumentException("아이디가 이미 존재합니다.");
         }
@@ -62,23 +45,7 @@ public class UserService {
             throw new IllegalArgumentException("이메일이 이미 사용 중입니다.");
         }
 
-        CompUser compUser = CompUser.builder()
-                .compUserName(dto.getCompUserName())
-                .compUserLoginId(dto.getCompUserLoginId())
-                .compUserPassword(dto.getCompUserPassword())
-                .compUserPhone(dto.getCompUserPhone())
-                .compUserEmail(dto.getCompUserEmail())
-                .compUserNickname(dto.getCompUserNickname())
-                .compRegNumber(dto.getCompRegNumber())
-                .compName(dto.getCompName())
-                .compCEOName(dto.getCompCEOName())
-                .compAddress(dto.getCompAddress())
-                .accessLevel(2L)
-                .userLockYn('N')
-                .loginAttemptCount(0L)
-                .build();
-
-        compUserRepository.save(compUser);
+        compUserRepository.save(dto.toEntity());
     }
 
     // 일반 회원 로그인
@@ -139,13 +106,14 @@ public class UserService {
         user.setUserPhoneNumber(updateDTO.getUserPhoneNumber());
         user.setUserPassWord(updateDTO.getUserPassword());
         user.setUserAddress(updateDTO.getUserAddress());
+        user.setUserId(updateDTO.getUser().getUserId());
         return user;
     }
 
     public CompUser findCompUserById(Long id) {
 
         return compUserRepository.findById(id).orElseThrow(() -> {
-            return new Exception404("해당 유저를 찾을 수 없습니다.");
+            throw new Exception404("해당 유저를 찾을 수 없습니다.");
         });
     }
 }

@@ -17,13 +17,14 @@
             </div>
 
             <!-- 리뷰 등록 버튼 -->
+            {{#sessionUser}}{{^isCompany}}{{#isWritable}}
             <div class="review-top-bar">
                 <a href="/company/{{companyId}}/reviews/form" class="add-review-button">리뷰 등록</a>
             </div>
-
+            {{/isWritable}}{{/isCompany}}{{/sessionUser}}
             <!-- 리뷰 리스트 -->
             <div class="review-section">
-                {{#reviews}}
+                {{#sessionUser}}{{#reviews}}
                     <div class="review-card">
                         <div class="review-header">
                             <span class="review-id">{{user.userNickName}}</span>
@@ -31,11 +32,11 @@
                             <!-- 자기 댓글일 때만 보이는 삭제 버튼 -->
                             <div class="review-right">
                                 <span class="review-date">{{time}}</span>
-                                {{#isMyReview}}
+                                {{^isCompany}}{{#isMyReview}}
                                     <form action="/company/{{companyId}}/reviews/{{reviewId}}/delete" method="post" class="delete-form">
-                                        <button type="submit" class="delete-button" onclick="return confirm('리뷰를 삭제 하시겠읍니까?')">삭제</button>
+                                        <button type="submit" class="delete-button" onclick="return confirm('리뷰를 삭제 하시겠습니까?')">삭제</button>
                                     </form>
-                                {{/isMyReview}}
+                                {{/isMyReview}}{{/isCompany}}
                             </div>
                         </div>
                         <div class="review-body">
@@ -57,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                {{/reviews}}
+                {{/reviews}}{{/sessionUser}}
 
                 {{^reviews}}
                     <div class="no-reviews">

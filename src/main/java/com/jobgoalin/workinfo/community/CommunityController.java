@@ -1,11 +1,11 @@
 package com.jobgoalin.workinfo.community;
 
+import com.jobgoalin.workinfo.user.LoginUser;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,54 +15,74 @@ public class CommunityController {
 
     private final CommunityService communityService;
 
-    // 1) 전체 게시글 목록
-    @GetMapping("/communityboard")
-    public String boardList(Model model) {
-        List<Community> communityBoardList = communityService.findAll();
-        model.addAttribute("communityBoardList", communityBoardList);
-        return "community/board";
+    // 전체 게시글 목록
+    @GetMapping("/community/list")
+    public String showList(Model model) {
+        List<Community> posts = communityService.findAllPosts();
+        model.addAttribute("posts", posts);
+        return "community/list";
     }
 
-    // 2) 게시글 상세보기
-    @GetMapping("/communityboard/detail/{postId}")
-    public String detail(@PathVariable Long postId, Model model) {
-        Community communityBoard = communityService.findById(postId);
-        model.addAttribute("communityBoard", communityBoard);
+    @GetMapping("/community/detail/{postId}")
+    public String showDetail(@PathVariable(name = "postId") Long postId, Model model) {
+        model.addAttribute("post", communityService.findById(postId));
         return "community/detail";
     }
 
-    // 3) 작성폼
-    @GetMapping("/communityboard/write")
+    @GetMapping("/community/write")
     public String showWriteForm() {
         return "community/save-form";
     }
 
-    // 4) 게시글 저장
-    @PostMapping("/communityboard/write")
-    public String submitCommunity(Community community) {
-        communityService.save(community);
-        return "redirect:/communityboard";
+    // 글 작성 처리
+    @PostMapping("/communityposting/write")
+    public String submitPost(@ModelAttribute("save-form") CommunityRequest.SaveDTO dto,
+                             HttpSession sessionUser) {
+        LoginUser loginUser = (LoginUser) sessionUser.getAttribute("sessionUser");
+
+        if (loginUser != null) {
+            dto.setInstId(loginUser.getLoginId());
+        } else {
+            dto.setInstId("anonymous");
+        }
+
+        communityService.savePost(dto);
+        return "redirect:/community/list";
     }
 
-    // 5) 수정폼
-    @GetMapping("/communityboard/{postId}/update-form")
-    public String updateForm(@PathVariable Long postId, Model model) {
-        Community communityBoard = communityService.findById(postId);
-        model.addAttribute("communityBoard", communityBoard);
+    // 글 수정 폼
+    @GetMapping("/{postId}/update-form")
+    public String showUpdateForm(@PathVariable(name="postId") Long postId, Model model) {
+        Community post = communityService.findById(postId);
+        CommunityRequest.UpdateDTO updateDTO = new CommunityRequest.UpdateDTO();
+        updateDTO.setTitle(post.getTitle());
+        updateDTO.setContent(post.getContent());
+        model.addAttribute("updateDTO", updateDTO);
+        model.addAttribute("postId", postId);
         return "community/update-form";
     }
 
-    // 6) 게시글 수정
-    @PostMapping("/communityboard/{postId}/update")
-    public String update(@PathVariable Long postId, Community updated) {
-        communityService.update(postId, updated);
-        return "redirect:/communityboard/detail/" + postId;
+    // 글 수정 처리
+    @PostMapping("/{postId}/update")
+    public String updatePost(@PathVariable Long postId,
+                             @ModelAttribute("updateDTO") CommunityRequest.UpdateDTO dto,
+                             HttpSession sessionUser) {
+
+        LoginUser loginUser = (LoginUser)sessionUser.getAttribute("sessionUser");
+        if(loginUser != null){
+            communityService.updatePost(postId, dto);
+            return "redirect:/community/detail/" + postId;
+        }else {
+            // 1. 사용자에게 값 받고
+            // 2. 글 쓸때 설정한 password와 값 비교 후 일치시 삭제
+        }
+        return "redirect:/community/detail/" + postId;
     }
 
-    // 7) 게시글 삭제
-    @PostMapping("/communityboard/{postId}/delete")
-    public String delete(@PathVariable Long postId) {
-        communityService.delete(postId);
-        return "redirect:/communityboard";
+    // 글 삭제
+    @PostMapping("/community/{postId}/delete")
+    public String deletePost(@PathVariable Long postId) {
+        communityService.deletePost(postId);
+        return "redirect:/community/list";
     }
 }

@@ -9,11 +9,16 @@ public class CommunityRequest {
         private String title;
         private String content;
         private String instId;
+        private String postPassword;
     }
 
     @Data
     public static class UpdateDTO {
         private String title;
         private String content;
+        private String instId;
+        private String postPassword;
+
+
     }
 }

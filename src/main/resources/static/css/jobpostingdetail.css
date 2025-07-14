@@ -48,6 +48,13 @@ body {
     margin-top: 30px;
 }
 
+/* 수정 폼 */
+.update-form {
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: white;
+}
+
 /* 삭제 버튼 */
 .delete-button {
     background-color: #dc3545;

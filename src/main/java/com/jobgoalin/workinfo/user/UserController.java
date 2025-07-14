@@ -1,5 +1,8 @@
 package com.jobgoalin.workinfo.user;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception500;
+import com.jobgoalin.workinfo.resume.Resume;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -39,13 +42,14 @@ public class UserController {
     // 일반 이용자 회원가입 요청
     @PostMapping("/signup/normal")
     public String normalUserSignup(UserRequest.JoinDTO dto, Model model) {
-        try {
-            userService.join(dto);
-            return "redirect:/login";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "user/userJoin";
-        }
+
+        // request 값 유효성 확인
+        dto.validate();
+
+        // 회원가입 진행
+        userService.join(dto);
+
+        return "redirect:/login";
     }
 
     // 기업 이용자 회원가입 화면 요청
@@ -56,14 +60,15 @@ public class UserController {
 
     // 기업 이용자 회원가입 요청
     @PostMapping("/signup/company")
-    public String join(UserRequest.CompJoinDTO dto, Model model) {
-        try {
-            userService.compJoin(dto);
-            return "redirect:/login";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", e.getMessage());
-            return "user/compUserJoin";
-        }
+    public String join(UserRequest.CompJoinDTO dto) {
+
+        // request 값 유효성 확인
+        dto.validate();
+
+        // 회원가입 진행
+        userService.compJoin(dto);
+
+        return "redirect:/login";
     }
 
     // 로그인 화면
@@ -128,16 +133,11 @@ public class UserController {
     /**
      * 회원 정보 수정 화면 요청
      */
-    @GetMapping("/user/update-form")
-    public String updateForm(Model model,HttpSession session) {
+    @GetMapping("/user/update-form/{id}")
+    public String updateForm(@PathVariable Long id, Model model, HttpSession session, UserRequest.UpdateDTO reqDTO) {
 
-        LoginUser checkSesssionUser = (LoginUser)session.getAttribute("sessionUser");
-        if (checkSesssionUser != null) {
-            log.info("sessionUser 값 확인 : {}", checkSesssionUser.toString());
-        }
-
-        User user = userService.findById(1L);
-
+        LoginUser userId = (LoginUser)session.getAttribute("sessionUser");
+        User user = userService.findById(userId.getId());
         model.addAttribute("userInfo", user);
 
         return "/user/update-form";
@@ -150,10 +150,9 @@ public class UserController {
     @PostMapping("/user/update-form/{id}")
     public String update(@PathVariable(name = "id") Long id, UserRequest.UpdateDTO reqDTO, HttpSession session) {
         reqDTO.validate();
-        User user = (User)session.getAttribute("sessionUser");
         User updateUser = userService.updateById(id,reqDTO);
         session.setAttribute("sessionUser",updateUser);
-        return "redirect:/uesr/update-form";
+        return "redirect:/user/update-form";
     }
 
     // 오시는길 화면 이동

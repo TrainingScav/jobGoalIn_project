@@ -8,10 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
+
+// 현재는 사용하지 않는 엔티티 클래스임.
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "resume_list")
 public class ResumeListBoard {
 
     @Id

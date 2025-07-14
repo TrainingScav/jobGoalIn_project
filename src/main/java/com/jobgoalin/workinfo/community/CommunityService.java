@@ -1,10 +1,8 @@
 package com.jobgoalin.workinfo.community;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,36 +13,42 @@ public class CommunityService {
 
     private final CommunityRepository communityRepository;
 
-    // 전체 조회
-    public List<Community> findAll() {
+    // 전체 게시글 조회
+    public List<Community> findAllPosts() {
         return communityRepository.findAll();
     }
 
-    // 단일 조회
+    // 단일 게시글 조회
     public Community findById(Long postId) {
-        return communityRepository.findByPostId(postId)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "게시글이 존재하지 않습니다. id=" + postId));
+        return communityRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. id=" + postId));
     }
 
-    // 저장
+    // 게시글 생성
     @Transactional
-    public void save(Community community) {
-        communityRepository.save(community);
+    public Community savePost(CommunityRequest.SaveDTO dto) {
+        Community post = Community.builder()
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .instId(dto.getInstId())
+                .postPassword(dto.getPostPassword())
+                .build();
+        return communityRepository.save(post);
     }
 
-    // 수정
+    // 게시글 수정
     @Transactional
-    public void update(Long postId, Community updated) {
-        Community origin = findById(postId);
-        origin.setTitle(updated.getTitle());
-        origin.setContent(updated.getContent());
-        // 작성자(instId)와 작성일(instDate)는 변경하지 않습니다
+    public void updatePost(Long postId, CommunityRequest.UpdateDTO dto) {
+        Community post = findById(postId);
+        post.setTitle(dto.getTitle());
+        post.setContent(dto.getContent());
+        // instId, instDate는 변경하지 않음
     }
 
-    // 삭제
+    // 게시글 삭제
     @Transactional
-    public void delete(Long postId) {
+    public void deletePost(Long postId) {
         communityRepository.deleteById(postId);
     }
+
 }

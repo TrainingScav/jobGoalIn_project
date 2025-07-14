@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>커뮤니티 글 목록</title>
+    <style>
+        body {
+          font-family: '맑은 고딕', sans-serif;
+          background-color: #f9f9f9;
+          margin: 0;
+          padding: 2rem;
+        }
+        .container {
+          max-width: 1000px;
+          margin: auto;
+          background: #fff;
+          padding: 2rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1 {
+          margin-top: 0;
+          color: #2c3e50;
+          font-size: 1.8rem;
+        }
+        .actions-top {
+          margin: 1rem 0;
+        }
+        .actions-top a {
+          text-decoration: none;
+          padding: 0.6rem 1rem;
+          background: #3498db;
+          color: #fff;
+          border-radius: 4px;
+          font-size: 0.9rem;
+        }
+        .actions-top a:hover {
+          background: #217dbb;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 1rem;
+        }
+        th, td {
+          padding: 0.8rem;
+          border-bottom: 1px solid #e0e0e0;
+          text-align: left;
+          font-size: 0.95rem;
+        }
+        th {
+          background: #f0f0f0;
+          color: #555;
+        }
+        tr:hover {
+          background: #f7f7f7;
+        }
+        .row-actions a,
+        .row-actions button {
+          margin-right: 0.5rem;
+          padding: 0.4rem 0.8rem;
+          font-size: 0.85rem;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .row-actions a {
+          background: #f39c12;
+          color: #fff;
+          text-decoration: none;
+        }
+        .row-actions a:hover {
+          background: #d78f0e;
+        }
+        .row-actions button {
+          background: #e74c3c;
+          color: #fff;
+        }
+        .row-actions button:hover {
+          background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>커뮤니티 글 목록</h1>
+
+    <!-- 상단 글 작성 버튼 -->
+    <div class="actions-top">
+        <a href="/community/write">글 작성하기</a>
+    </div>
+
+    <!-- 게시글 테이블 -->
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#posts}}
+            <tr>
+                <td>{{postId}}</td>
+                <td><a href="/community/detail/{{postId}}">{{title}}</a></td>
+                <td>{{instId}}</td>
+                <td>{{instDate}}</td>
+                <td class="row-actions">
+                    <a href="/community/{{postId}}/update-form">수정</a>
+                    <form action="/community/{{postId}}/delete" method="post" style="display:inline;">
+                        <button type="submit" onclick="return confirm('삭제하시겠습니까?')">삭제</button>
+                    </form>
+                </td>
+            </tr>
+        {{/posts}}
+
+        {{^posts}}
+            <tr>
+                <td colspan="5" style="text-align:center; color:#777;">게시글이 없습니다.</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

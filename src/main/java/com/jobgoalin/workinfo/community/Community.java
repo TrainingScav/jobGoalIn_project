@@ -19,6 +19,10 @@ public class Community {
     @Column(name = "post_id")
     private Long postId;
 
+    @Column(length = 8)
+    private String postPassword;
+
+
     @Column(length = 100, nullable = false)
     private String title;
 
@@ -34,9 +38,10 @@ public class Community {
     private Timestamp instDate;
 
     @Builder
-    public Community(String title, String content, String instId) {
+    public Community(String title, String content, String instId, String postPassword) {
         this.title = title;
         this.content = content;
         this.instId = instId;
+        this.postPassword = postPassword;
     }
 }

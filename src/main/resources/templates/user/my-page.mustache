@@ -1,24 +1,124 @@
 {{> layout/header}}
 <body>
-<div class="mypage-wrapper">
-    <div class="user-info-card">
-        <div class="user-header">
-            <div class="user-nickname">홍길동님</div>
-            <div class="user-join-date">가입일: 2024-05-10</div>
-        </div>
+<div class="main">
+    <section class="profile-main">
 
-        <div class="user-detail">
-            <div class="user-label">포지션</div>
-            <div class="user-value">백엔드 개발자</div>
-        </div>
-
-        <div class="user-detail">
-            <div class="user-label">기술 스택</div>
-            <div class="skill-tags">
-                <span class="skill-tag">{{skillList.skillName}}</span>
+        {{^loginUser.isCompany}}
+            <div class="profile-box section-block">
+                <div class="profile-header">
+                    <h3>{{userInfo.username}} / {{userInfo.userNickName}}</h3>
+                </div>
+                <div class="edit-btn-wrap">
+                    <a href="/user/update-form/{{userInfo.userId}}" class="btn-edit">회원정보 수정</a>
+                </div>
+                <div class="profile-info">
+                    <div class="meta"><strong>가입일:</strong> {{userInfo.userCreatedAt}}</div>
+                    <div class="meta"><strong>이메일:</strong> {{userInfo.userEmail}}</div>
+                    <div class="meta"><strong>주소:</strong> {{userInfo.userAddress}}</div>
+                    <div class="meta"><strong>전화번호:</strong> {{userInfo.userPhoneNumber}}</div>
+                </div>
             </div>
-        </div>
-    </div>
+        {{/loginUser.isCompany}}
+
+        {{#loginUser.isCompany}}
+            <div class="profile-box section-block">
+                <div class="profile-header">
+                    <h3>{{compUserInfo.compUserName}}</h3>
+                </div>
+                <div class="edit-btn-wrap">
+                    <a href="/user/update-form" class="btn-edit">기업정보 수정</a>
+                </div>
+                <div class="profile-info">
+                    <div class="meta"><strong>CEO:</strong> {{compUserInfo.compCEOName}}</div>
+                    <div class="meta"><strong>가입일:</strong> {{compUserInfo.ComUserCreatedAt}}</div>
+                    <div class="meta"><strong>회사 이메일:</strong> {{compUserInfo.compUserEmail}}</div>
+                    <div class="meta"><strong>회사 주소:</strong> {{compUserInfo.compAddress}}</div>
+                    <div class="meta"><strong>회사 전화번호:</strong> {{compUserInfo.compUserPhone}}</div>
+                </div>
+            </div>
+        {{/loginUser.isCompany}}
+
+        {{^loginUser.isCompany}}
+            <div class="resume-section section-block">
+                <h4>작성한 이력서 목록</h4>
+                <table class="resume-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 50%;">제목</th>
+                        <th style="width: 30%;">등록 일시</th>
+                        <th style="width: 20%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#resumes}}
+                        <tr>
+                            <td class="center-text">
+                                <a href="/resume/detail/{{resumeNo}}" class="resume-link">{{title}}</a>
+                            </td>
+                            <td class="center-text">{{instDate}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="/resumelist/resume-update" class="btn-small">수정</a>
+                                    <a href="/resume/delete" class="btn-small btn-delete">삭제</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/resumes}}
+                    </tbody>
+                </table>
+                {{^resumes}}
+                    <div class="card-body text-center">
+                        <p class="text-muted mb-0">작성한 이력서가 없습니다</p>
+                    </div>
+                {{/resumes}}
+
+                <div class="resume-write-btn">
+                    <a href="/resumelist/resume-register" class="btn-write">이력서 등록</a>
+                </div>
+            </div>
+        {{/loginUser.isCompany}}
+
+        {{#loginUser.isCompany}}
+            <div class="resume-section section-block">
+                <h4>작성한 채용공고</h4>
+                <table class="resume-table">
+                    <thead>
+                    <tr>
+                        <th style="width: 50%;">제목</th>
+                        <th style="width: 30%;">등록 일시</th>
+                        <th style="width: 20%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#jobPostings}}
+                        <tr>
+                            <td class="center-text">
+                                <a href="/jobPosting/detail/{{recruitId}}" class="resume-link">{{title}}</a>
+                            </td>
+                            <td class="center-text">{{instDate}}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="/board/update-form" class="btn-small">수정</a>
+                                    <a href="/user/mypage" class="btn-small btn-delete">삭제</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/jobPostings}}
+                    </tbody>
+                </table>
+                {{^jobPostings}}
+                    <div class="card-body text-center">
+                        <p class="text-muted mb-0">작성한 채용공고가 없습니다</p>
+                    </div>
+                {{/jobPostings}}
+
+                <div class="resume-write-btn">
+                    <a href="/board/save-form" class="btn-write">채용공고 등록</a>
+                </div>
+            </div>
+        {{/loginUser.isCompany}}
+
+    </section>
 </div>
-</body>
+
 {{> layout/footer}}

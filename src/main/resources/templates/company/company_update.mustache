@@ -1,7 +1,7 @@
 {{> layout/header}}
 <div class="company-register-page">
     <form class="register-form" action="/company/{{companyInfo.companyId}}/update" method="post">
-        <h1>기업 정보 등록</h1>
+        <h1>기업 정보 수정</h1>
 
         <!-- 기업명 -->
         <div class="form-group">
@@ -46,7 +46,7 @@
         </div>
 
         <!-- 제출 버튼 -->
-        <button type="submit" class="submit-button">수정하기</button>
+        <button type="submit" class="submit-button" onclick="confirm('기업 정보를 수정 하시겠습니까?')">수정하기</button>
     </form>
 </div>
 {{> layout/footer}}

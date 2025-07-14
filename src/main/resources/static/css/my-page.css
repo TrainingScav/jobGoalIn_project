@@ -1,71 +1,135 @@
-.mypage-wrapper {
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  background-color: #f0f2f5;
-  min-height: 100vh;
+.main {
+    max-width: 900px;
+    margin: 30px auto;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+    background: #fdfdfd;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    padding: 20px 30px;
 }
 
-.user-info-card {
-  width: 100%;
-  max-width: 600px;
-  background-color: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+.profile-main .section-block {
+    padding: 20px 0;
 }
 
-.user-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 10px;
+.profile-main .section-block.profile-box:not(:first-child) {
+    border-top: 2px solid #bbb;
 }
 
-.user-nickname {
-  font-size: 22px;
-  font-weight: 700;
-  color: #333;
+.profile-header h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 600;
 }
 
-.user-join-date {
-  font-size: 14px;
-  color: #888;
+.edit-btn-wrap {
+    text-align: right;
+    margin-bottom: 12px;
 }
 
-.user-detail {
-  display: flex;
-  flex-direction: column;
+.btn-edit, .btn-write, .btn-small {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
 }
 
-.user-label {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: #555;
+.btn-edit:hover, .btn-write:hover, .btn-small:hover {
+    background-color: #2980b9;
 }
 
-.user-value {
-  font-size: 17px;
-  color: #222;
+.profile-info .meta {
+    font-size: 1rem;
+    margin-bottom: 6px;
 }
 
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 5px;
+.profile-info .meta strong {
+    color: #555;
 }
 
-.skill-tag {
-  background-color: #e3f2fd;
-  color: #1976d2;
-  font-size: 13px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: 500;
+
+.resume-section {
+    padding: 25px 25px 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 1px solid #ccc;
+}
+
+
+.resume-section h4 {
+    margin-bottom: 14px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #34495e;
+    padding-bottom: 10px;
+    border-bottom: none;
+}
+
+.resume-table {
+    margin-top: 16px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #ccc;
+}
+
+.resume-table th, .resume-table td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.resume-table th {
+    background-color: #e8eef5;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.resume-table tr:hover {
+    background-color: #f4faff;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.btn-group a {
+    margin-right: 8px;
+}
+
+.btn-small {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+}
+
+.btn-delete {
+    background-color: #e74c3c;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+}
+
+.resume-write-btn {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.text-muted {
+    color: #999;
+}
+
+.card-body.text-center {
+    padding: 20px 0;
+    font-style: italic;
 }

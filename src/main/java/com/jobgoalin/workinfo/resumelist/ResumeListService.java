@@ -1,5 +1,7 @@
 package com.jobgoalin.workinfo.resumelist;
 
+import com.jobgoalin.workinfo.resume.Resume;
+import com.jobgoalin.workinfo.resume.ResumeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,14 +11,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResumeListService {
 
-    private final ResumeListRepository resumeListRepository;
+    private final ResumeRepository resumeRepository;
 
-    public List<ResumeListBoard> getAllResumes() {
-        return resumeListRepository.findAll();
+    public List<Resume> getAllResumes() {
+        return resumeRepository.findAll();
     }
 
-    public ResumeListBoard findById(int resumeNo) {
-        return resumeListRepository.findById(resumeNo)
+    public Resume findById(Long resumeNo) {
+        return resumeRepository.findById(resumeNo)
                 .orElseThrow(() -> new IllegalArgumentException("이력서를 찾을 수 없습니다. resumeNo=" + resumeNo));
     }
 
