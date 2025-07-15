@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                .addPathPatterns("/resumes/**", "/company/form**","/resumes/**", "/resumelist/**",
                                 "/company/{id:\\d+}/update", "/company/{id:\\d+}/reviews/form",
                                 "/jobpostingboard/write", "/jobpostingboard/{id:\\d+}/update-form",
-                                "/jobpostingboard/{id:\\d+}/delete"
+                                "/jobpostingboard/{id:\\d+}/delete,/community/{id:\\d+/update},/community/{id:\\d+delete}"
                );
                 // 인터셉터에서 제외할 URI 패턴 설정
                 //.excludePathPatterns("/board/{id:\\d+}");

@@ -53,18 +53,23 @@ public class UserService {
         // 아이디 조회
         User user = userRepository.findByUserLoginId(dto.getUserLoginId())
                 .orElseThrow(() -> new Exception400("아이디가 존재하지 않습니다."));
+
+        System.out.println("1 DTO 비밀번호 "+ dto.getUserPassWord());
+        System.out.println("1 유저 비밀번호 "+ user.getUserPassWord());
         // 조회 후 계정잠금 확인
-        if (user.getUserLockYn() == 'Y') {
-            throw new Exception400("로그인 시도 5회 초과로 계정이 잠금되었습니다.");
-        }
+
         // 입력한 비밀번호가 다르다면
         if (!dto.getUserPassWord().equals(user.getUserPassWord())) {
+            System.out.println("DTO 비밀번호 "+ dto.getUserPassWord());
+            System.out.println("유저 비밀번호 "+ user.getUserPassWord());
             user.setLoginAttemptCount(user.getLoginAttemptCount() + 1);
             //로그인 횟수 1 추가
             if (user.getLoginAttemptCount() >= 5) {
                 user.setUserLockYn('Y');
             }
-
+            if (user.getUserLockYn() == 'Y') {
+                throw new Exception400("로그인 시도 5회 초과로 계정이 잠금되었습니다.");
+            }
             throw new Exception400("비밀번호가 틀렸습니다. 5회 누적시 계정 잠김." + " 현재 시도 횟수 : "+ user.getLoginAttemptCount());
         }
 

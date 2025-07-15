@@ -37,6 +37,7 @@ public class Community {
     @Column(name = "inst_date", nullable = false, updatable = false)
     private Timestamp instDate;
 
+
     @Builder
     public Community(String title, String content, String instId, String postPassword) {
         this.title = title;

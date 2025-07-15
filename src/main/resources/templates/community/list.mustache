@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{> layout/header}}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -102,28 +102,44 @@
         </tr>
         </thead>
         <tbody>
-        {{#posts}}
+        {{#communityPage}}
             <tr>
                 <td>{{postId}}</td>
                 <td><a href="/community/detail/{{postId}}">{{title}}</a></td>
                 <td>{{instId}}</td>
                 <td>{{instDate}}</td>
                 <td class="row-actions">
-                    <a href="/community/{{postId}}/update-form">수정</a>
-                    <form action="/community/{{postId}}/delete" method="post" style="display:inline;">
-                        <button type="submit" onclick="return confirm('삭제하시겠습니까?')">삭제</button>
-                    </form>
                 </td>
             </tr>
-        {{/posts}}
+        {{/communityPage}}
 
-        {{^posts}}
+        {{^communityPage}}
             <tr>
                 <td colspan="5" style="text-align:center; color:#777;">게시글이 없습니다.</td>
             </tr>
-        {{/posts}}
+        {{/communityPage}}
         </tbody>
     </table>
+    <!-- 페이지 네비게이션 -->
+    <div style="margin-top: 1.5rem; text-align: center;">
+        {{#previousPageNumber}}
+            <a href="/community/list?page={{previousPageNumber}}" style="margin-right: 10px;">◀ 이전</a>
+        {{/previousPageNumber}}
+
+        {{#pageLinks}}
+            {{#active}}
+                <strong style="margin: 0 5px;">{{displayNumber}}</strong>
+            {{/active}}
+            {{^active}}
+                <a href="/community/list?page={{pageNumber}}" style="margin: 0 5px;">{{displayNumber}}</a>
+            {{/active}}
+        {{/pageLinks}}
+
+        {{#nextPageNumber}}
+            <a href="/community/list?page={{nextPageNumber}}" style="margin-left: 10px;">다음 ▶</a>
+        {{/nextPageNumber}}
+    </div>
 </div>
 </body>
 </html>
+{{> layout/footer}}

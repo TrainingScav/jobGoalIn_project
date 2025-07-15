@@ -1,11 +1,13 @@
 package com.jobgoalin.workinfo.community;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -14,8 +16,11 @@ public class CommunityService {
     private final CommunityRepository communityRepository;
 
     // 전체 게시글 조회
-    public List<Community> findAllPosts() {
-        return communityRepository.findAll();
+    public Page<Community> findAllPosts(Pageable pageable) {
+        log.info("전체 게시글 조회 서비스 시작");
+        Page<Community> communityPage = communityRepository.findAll(pageable);
+        log.info("게시글 : {}",communityPage.getTotalElements());
+        return communityPage;
     }
 
     // 단일 게시글 조회
@@ -42,7 +47,7 @@ public class CommunityService {
         Community post = findById(postId);
         post.setTitle(dto.getTitle());
         post.setContent(dto.getContent());
-        // instId, instDate는 변경하지 않음
+
     }
 
     // 게시글 삭제
