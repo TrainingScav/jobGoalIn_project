@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.resume;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception404;
 import com.jobgoalin.workinfo.info.SkillList;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserRepository;
@@ -59,13 +60,20 @@ public class ResumeService {
 
     }
 
+    /**
+     * 이력서 조회
+     */
     public Resume findById(Long id) {
         return resumeRepository.findById(id).orElseThrow(() -> {
-            return new ResponseStatusException(HttpStatus.NOT_FOUND, "이력서를 찾을 수 없습니다.");
+            return new Exception404("이력서를 찾을 수 없습니다.");
         });
     }
 
+    /**
+     * 회원 아이디로 이력서 목록 조회하기
+     */
     public List<Resume> findResumesByUserId(Long userId) {
+
         return resumeRepository.findByUserUserId(userId);
     }
 }

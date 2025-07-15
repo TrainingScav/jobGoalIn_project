@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception401;
 import com.jobgoalin.workinfo._core.errors.exception.Exception500;
 import com.jobgoalin.workinfo.resume.Resume;
 import jakarta.servlet.http.HttpSession;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+
 @RequiredArgsConstructor
+@Controller
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -26,7 +28,6 @@ public class UserController {
     public String index(HttpSession session) {
 
         LoginUser user = (LoginUser) session.getAttribute("sessionUser");
-
         if (user != null) {
             log.info("sessionUser 값 확인 : {}", user );
         }
@@ -75,12 +76,13 @@ public class UserController {
     // 로그인 화면
     @GetMapping("/login")
     public String loginForm() {
+        log.info("로그인 요청 폼");
         return "user/login";
     }
 
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO dto, HttpSession session, Model model) {
-
+        log.info("=== 로그인 시도 ===");
         log.info("dto 값 확인 : {}", dto.toString());
 
         if (dto.getLoginType().equals("normal")) {

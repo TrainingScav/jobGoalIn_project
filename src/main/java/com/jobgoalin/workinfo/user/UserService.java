@@ -2,17 +2,11 @@ package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import com.jobgoalin.workinfo._core.errors.exception.Exception404;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +17,7 @@ public class UserService {
 
     // 일반유저 회원가입 - 유니크 컬럼만 검증함
     public void join(UserRequest.JoinDTO dto) {
+
         if (userRepository.existsByUserLoginId(dto.getUserLoginId())) {
             throw new IllegalArgumentException("아이디가 이미 존재합니다.");
         }
@@ -49,7 +44,9 @@ public class UserService {
         compUserRepository.save(dto.toEntity());
     }
 
-    // 일반 회원 로그인
+    /**
+     * 일반 회원 로그인
+     */
     public User login(UserRequest.LoginDTO dto) {
         // 아이디 조회
         User user = userRepository.findByUserLoginId(dto.getUserLoginId())
@@ -65,8 +62,7 @@ public class UserService {
             if (user.getLoginAttemptCount() >= 5) {
                 user.setUserLockYn('Y');
             }
-
-            throw new Exception400("비밀번호가 틀렸습니다. 5회 누적시 계정 잠김." + " 현재 시도 횟수 : "+ user.getLoginAttemptCount());
+            throw new Exception400("비밀번호가 틀렸습니다. 5회 누적시 계정 잠김." + " 현재 시도 횟수 : " + user.getLoginAttemptCount());
         }
 
         // 성공 시 초기화
@@ -76,7 +72,9 @@ public class UserService {
         return user;
     }
 
-    // 기업 회원 로그인
+    /**
+     * 기업 회원 로그인
+     */
     public CompUser compLogin(UserRequest.LoginDTO dto) {
 
         return compUserRepository
@@ -88,28 +86,29 @@ public class UserService {
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> {
             log.warn("사용자 조회 실패 - ID: {}", id);
-            return new ResponseStatusException(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다.");
+            return new Exception404("사용자를 찾을 수 없습니다.");
         });
     }
 
-
     /**
-     *  회원정보 수정 처리 (더티 체킹)
+     * 회원정보 수정 처리 (더티 체킹)
      */
-
     @Transactional
     public User updateById(UserRequest.UpdateDTO updateDTO) {
 
         User user = findById(updateDTO.getUserId());
-
         // 더티 체킹
         user.setUserNickName(updateDTO.getUserNickname());
         user.setUserPhoneNumber(updateDTO.getUserPhoneNumber());
         user.setUserPassWord(updateDTO.getUserPassword());
         user.setUserAddress(updateDTO.getUserAddress());
+
         return user;
     }
 
+    /**
+     * 기업 회원 조회
+     */
     public CompUser findCompUserById(Long id) {
 
         return compUserRepository.findById(id).orElseThrow(() -> {
