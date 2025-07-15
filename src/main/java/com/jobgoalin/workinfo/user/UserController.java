@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.user;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception401;
 import com.jobgoalin.workinfo._core.errors.exception.Exception500;
 import com.jobgoalin.workinfo.resume.Resume;
 import jakarta.servlet.http.HttpSession;
@@ -12,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+
 @RequiredArgsConstructor
+@Controller
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -25,7 +28,6 @@ public class UserController {
     public String index(HttpSession session) {
 
         LoginUser user = (LoginUser) session.getAttribute("sessionUser");
-
         if (user != null) {
             log.info("sessionUser 값 확인 : {}", user );
         }
@@ -74,12 +76,13 @@ public class UserController {
     // 로그인 화면
     @GetMapping("/login")
     public String loginForm() {
+        log.info("로그인 요청 폼");
         return "user/login";
     }
 
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO dto, HttpSession session, Model model) {
-
+        log.info("=== 로그인 시도 ===");
         log.info("dto 값 확인 : {}", dto.toString());
 
         if (dto.getLoginType().equals("normal")) {
@@ -133,8 +136,8 @@ public class UserController {
     /**
      * 회원 정보 수정 화면 요청
      */
-    @GetMapping("/user/update-form/{id}")
-    public String updateForm(@PathVariable Long id, Model model, HttpSession session, UserRequest.UpdateDTO reqDTO) {
+    @GetMapping("/user/update-form")
+    public String updateForm(Model model, HttpSession session, UserRequest.UpdateDTO reqDTO) {
 
         LoginUser userId = (LoginUser)session.getAttribute("sessionUser");
         User user = userService.findById(userId.getId());
@@ -147,11 +150,23 @@ public class UserController {
      * 회원 수정 기능 요청
      */
 
-    @PostMapping("/user/update-form/{id}")
-    public String update(@PathVariable(name = "id") Long id, UserRequest.UpdateDTO reqDTO, HttpSession session) {
+    @PostMapping("/user/update-form")
+    public String update(UserRequest.UpdateDTO reqDTO, HttpSession session) {
+
         reqDTO.validate();
-        User updateUser = userService.updateById(id,reqDTO);
-        session.setAttribute("sessionUser",updateUser);
+
+        LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
+        reqDTO.setUserId(loginUser.getId());
+
+        if (loginUser.isCompany()) { //기업 회원일 시
+            // 기업 회원 업데이트 서비스 로직 호출
+        } else {
+            User updateUser = userService.updateById(reqDTO);
+
+            loginUser.setUserNickname(updateUser.getUserNickName());
+        }
+
+        session.setAttribute("sessionUser",loginUser);
         return "redirect:/user/update-form";
     }
 
