@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.jobposting;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception404;
 import com.jobgoalin.workinfo.resume.Resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,17 @@ public class JobPostingService {
     private final JobPostingRepository jobPostingRepository;
 
     public List<JobPostingBoard> findAll() {
-        return jobPostingRepository.findAll();
+        List<JobPostingBoard> boards = jobPostingRepository.findAll();
+        if (boards.isEmpty()) {
+            throw new Exception404("공고 목록이 없습니다");
+        }
+        return boards;
+        // return jobPostingRepository.findAll();
     }
 
     public JobPostingBoard findById(Long recruitId) {
         return jobPostingRepository.findByRecruitId(recruitId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new Exception404("해당 게시물을 찾을 수 없습니다"));
     }
 
     @Transactional

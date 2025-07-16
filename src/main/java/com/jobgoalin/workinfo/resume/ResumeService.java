@@ -27,13 +27,15 @@ public class ResumeService {
     private final UserSkillListJpaRepository userSkillListJpaRepository;
     private static final Logger log = LoggerFactory.getLogger(ResumeService.class);
 
+    /**
+     * 이력서 등록
+     */
     @Transactional
     public void registerResume(ResumeRequest.ResumeRegisterDTO request) {
         User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+                .orElseThrow(() -> new Exception404("사용자를 찾을 수 없습니다."));
 
         Resume resume = resumeRepository.save(request.toEntity(user));
-
         log.info("request 확인 : {}", request);
 
         SkillList positionSkill = skillListJpaRepository.findBySkillId(request.getPositionId());
@@ -73,7 +75,6 @@ public class ResumeService {
      * 회원 아이디로 이력서 목록 조회하기
      */
     public List<Resume> findResumesByUserId(Long userId) {
-
         return resumeRepository.findByUserUserId(userId);
     }
 }
