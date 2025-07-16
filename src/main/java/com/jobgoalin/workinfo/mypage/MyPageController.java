@@ -1,5 +1,6 @@
 package com.jobgoalin.workinfo.mypage;
 
+import com.jobgoalin.workinfo._core.errors.exception.Exception404;
 import com.jobgoalin.workinfo.jobposting.JobPostingBoard;
 import com.jobgoalin.workinfo.jobposting.JobPostingRepository;
 import com.jobgoalin.workinfo.jobposting.JobPostingService;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -27,21 +29,23 @@ public class MyPageController {
 
     private final ResumeService resumeService;
     private final JobPostingService jobPostingService;
+    private final UserService userService;
 
 
+    /**
+     * 마이페이지 화면 요청
+     */
     @GetMapping("/user/my-page")
     public String myPage(Model model, HttpSession session) {
 
         LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
         Long userId = loginUser.getId();
-        if (loginUser == null) {
-            return "redirect:/login";
-        }
+
 
         model.addAttribute("loginUser",loginUser);
 
         if (loginUser.isCompany()) {
-            // 기업회원 데이터 준비
+            // 기업 회원 데이터
 
             CompUser compUser = compUserRepository.findById(userId).orElse(null);
             List<JobPostingBoard> myJobPostings = jobPostingService.findJobPostingsByUserId(userId);
@@ -51,15 +55,14 @@ public class MyPageController {
             model.addAttribute("jobPostings",myJobPostings);
             model.addAttribute("jobPostingInfo",jobPostingBoard);
         } else {
-            // 일반 회원 데이터 준비
+            // 일반 회원 데이터
 
-            User user = userRepository.findById(userId).orElse(null);
-            List<Resume> myResumes = resumeService.findResumesByUserId(userId);
-            Resume resume = resumeRepository.findById(userId).orElse(null);
+            User user = userService.findById(userId);
+            List<Resume> resumes = resumeService.findResumesByUserId(userId);
 
             model.addAttribute("userInfo", user);
-            model.addAttribute("resumeInfo", resume);
-            model.addAttribute("resumes", myResumes);
+            model.addAttribute("resumeInfo", resumes);
+
         }
             return "user/my-page";
     }

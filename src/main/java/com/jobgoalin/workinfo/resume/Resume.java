@@ -86,14 +86,15 @@ public class Resume {
 
     public boolean getShowStatus() {
         return this.isShow == 'Y';
-        //return "Y".equals(this.isShow) ? "공개" : "비공개";
     }
 
-    public String getExperiencedStatus() {
-        return this.isExperienced == 'Y' ? "O" : "X";
+    public boolean getExperiencedStatus() {
+        return this.isExperienced == 'Y';
     }
 
-    public String getGenderInfo() {
-        return this.gender == 'M' ? "남성" : "여성";
+    public boolean getGenderInfo() {
+        return this.gender == 'M';
     }
+
+
 }
