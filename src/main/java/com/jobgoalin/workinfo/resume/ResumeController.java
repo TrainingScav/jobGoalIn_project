@@ -55,18 +55,26 @@ public class ResumeController {
 /**
  * 이력서 수정 화면 요청
  */
-    @GetMapping("/resumelist/resume-update")
-    public String resumeUpdateForm(Model model, HttpSession session) {
+    @GetMapping("/resumelist/resume-update/{id}")
+    public String resumeUpdateForm(@PathVariable(name = "id") Long id,Model model) {
 
-        LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
-        Long userId = loginUser.getId();
 
-        User user = userRepository.findById(userId).orElse(null);
-        Resume resume = resumeRepository.findById(userId).orElse(null);
+        Resume resume = resumeService.getResumeById(id);
 
-        model.addAttribute("userInfo",user);
+
         model.addAttribute("resumeInfo",resume);
 
         return "resumelist/resume-update";
     }
+
+
+
+/**
+ *
+ */
+
+
+
+
+
 }

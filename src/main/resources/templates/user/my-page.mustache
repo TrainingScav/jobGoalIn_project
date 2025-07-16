@@ -50,7 +50,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{#resumes}}
+                    {{#resumeInfo}}
                         <tr>
                             <td class="center-text">
                                 <a href="/resume/detail/{{resumeNo}}" class="resume-link">{{title}}</a>
@@ -58,19 +58,19 @@
                             <td class="center-text">{{instDate}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="/resumelist/resume-update" class="btn-small">수정</a>
+                                    <a href="/resumelist/resume-update/{{resumeNo}}" class="btn-small">수정</a>
                                     <a href="/resume/delete" class="btn-small btn-delete">삭제</a>
                                 </div>
                             </td>
                         </tr>
-                    {{/resumes}}
+                    {{/resumeInfo}}
                     </tbody>
                 </table>
-                {{^resumes}}
+                {{^resumeInfo}}
                     <div class="card-body text-center">
                         <p class="text-muted mb-0">작성한 이력서가 없습니다</p>
                     </div>
-                {{/resumes}}
+                {{/resumeInfo}}
 
                 <div class="resume-write-btn">
                     <a href="/resumelist/resume-register" class="btn-write">이력서 등록</a>

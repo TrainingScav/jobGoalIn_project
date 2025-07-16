@@ -41,5 +41,9 @@ public class ResumeRequest {
                     .instId(user.getUserLoginId())
                     .build();
         }
+
+        public static class UpdateDTO {
+
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.jobgoalin.workinfo.info.SkillList;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserRepository;
 import com.jobgoalin.workinfo.user.UserSkillList;
+import jakarta.persistence.PersistenceUnit;
 import jakarta.persistence.Transient;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -39,9 +40,9 @@ public class ResumeService {
         log.info("request 확인 : {}", request);
 
         SkillList positionSkill = skillListJpaRepository.findBySkillId(request.getPositionId());
-        SkillList SkillStack = skillListJpaRepository.findBySkillId(request.getSkillStackId());
-
         log.info("positionSetting 확인 : {}", positionSkill.getSkillListNo());
+
+        SkillList SkillStack = skillListJpaRepository.findBySkillId(request.getSkillStackId());
         log.info("skillSettiong 확인 : {}", SkillStack.getSkillListNo());
 
         UserSkillList userPositionSetting = UserSkillList.builder()
@@ -72,9 +73,25 @@ public class ResumeService {
     }
 
     /**
-     * 회원 아이디로 이력서 목록 조회하기
+     * 회원 아이디로 작성한 이력서 목록 조회
      */
     public List<Resume> findResumesByUserId(Long userId) {
         return resumeRepository.findByUserUserId(userId);
     }
+
+    /**
+     * 이력서 ID로 조회
+     */
+    public Resume getResumeById(Long id) {
+        return resumeRepository.findById(id)
+                .orElseThrow(() -> new Exception404("해당 이력서를 찾을 수 없습니다. ID: " +id));
+    }
+
+
+
+
+
 }
+
+
+
