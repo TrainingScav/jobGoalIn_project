@@ -57,12 +57,10 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(Exception403.class)
     public String ex403(Exception403 e, HttpServletRequest request) {
-
         log.warn("=== 403 Forbidden 에러 발생 ===");
         log.warn("요청 URL : {}", request.getRequestURL());
         log.warn("인증 오류: {}", e.getMessage());
         log.warn("User-Agent: {}", request.getHeader("User-Agent"));
-
         request.setAttribute("msg", e.getMessage());
         return "err/403";
     }
