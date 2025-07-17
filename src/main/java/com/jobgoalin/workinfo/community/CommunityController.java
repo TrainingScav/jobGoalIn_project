@@ -35,8 +35,8 @@ public class CommunityController {
             pageLinks.add(new PageLink(i, i + 1, i == communityPage.getNumber()));
         }
 
-        Integer previousPageNumber = communityPage.hasPrevious() ? communityPage.getNumber() : null;
-        Integer nextPageNumber = communityPage.hasNext() ? communityPage.getNumber() + 2 : null;
+        Integer previousPageNumber = communityPage.hasPrevious() ? communityPage.getNumber() -1 : null;
+        Integer nextPageNumber = communityPage.hasNext() ? communityPage.getNumber() + 1 : null;
 
         // 뷰 화면에 데이터 전달
         model.addAttribute("communityPage", communityPage);
