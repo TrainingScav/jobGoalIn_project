@@ -32,22 +32,14 @@ public class CommunityService {
     // 게시글 생성
     @Transactional
     public Community savePost(CommunityRequest.SaveDTO dto) {
-        Community post = Community.builder()
-                .title(dto.getTitle())
-                .content(dto.getContent())
-                .instId(dto.getInstId())
-                .postPassword(dto.getPostPassword())
-                .build();
-        return communityRepository.save(post);
+        return communityRepository.save(dto.toEntity());
     }
 
     // 게시글 수정
     @Transactional
     public void updatePost(Long postId, CommunityRequest.UpdateDTO dto) {
         Community post = findById(postId);
-        post.setTitle(dto.getTitle());
-        post.setContent(dto.getContent());
-
+        post.update(dto);
     }
 
     // 게시글 삭제

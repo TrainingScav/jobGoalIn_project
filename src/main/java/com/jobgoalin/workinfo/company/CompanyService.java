@@ -1,15 +1,15 @@
 package com.jobgoalin.workinfo.company;
 
-import com.jobgoalin.workinfo._core.errors.exception.Exception400;
 import com.jobgoalin.workinfo._core.errors.exception.Exception404;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -17,19 +17,26 @@ import java.util.Optional;
 public class CompanyService {
 
     private static final Logger log = LoggerFactory.getLogger(CompanyService.class);
-    private final CompanyInfoJpaRepository companyInfoJpaRepository;
+    private final CompanyJpaRepository companyJpaRepository;
     private final CompanyReviewJpaRepository companyReviewJpaRepository;
 
-    public List<CompanyInfo> findAllCompanyInfo() {
+    //검색기능 - 제목
+    public Page<CompanyInfo> findCompanyNamesByKeyword(String keyword,Pageable pageable) {
+        log.info("==== 검색기능-제목 서비스 시작 ====");
+        Page<CompanyInfo> searchToCompanyName = companyJpaRepository.findCompanyNamesByKeyword(keyword, pageable);
+        return companyJpaRepository.findCompanyNamesByKeyword(keyword,pageable);
+    }
 
-        List<CompanyInfo> CompanyList = companyInfoJpaRepository.findAll();
 
-        return CompanyList;
+    //기업목록 조회(페이지)
+    public Page<CompanyInfo> findAllCompanyInfo(Pageable pageable) {
+        Page<CompanyInfo> CompanyPage = companyJpaRepository.findAll(pageable);
+        return CompanyPage;
     }
 
     public CompanyInfo findCompanyInfoById(Long id) {
 
-        CompanyInfo companyInfo = companyInfoJpaRepository.findById(id).orElseThrow(() ->
+        CompanyInfo companyInfo = companyJpaRepository.findById(id).orElseThrow(() ->
                 new Exception404("해당 게시물이 존재하지 않습니다.")
         );
 
@@ -39,7 +46,7 @@ public class CompanyService {
     @Transactional
     public CompanyInfo companyInfoInsert(CompanyInfo companyInfo) {
 
-        CompanyInfo savedCompanyInfo = companyInfoJpaRepository.save(companyInfo);
+        CompanyInfo savedCompanyInfo = companyJpaRepository.save(companyInfo);
 
         return savedCompanyInfo;
     }
@@ -65,11 +72,18 @@ public class CompanyService {
     public void companyInfoDelete(Long id) {
 
         log.info("게시글 삭제 서비스 시작 - ID {}", id);
-        CompanyInfo companyInfo = companyInfoJpaRepository.findById(id).orElseThrow(() ->
+        CompanyInfo companyInfo = companyJpaRepository.findById(id).orElseThrow(() ->
                 new Exception404("삭제하려는 게시글이 없습니다")
         );
 
-        companyInfoJpaRepository.deleteById(id);
+        companyJpaRepository.deleteById(id);
+    }
+
+    public Page<CompanyReview> findCompanyReviewByCompanyId(Pageable pageable, Long companyId) {
+
+        log.info("기업 리뷰 조회 서비스 시작");
+
+        return companyReviewJpaRepository.findReviewsJoinCompanyInfo(pageable, companyId);
     }
 
     public List<CompanyReview> findCompanyReviewByCompanyId(Long companyId) {
@@ -105,7 +119,7 @@ public class CompanyService {
     /**/
     public CompanyInfo findCompanyInfoByUserId(Long compUserId) {
 
-        return companyInfoJpaRepository.findCompanyInfoByCompUserId(compUserId);
+        return companyJpaRepository.findCompanyInfoByCompUserId(compUserId);
     }
 
 }

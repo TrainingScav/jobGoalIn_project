@@ -10,6 +10,15 @@ public class CommunityRequest {
         private String content;
         private String instId;
         private String postPassword;
+
+        public Community toEntity() {
+            return Community.builder()
+                    .title(title)
+                    .content(content)
+                    .instId(instId)
+                    .postPassword(postPassword)
+                    .build();
+        }
     }
 
     @Data
@@ -19,6 +28,13 @@ public class CommunityRequest {
         private String instId;
         private String postPassword;
 
-
+        public Community toEntity() {
+            return Community.builder()
+                    .title(title)
+                    .content(content)
+                    .instId(instId)
+                    .postPassword(postPassword)
+                    .build();
+        }
     }
 }

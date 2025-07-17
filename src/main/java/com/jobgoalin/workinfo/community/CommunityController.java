@@ -59,13 +59,14 @@ public class CommunityController {
 
     @GetMapping("/community/write")
     public String showWriteForm() {
+
         return "community/save-form";
+
     }
 
     // 글 작성 처리
     @PostMapping("/community/write")
-    public String submitPost(@ModelAttribute("save-form") CommunityRequest.SaveDTO dto,
-                             HttpSession sessionUser) {
+    public String submitPost(@ModelAttribute("save-form") CommunityRequest.SaveDTO dto, HttpSession sessionUser) {
         LoginUser loginUser = (LoginUser) sessionUser.getAttribute("sessionUser");
 
         if (loginUser != null) {

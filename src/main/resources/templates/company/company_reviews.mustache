@@ -18,18 +18,17 @@
 
             <!-- 리뷰 등록 버튼 -->
             {{#sessionUser}}{{^isCompany}}{{#isWritable}}
-            <div class="review-top-bar">
-                <a href="/company/{{companyId}}/reviews/form" class="add-review-button">리뷰 등록</a>
-            </div>
+                <div class="review-top-bar">
+                    <a href="/company/{{companyId}}/reviews/form" class="add-review-button">리뷰 등록</a>
+                </div>
             {{/isWritable}}{{/isCompany}}{{/sessionUser}}
+
             <!-- 리뷰 리스트 -->
             <div class="review-section">
                 {{#sessionUser}}{{#reviews}}
                     <div class="review-card">
                         <div class="review-header">
                             <span class="review-id">{{user.userNickName}}</span>
-
-                            <!-- 자기 댓글일 때만 보이는 삭제 버튼 -->
                             <div class="review-right">
                                 <span class="review-date">{{time}}</span>
                                 {{^isCompany}}{{#isMyReview}}
@@ -65,8 +64,28 @@
                         현재 등록된 리뷰가 없습니다.
                     </div>
                 {{/reviews}}
-
             </div>
+
+            <!-- 페이징 영역 -->
+            <div class="review-pagination" style="margin-top: 2rem; text-align: center;">
+                {{#previousPageNumber}}
+                    <a href="/company/{{companyId}}/reviews?page={{previousPageNumber}}" style="margin-right: 10px;">◀ 이전</a>
+                {{/previousPageNumber}}
+
+                {{#pageLinks}}
+                    {{#active}}
+                        <strong style="margin: 0 5px;">{{displayNumber}}</strong>
+                    {{/active}}
+                    {{^active}}
+                        <a href="/company/{{companyId}}/reviews?page={{pageNumber}}" style="margin: 0 5px;">{{displayNumber}}</a>
+                    {{/active}}
+                {{/pageLinks}}
+
+                {{#nextPageNumber}}
+                    <a href="/company/{{companyId}}/reviews?page={{nextPageNumber}}" style="margin-left: 10px;">다음 ▶</a>
+                {{/nextPageNumber}}
+            </div>
+
         </div>
     </div>
 </div>

@@ -1,32 +1,67 @@
 {{> layout/header}}
 <div class="company-list-page">
     <div class="company-list-container">
-        <!-- 헤더 + 추가 버튼 -->
-        <div class="company-list-header">
-            <h1>기업 목록</h1>
-            {{#sessionUser}}
-                {{#isCompany}}{{#isCompanyInfoWritable}}
-                    <a href="/company/form" class="add-button">추가</a>
-                {{/isCompanyInfoWritable}}{{/isCompany}}
-            {{/sessionUser}}
+        <!-- 헤더 + 추가 버튼 + 검색창 -->
+        <div class="company-list-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="margin: 0;">기업 목록</h1>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                {{#sessionUser}}
+                    {{#isCompany}}{{#isCompanyInfoWritable}}
+                        <a href="/company/form" class="add-button"
+                           style="padding: 0.5rem 1rem; background: #3498db; color: #fff; border-radius: 4px; text-decoration: none;">
+                            추가
+                        </a>
+                    {{/isCompanyInfoWritable}}{{/isCompany}}
+                {{/sessionUser}}
+
+                <!-- 검색창 -->
+                <form action="/company/list" method="get" style="display: flex; align-items: center;">
+                    <input type="text" name="keyword" value="{{keyword}}" placeholder="회사명 검색"
+                           style="padding: 0.5rem; font-size: 0.9rem; border: 1px solid #ccc; border-radius: 4px;">
+                    <button type="submit"
+                            style="margin-left: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9rem; background: #2ecc71; color: white; border: none; border-radius: 4px;">
+                        검색
+                    </button>
+                </form>
+            </div>
         </div>
 
         <!-- 기업 목록 -->
-        {{#companyInfoList}}
-        <div class="company-item">
-            <img src="https://picsum.photos/id/10/300/300" alt="기업 이미지">
-            <div>
-                <a href="/company/{{companyId}}">{{companyName}}</a>
-                <p>{{companyDesc}}</p>
+        {{#companyInfoPage}}
+            <div class="company-item" style="display: flex; gap: 1rem; border-bottom: 1px solid #eee; padding: 1rem 0;">
+                <img src="https://picsum.photos/id/10/300/300" alt="기업 이미지" style="border-radius: 8px;">
+                <div>
+                    <a href="/company/{{companyId}}" style="font-weight: bold; font-size: 1.1rem;">{{companyName}}</a>
+                    <p style="color: #666;">{{companyDesc}}</p>
+                </div>
             </div>
-        </div>
-        {{/companyInfoList}}
+        {{/companyInfoPage}}
 
-        {{^companyInfoList}}
-        <div class="company-item">
-            <p>등록된 기업이 없습니다.</p>
+        {{^companyInfoPage}}
+            <div class="company-item" style="padding: 1rem; text-align: center; color: #999;">
+                등록된 기업이 없습니다.
+            </div>
+        {{/companyInfoPage}}
+
+        <!-- 페이지 네비게이션 -->
+        <div style="margin-top: 1.5rem; text-align: center;">
+            {{#previousPageNumber}}
+                <a href="/company/list?page={{previousPageNumber}}{{#keyword}}&keyword={{keyword}}{{/keyword}}" style="margin-right: 10px;">◀ 이전</a>
+            {{/previousPageNumber}}
+
+            {{#pageLinks}}
+                {{#active}}
+                    <strong style="margin: 0 5px;">{{displayNumber}}</strong>
+                {{/active}}
+                {{^active}}
+                    <a href="/company/list?page={{pageNumber}}{{#keyword}}&keyword={{keyword}}{{/keyword}}" style="margin: 0 5px;">{{displayNumber}}</a>
+                {{/active}}
+            {{/pageLinks}}
+
+            {{#nextPageNumber}}
+                <a href="/company/list?page={{nextPageNumber}}{{#keyword}}&keyword={{keyword}}{{/keyword}}" style="margin-left: 10px;">다음 ▶</a>
+            {{/nextPageNumber}}
         </div>
-        {{/companyInfoList}}
     </div>
 </div>
 {{> layout/footer}}

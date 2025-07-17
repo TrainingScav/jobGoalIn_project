@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CommunityRepository extends JpaRepository<Community, Long> {
     Page<Community> findAll(Pageable pageable);
+
 }

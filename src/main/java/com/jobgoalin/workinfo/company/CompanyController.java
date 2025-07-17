@@ -1,22 +1,31 @@
 package com.jobgoalin.workinfo.company;
 
-import com.jobgoalin.workinfo._core.errors.exception.*;
+import com.jobgoalin.workinfo._core.common.PageLink;
+import com.jobgoalin.workinfo._core.errors.exception.Exception400;
+import com.jobgoalin.workinfo._core.errors.exception.Exception403;
+import com.jobgoalin.workinfo._core.errors.exception.Exception404;
+import com.jobgoalin.workinfo._core.errors.exception.Exception500;
 import com.jobgoalin.workinfo.user.CompUser;
 import com.jobgoalin.workinfo.user.LoginUser;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserService;
+import com.jobgoalin.workinfo.utils.CompanyInfoViewHelper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,27 +37,35 @@ public class CompanyController {
     private final CompanyService companyService;
     private final UserService userService;
 
+
+    //전체 게시글 조회 and 제목 검색한 게시글 조회
     @GetMapping("/company/list")
-    public String companyInfoList(Model model, HttpSession session) {
+    public String companyInfoList(Model model, HttpSession session,
+                                  @RequestParam(required = false) String keyword,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "10") int size) {
+        LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
+        Pageable pageable = PageRequest.of(page, size, Sort.by("instDate").descending());
+        Page<CompanyInfo> companyInfoPage;
 
-        log.info(">> 기업정보 목록 조회 시작 << ");
-
-        LoginUser user = (LoginUser) session.getAttribute("sessionUser");
-        List<CompanyInfo> companyInfoList = companyService.findAllCompanyInfo();
-
-        if (user != null) {
-            // 테이블 조회하여 해당 유저로 등록된 기업정보가 있는지 확인
-            CompanyInfo canWrite = companyService.findCompanyInfoByUserId(user.getId());
-
-            if (canWrite == null) {
-                model.addAttribute("isCompanyInfoWritable", true);
+        if (keyword == null) {
+            log.info(">> 기업정보 목록 조회 시작 << ");
+            if (loginUser != null) {
+                CompanyInfo canWrite = companyService.findCompanyInfoByUserId(loginUser.getId());
+                if (canWrite == null) {
+                    model.addAttribute("isCompanyInfoWritable", true);
+                }
             }
+            companyInfoPage = companyService.findAllCompanyInfo(pageable);
+        } else {
+            companyInfoPage = companyService.findCompanyNamesByKeyword(keyword, pageable);
         }
 
-        model.addAttribute("companyInfoList", companyInfoList);
+        CompanyInfoViewHelper.populateModel(model, keyword, companyInfoPage);
 
         return "company/company_list";
     }
+
 
     @GetMapping("/company/{id}")
     public String companyInfoDetail(@PathVariable(name = "id") Long id, Model model, HttpSession session) {
@@ -151,12 +168,34 @@ public class CompanyController {
         return "redirect:/company/list";
     }
 
+    // 전체 리뷰 목록
     @GetMapping("/company/{id}/reviews")
-    public String companyReview(@PathVariable(name = "id") Long companyId, Model model, HttpSession session)  {
+    public String companyReview(@PathVariable(name = "id") Long companyId,
+                                @RequestParam(defaultValue = "0")int page,
+                                @RequestParam(defaultValue = "10")int size, Model model, HttpSession session)  {
 
         LoginUser user = (LoginUser)session.getAttribute("sessionUser");
-        List<CompanyReview> companyReviews = companyService.findCompanyReviewByCompanyId(companyId);
+        Pageable pageable = PageRequest.of(page ,size, Sort.by("instDate").descending());
 
+        Page<CompanyReview> companyReviews = companyService.findCompanyReviewByCompanyId(pageable,companyId);
+
+        // 페이지 네비게이션 용 데이터 준비
+        List<PageLink> pageLinks = new ArrayList<>();
+        for(int i = 0; i < companyReviews.getTotalPages(); i++) {
+            pageLinks.add(new PageLink(i, i + 1, i == companyReviews.getNumber()));
+        }
+
+        Integer previousPageNumber = companyReviews.hasPrevious() ? companyReviews.getNumber() -1 : null;
+        Integer nextPageNumber = companyReviews.hasNext() ? companyReviews.getNumber() + 1 : null;
+
+        // 뷰 화면에 데이터 전달
+        model.addAttribute("companyReviews", companyReviews);
+        // 페이지 네비게이션에 사용할 번호 링크 리스트
+        model.addAttribute("pageLinks", pageLinks);
+        // 이전 페이지 번호 (없으면 null)
+        model.addAttribute("previousPageNumber", previousPageNumber);
+        // 다음 페이지 번호 (없으면 null)
+        model.addAttribute("nextPageNumber", nextPageNumber);
         // 리뷰 소유권 설정 (삭제 버튼 표시용)
         if (user != null) {
             if (!user.isCompany()) {
@@ -174,7 +213,7 @@ public class CompanyController {
             }
         }
 
-        log.info("리뷰 개수 확인 : {}", companyReviews.size());
+        log.info("리뷰 개수 확인 : {}", companyReviews.getSize());
 
         model.addAttribute("companyId", companyId);
         model.addAttribute("reviews", companyReviews);
