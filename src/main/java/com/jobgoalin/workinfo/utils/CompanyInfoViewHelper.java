@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * companyController 의 companyInfoList 메서드 코드가 너무 더러워서 추가했음..
+ */
 public class CompanyInfoViewHelper {
     public static void populateModel(Model model, String keyword, Page<CompanyInfo> companyInfoPage) {
         List<PageLink> pageLinks = IntStream.range(0, companyInfoPage.getTotalPages())

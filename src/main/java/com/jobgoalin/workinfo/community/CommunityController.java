@@ -3,6 +3,7 @@ package com.jobgoalin.workinfo.community;
 import com.jobgoalin.workinfo._core.common.PageLink;
 import com.jobgoalin.workinfo._core.errors.exception.Exception403;
 import com.jobgoalin.workinfo.user.LoginUser;
+import com.jobgoalin.workinfo.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -52,8 +53,13 @@ public class CommunityController {
     }
 
     @GetMapping("/community/detail/{postId}")
-    public String showDetail(@PathVariable(name = "postId") Long postId, Model model) {
-        model.addAttribute("post", communityService.findById(postId));
+    public String showDetail(@PathVariable(name = "postId") Long postId, Model model,HttpSession session) {
+        Community post = communityService.findById(postId);
+        model.addAttribute("post", post);
+        LoginUser loginUser = (LoginUser) session.getAttribute("sessionUser");
+        boolean isWriter = loginUser != null && post.getInstId().equals(loginUser.getLoginId());
+        model.addAttribute("isWriter", isWriter);
+
         return "community/detail";
     }
 
@@ -81,13 +87,14 @@ public class CommunityController {
 
     // 글 수정 폼
     @GetMapping("/community/{postId}/update")
-    public String showUpdateForm(@PathVariable(name="postId") Long postId, Model model) {
+    public String showUpdateForm(@PathVariable(name="postId") Long postId, Model model,HttpSession session) {
         Community post = communityService.findById(postId);
         CommunityRequest.UpdateDTO updateDTO = new CommunityRequest.UpdateDTO();
         updateDTO.setTitle(post.getTitle());
         updateDTO.setContent(post.getContent());
         model.addAttribute("updateDTO", updateDTO);
         model.addAttribute("postId", postId);
+
         return "community/update-form";
     }
 

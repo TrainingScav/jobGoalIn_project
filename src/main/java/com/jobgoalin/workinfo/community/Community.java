@@ -1,6 +1,8 @@
 package com.jobgoalin.workinfo.community;
 
+import com.jobgoalin.workinfo.user.User;
 import jakarta.persistence.*;
+import jakarta.servlet.http.HttpSession;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,4 +51,6 @@ public class Community {
         this.title = updateDTO.getTitle();
         this.content = updateDTO.getContent();
     }
+
+
 }

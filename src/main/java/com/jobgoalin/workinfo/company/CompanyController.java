@@ -36,7 +36,7 @@ public class CompanyController {
     private static final Logger log = LoggerFactory.getLogger(CompanyController.class);
     private final CompanyService companyService;
     private final UserService userService;
-
+    
 
     //전체 게시글 조회 and 제목 검색한 게시글 조회
     @GetMapping("/company/list")

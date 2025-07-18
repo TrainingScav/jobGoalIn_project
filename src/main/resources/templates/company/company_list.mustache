@@ -1,15 +1,15 @@
 {{> layout/header}}
-<div class="company-list-page">
-    <div class="company-list-container">
+<div class="company-list-page" style="padding: 2rem; background-color: #f9f9f9;">
+    <div class="company-list-container" style="max-width: 960px; margin: auto;">
         <!-- 헤더 + 추가 버튼 + 검색창 -->
-        <div class="company-list-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 style="margin: 0;">기업 목록</h1>
+        <div class="company-list-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 style="margin: 0; font-size: 1.8rem;">기업 목록</h1>
             <div style="display: flex; gap: 0.5rem; align-items: center;">
                 {{#sessionUser}}
                     {{#isCompany}}{{#isCompanyInfoWritable}}
                         <a href="/company/form" class="add-button"
                            style="padding: 0.5rem 1rem; background: #3498db; color: #fff; border-radius: 4px; text-decoration: none;">
-                            추가
+                            기업 추가
                         </a>
                     {{/isCompanyInfoWritable}}{{/isCompany}}
                 {{/sessionUser}}
@@ -27,24 +27,26 @@
         </div>
 
         <!-- 기업 목록 -->
-        {{#companyInfoPage}}
-            <div class="company-item" style="display: flex; gap: 1rem; border-bottom: 1px solid #eee; padding: 1rem 0;">
-                <img src="https://picsum.photos/id/10/300/300" alt="기업 이미지" style="border-radius: 8px;">
-                <div>
-                    <a href="/company/{{companyId}}" style="font-weight: bold; font-size: 1.1rem;">{{companyName}}</a>
-                    <p style="color: #666;">{{companyDesc}}</p>
+        <div class="company-list" style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+            {{#companyInfoPage}}
+                <div class="company-card" style="width: 600px; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden;">
+                    <img src="https://picsum.photos/id/{{companyId}}/600/250" alt="기업 이미지" style="width: 100%; height: auto;">
+                    <div style="padding: 1rem;">
+                        <a href="/company/{{companyId}}" style="font-weight: bold; font-size: 1.2rem; text-decoration: none; color: #333;">{{companyName}}</a>
+                        <p style="color: #666; margin-top: 0.5rem;">{{companyDesc}}</p>
+                    </div>
                 </div>
-            </div>
-        {{/companyInfoPage}}
+            {{/companyInfoPage}}
 
-        {{^companyInfoPage}}
-            <div class="company-item" style="padding: 1rem; text-align: center; color: #999;">
-                등록된 기업이 없습니다.
-            </div>
-        {{/companyInfoPage}}
+            {{^companyInfoPage}}
+                <div style="text-align: center; color: #999;">
+                    등록된 기업이 없습니다.
+                </div>
+            {{/companyInfoPage}}
+        </div>
 
         <!-- 페이지 네비게이션 -->
-        <div style="margin-top: 1.5rem; text-align: center;">
+        <div style="margin-top: 2rem; text-align: center;">
             {{#previousPageNumber}}
                 <a href="/company/list?page={{previousPageNumber}}{{#keyword}}&keyword={{keyword}}{{/keyword}}" style="margin-right: 10px;">◀ 이전</a>
             {{/previousPageNumber}}

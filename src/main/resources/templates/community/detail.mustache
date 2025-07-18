@@ -1,48 +1,85 @@
 {{> layout/header}}
-{{#post}}
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{title}} - 상세 보기</title>
-        <style>
-            body { font-family:'맑은 고딕',sans-serif; background:#f5f5f5; padding:2rem; }
-            .container { background:#fff; padding:2rem; max-width:800px; margin:auto;
-                         box-shadow:0 4px 10px rgba(0,0,0,0.05); border-radius:8px; }
-            h1 { margin-top:0; color:#2c3e50; }
-            .meta { font-size:0.9rem; color:#777; margin-bottom:1.5rem; }
-            .content { white-space:pre-wrap; line-height:1.6; }
-            .back, .button { display:inline-block; margin-top:2rem; margin-right:1rem; color:#3498db;
-                             text-decoration:none; padding:0.4rem 0.8rem; border:1px solid #3498db;
-                             border-radius:4px; font-size:0.9rem; transition:0.2s ease; }
-            .back:hover, .button:hover { background:#3498db; color:#fff; }
-            .button.delete { color:#e74c3c; border-color:#e74c3c; }
-            .button.delete:hover { background:#e74c3c; color:#fff; }
-        </style>
-    </head>
-    <body>
-    <div class="container">
-        <h1>{{title}}</h1>
-        <div class="meta">
-            작성자 ID: {{instId}}<br>
-            작성일시: {{instDate}}
-        </div>
-        <div class="content">
-            {{content}}
-        </div>
 
-        <a href="/community/list" class="back">← 목록으로 돌아가기</a>
-
-
-            <a href="/community/{{postId}}/update" class="button">수정</a>
-            <form action="/community/{{postId}}/delete" method="post" style="display:inline;">
-                <button type="submit" class="button delete"
-                        onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-            </form>
-
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{post.title}} - 상세 보기</title>
+    <style>
+        body {
+            font-family: '맑은 고딕', sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+        .container {
+            background: #fff;
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+        h1 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .meta {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+        }
+        .content {
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+        .back, .button {
+            display: inline-block;
+            margin-top: 2rem;
+            margin-right: 1rem;
+            color: #3498db;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: 0.2s ease;
+        }
+        .back:hover, .button:hover {
+            background: #3498db;
+            color: #fff;
+        }
+        .button.delete {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        .button.delete:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{post.title}}</h1>
+    <div class="meta">
+        작성자 ID: {{post.instId}}<br>
+        작성일시: {{post.instDate}}
     </div>
-    </body>
-    </html>
-{{/post}}
+    <div class="content">
+        {{post.content}}
+    </div>
+
+    <a href="/community/list" class="back">← 목록으로 돌아가기</a>
+
+    {{#isWriter}}
+        <a href="/community/{{post.postId}}/update" class="button">수정</a>
+        <form action="/community/{{post.postId}}/delete" method="post" style="display:inline;">
+            <button type="submit" class="button delete"
+                    onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+        </form>
+    {{/isWriter}}
+</div>
+</body>
+</html>
+
 {{> layout/footer}}
