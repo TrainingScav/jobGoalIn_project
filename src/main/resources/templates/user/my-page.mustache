@@ -59,7 +59,9 @@
                             <td>
                                 <div class="btn-group">
                                     <a href="/resumelist/resume-update/{{resumeNo}}" class="btn-small">수정</a>
-                                    <a href="/resume/delete" class="btn-small btn-delete">삭제</a>
+                                    <form action="/resume/delete/{{resumeNo}}" method="post">
+                                        <button type="submit" class="btn-small btn-delete">삭제</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

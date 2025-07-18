@@ -41,6 +41,40 @@
     display: inline-block;
 }
 
+.btn-small,
+.btn-small:link,
+.btn-small:visited,
+.btn-small[type="submit"],
+form .btn-small {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  line-height: 1;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+/* 삭제 버튼 */
+.btn-delete {
+  background-color: #e74c3c !important;
+}
+
+/* hover 효과 */
+.btn-small:hover {
+  background-color: #2980b9;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b !important;
+}
+
 .btn-edit:hover, .btn-write:hover, .btn-small:hover {
     background-color: #2980b9;
 }

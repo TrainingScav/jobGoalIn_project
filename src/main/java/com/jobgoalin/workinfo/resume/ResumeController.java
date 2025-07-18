@@ -60,4 +60,16 @@ public class ResumeController {
         Resume updateresume = resumeService.update(id,updateDTO);
      return "redirect:/user/my-page";
     }
+
+    // 이력서 삭제
+    @PostMapping("/resume/delete/{id}")
+    public String resumeDelete(@PathVariable(name = "id")Long id) {
+
+        log.info(" 이력서 삭제 시작 ");
+
+        resumeService.resumeDelete(id);
+        return "redirect:/user/my-page";
+    }
+
+
 }

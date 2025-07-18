@@ -1,6 +1,7 @@
 package com.jobgoalin.workinfo.resume;
 
 import com.jobgoalin.workinfo._core.errors.exception.Exception404;
+import com.jobgoalin.workinfo.company.CompanyInfo;
 import com.jobgoalin.workinfo.info.SkillList;
 import com.jobgoalin.workinfo.user.User;
 import com.jobgoalin.workinfo.user.UserRepository;
@@ -89,7 +90,15 @@ public class ResumeService {
         return updateResume;
     }
 
-
+    // 이력서 삭제
+    @Transactional
+    public void resumeDelete(Long id) {
+        log.info("이력서 삭제 시작 - ID {}", id);
+        Resume resume = resumeRepository.findById(id).orElseThrow(() ->
+                new Exception404("삭제하려는 이력서가 없습니다")
+        );
+        resumeRepository.deleteById(id);
+    }
 }
 
 
