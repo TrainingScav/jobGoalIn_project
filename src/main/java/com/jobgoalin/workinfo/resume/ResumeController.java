@@ -55,14 +55,9 @@ public class ResumeController {
     // 이력서 수정 기능 요청
     @PostMapping("/resumelist/resume-update/{id}")
     public String resumeUpdate(@PathVariable(name = "id")Long id,ResumeRequest.UpdateDTO updateDTO,HttpSession session) {
-
         log.info(" 이력서 수정 시작 ");
-
         LoginUser loginUser = (LoginUser)session.getAttribute("sessionUser");
-        Resume resume = resumeService.findResumeById(loginUser.getId());
-
         Resume updateresume = resumeService.update(id,updateDTO);
-
      return "redirect:/user/my-page";
     }
 }
