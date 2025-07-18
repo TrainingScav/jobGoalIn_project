@@ -95,6 +95,4 @@ public class Resume {
     public boolean getGenderInfo() {
         return this.gender == 'M';
     }
-
-
 }
